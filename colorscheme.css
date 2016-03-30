@@ -1,0 +1,82 @@
+/* This is the CSS for the "Elena's Love Story" webpage. */
+/* Project: UMSL CS4500 SS2016 Group Project. */
+/* Author: Benjamin Leach */
+/* Partners: Brett Lindsay
+             Jason Pharm
+			 Chad Nelson
+			 Ryan */
+
+body{
+	background-color: pink;
+}
+
+/* This is the style rule for the area of the start button. */
+.startbuttonarea {
+	position: fixed; 
+	bottom: 0; 
+	width: 100%; 
+	text-align: center
+}
+
+/* This is the style rule for the play button on the webpage. */
+.startbutton{
+	/*________________*/
+	/*                */
+	/*     Colors     */
+	/*________________*/
+	background-color: #FF00FF; /* magenta */
+	border: none;
+	color: white;
+	text-align: center;
+	/* border adds a colored border to the button. */
+	border: 2px solid #f7f7f7; /* off white */
+	
+	/*________________*/
+	/*                */
+	/*     Size       */
+	/*________________*/
+	/* font-size determines the size of the button. */
+	font-size: 25px;
+	/* padding is how much extra space there is
+	   in the button beyond the font. */
+	padding: 15px 15px;
+	width: 250px;
+	
+	/*________________*/
+	/*                */
+	/*      Look      */
+	/*________________*/
+	/* border-radius determines how round the button is. */
+	border-radius: 20px;
+	/* I went with a "softer" font for the text. */
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	/* Give is a shadow with the box-shadow feature. */
+	box-shadow: 0 9px #999;
+	
+	/* transition-duration: .4s means wait a 
+	   little to change the button look when
+	   to mouse hovers over the button. */
+	transition-duration: .4s;
+}
+
+/* This style rule will determine what happens
+   when the mouse hovers over the button. */
+.startbutton:hover {
+	background-color: white;
+	/* font color line below */
+	color: black;
+}
+
+/* This style rule determines what happens when
+   the button is clicked. */
+.startbutton:active {
+	/* I changed the posistion and color of the shadow
+	   with box-shadow so it will look like the shadow 
+	   had moved when the user clicks on it. 
+	*/
+	box-shadow: 0 5px #666;
+	/* transform moves the button. translateY(4px) means
+	   move it down 4 pixels. */
+	transform: translateY(4px);
+}
+	 
