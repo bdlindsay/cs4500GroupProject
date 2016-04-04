@@ -79,4 +79,17 @@ body{
 	   move it down 4 pixels. */
 	transform: translateY(4px);
 }
-	 
+
+.imageDisplay{
+    height:100%;
+    width:100%;
+}
+
+.imageDisplayArea{
+	position: relative;
+	border: 5px solid #f7f7f7;
+	/*box-shadow: 5px 5px #666; */
+	background-color: white;
+	width:300px;
+	height:300px;
+}

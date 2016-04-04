@@ -6,14 +6,46 @@
         	<meta charset="UTF-8"/>
         	
 		<script src="Audio.js"></script>
+		
+		<!-- Added source files -->
+		<script src="SlideShow.js"></script>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script><!-- For JQuery -->
+		
+		<!--Meta set and script files to use Bootstrap API
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  		-->
+		
+		
 	</head>
 	<body class = "main">
+		<!-- Is the form needed?
 		<form id "myForm" action =" ">
         		<div sytle="position: relative">
                 		<p class="startbuttonarea">
-                			<button class="startbutton" >START</button>
+                			<button class="startbutton"onclick="beginPlaying" >START</button>
                   		</p> 
-              		</div> 
+              		</div 
 		 </form>
+		-->
+		
+		<!--div for displaying images while song is playing-->
+		<div id="imageBox" class="imageDisplayArea">
+			<img id="image" class="imageDisplay" />
+			
+			<!-- div for display popups when music stops-->
+			<div id="popupBox">
+				
+			</div>
+		</div>
+		
+		
+		 <div style="position: relative">
+			<p class="startbuttonarea">
+		 		<button id ="startButton" class="startbutton" onclick="beginPlaying()">START</button>
+		 	</p>
+		 </div>
 	</body>
 </html>
