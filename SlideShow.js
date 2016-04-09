@@ -7,7 +7,7 @@
 			 Ryan */
 //Globals
 //////////////////////////////////////////////////////////////////////////////////////////////////
-var audio = new Audio('Audio/Love Story-Taylor Swift.mp3');//Global for ease of coding for now
+var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
 var imageArray = new Array();
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
 var counter; //setting the counter as global for this iteration for simplicity
@@ -30,12 +30,12 @@ function displayImages(){
 	for(var i = 0;i < numOfImages;i++){
 		imageArray[i] = new Image();
 	}
-	imageArray[0].src = 'Images/Alaina1.JPG';
-	imageArray[1].src = 'Images/AlainaGrandad1.JPG';
-	imageArray[2].src = 'Images/BrotherCullen.JPG';
-	imageArray[3].src = 'Images/AlainasFamily.JPG';
-	imageArray[4].src = 'Images/Grandparents-Alaina-USE.JPG';
-	imageArray[5].src = 'Images/musicalToy-USE.JPG';
+	imageArray[0].src = 'cs4500Media/images/Alaina1-USE.JPG';
+	imageArray[1].src = 'cs4500Media/images/AlainaGrandad1-USE.JPG';
+	imageArray[2].src = 'cs4500Media/images/BrotherCullen-USE.JPG';
+	imageArray[3].src = 'cs4500Media/images/Alaina\'s Family-USE.JPG';
+	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
+	imageArray[5].src = 'cs4500Media/images/musicalToy-USE.JPG';
 	/////////////////////////////////////////////////////////////////////////
 	
 	var imgArea = document.getElementById("imageBox");
