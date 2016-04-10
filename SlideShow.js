@@ -127,9 +127,9 @@ function beginPlaying(){
 	//is repeated for all 3 initial buttons
 	var button = document.getElementById("startButton");
 	button.style.display = "none";
-	var button = document.getElementById("mode2button");
+	var button = document.getElementById("mode2Button");
 	button.style.display = "none";
-	var button = document.getElementById("optionsbutton");
+	var button = document.getElementById("optionsButton");
 	button.style.display = "none";
 	audio.play();
 }
