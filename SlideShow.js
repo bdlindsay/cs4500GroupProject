@@ -122,7 +122,14 @@ function pauseAudio(){
 function beginPlaying(){
 	//audio.canPlayType()//checks if the browser can play the audio file
 	displayImages();
+
+	//code to stop displaying the initial buttons
+	//is repeated for all 3 initial buttons
 	var button = document.getElementById("startButton");
+	button.style.display = "none";
+	var button = document.getElementById("mode2button");
+	button.style.display = "none";
+	var button = document.getElementById("optionsbutton");
 	button.style.display = "none";
 	audio.play();
 }
