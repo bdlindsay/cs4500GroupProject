@@ -27,8 +27,8 @@ body{
 	text-align: center;
 }
 
-/* This is the style rule for the play button on the webpage. */
-.startbutton{
+/* This is the style rule for the all buttons on the webpage. */
+button {
 	/*________________*/
 	/*                */
 	/*     Colors     */
@@ -70,7 +70,7 @@ body{
 
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
-.startbutton:hover {
+button:hover {
 	background-color: #ff1aff; /* light purple */
 	/* font color line below */
 	color: black;
