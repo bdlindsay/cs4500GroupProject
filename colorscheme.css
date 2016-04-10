@@ -2,12 +2,21 @@
 /* Project: UMSL CS4500 SS2016 Group Project. */
 /* Author: Benjamin Leach */
 /* Partners: Brett Lindsay
-             Jason Pharm
+             Jason Pharms
 			 Chad Nelson
 			 Ryan */
 
+	/*_________________*/
+	/*                 */
+	/*    Background   */
+	/*_________________*/
 body{
-	background-color: pink;
+	/* CSS3 allows using mutiple images as the background. */
+	/* That's what I have done here. */
+	/* I am using the blue bubbles too offset the pink a little. */
+	/* I'm willing to use a different color or picture if need be. */
+	background: url(cs4500Media/backgrounds/bubbles.jpg) no-repeat top right, url(cs4500Media/backgrounds/pink_butterfly.jpg) no-repeat center center fixed;
+	
 }
 
 /* This is the style rule for the area of the start button. */
@@ -15,7 +24,7 @@ body{
 	position: fixed; 
 	bottom: 0; 
 	width: 100%; 
-	text-align: center
+	text-align: center;
 }
 
 /* This is the style rule for the play button on the webpage. */
@@ -24,7 +33,7 @@ body{
 	/*                */
 	/*     Colors     */
 	/*________________*/
-	background-color: #FF00FF; /* magenta */
+	background-color: #b300b3; /* medium-purple */
 	border: none;
 	color: white;
 	text-align: center;
@@ -62,7 +71,7 @@ body{
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
 .startbutton:hover {
-	background-color: white;
+	background-color: #ff1aff; /* light purple */
 	/* font color line below */
 	color: black;
 }
@@ -87,7 +96,7 @@ body{
 
 .imageDisplayArea{
 	position: relative;
-	border: 5px solid #f7f7f7;
+	border: 5px solid #9999ff /* light blue, little white/pink */;
 	/*box-shadow: 5px 5px #666; */
 	background-color: white;
 	width:300px;
