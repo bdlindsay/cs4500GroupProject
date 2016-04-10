@@ -94,18 +94,21 @@ function displayImages(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
+	
+	playActionAudio();
+	
 	//Append a button to the popup div, currently using the sratbutton CSS
-	$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
-	$("#resumebutton").appendTo("#popupBox");
-	
-	//Add event handler for created button
-	$( "#resumebutton" ).click(function() {
- 		displayImages();
-		audio.play();
-		$( "#resumebutton" ).remove();
-	});
-
-	
+	window.setTimeout(function () {
+		$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
+		$("#resumebutton").appendTo("#popupBox");
+		
+		//Add event handler for created button
+		$( "#resumebutton" ).click(function() {
+	 		displayImages();
+			audio.play();
+			$( "#resumebutton" ).remove();
+		});
+	}, 2500);
 }
 
 function pauseAudio(){
@@ -129,6 +132,19 @@ function beginPlaying(){
 	var button = document.getElementById("optionsButton");
 	button.style.display = "none";
 	audio.play();
+}
+
+function playActionAudio() {
+	var actionAudio1 = 
+		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
+	var actionAudio2 = 
+		new Audio('cs4500Media/i-love-you-audio/girl_i_love_you_too.wav');
+	window.setTimeout(function () {
+		actionAudio1.play();
+	}, 200);
+	window.setTimeout(function() {
+		actionAudio2.play();
+	}, 1500);	
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
