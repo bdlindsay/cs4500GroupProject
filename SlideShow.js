@@ -19,7 +19,7 @@ var shouldPause = true;
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var DURATION_PER_IMAGE = 1500;
+	var DURATION_PER_IMAGE = 2019;
 	var SONG_DURATION = Math.ceil(audio.duration); //return the duration of the song in seconds,rounded up.
 	numOfImages = 6;
 	
@@ -27,7 +27,6 @@ function displayImages(){
 		console.log("counter is not a number");
 		counter = 0;
 	}
-	
 	
 	//setting up Image Array, can use this to auto load images down the road
 	for(var i = 0;i < numOfImages;i++){
@@ -59,7 +58,6 @@ function displayImages(){
 		*/
 		if(counter == (numOfImages-1)){
 			counter = 0;
-			//clearInterval(interval);//this eventually will need to be called at end of song or on a pause
 		}
 		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
@@ -74,12 +72,13 @@ function displayImages(){
 		else{
 			counter++;
 		}
-		
 		// if song has ended, reset the app
 		if(audio.ended) {
 			clearInterval(interval);
 			// reset everything for a new start of program
 			$("#startButton").css("display", "initial");
+			$("#mode2Button").css("display", "initial");
+			$("#optionsButton").css("display", "initial");
 			shouldPause = true;
 			numPauses = 0;
 		}
@@ -88,7 +87,6 @@ function displayImages(){
 	//var songEnded = audio.ended
 	//var currentSongTime = audio.getStartDate;//this has an error
 	//console.log(currentSongTime+","+audio.duration);
-	
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,7 +94,6 @@ function displayImages(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
-	
 	//Append a button to the popup div, currently using the sratbutton CSS
 	$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
 	$("#resumebutton").appendTo("#popupBox");

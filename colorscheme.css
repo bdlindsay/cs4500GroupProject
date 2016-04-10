@@ -113,3 +113,9 @@ button:hover {
 	left: 8%;
 	top: 10%;	
 }
+
+.inactive {
+    background-color: #ff1aff; /* light purple */
+	/* font color line below */
+	color: black;
+}
