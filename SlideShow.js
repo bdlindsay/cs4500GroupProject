@@ -11,6 +11,8 @@ var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding
 var imageArray = new Array();
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
 var counter = 0; //setting the counter as global for this iteration for simplicity
+var numPauses = 0;
+var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,19 +61,27 @@ function displayImages(){
 			counter = 0;
 			//clearInterval(interval);//this eventually will need to be called at end of song or on a pause
 		}
-		else if(counter == 3 && shouldPause){//Manually setting time of interupt for now
+		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			interruptSong();
-			shouldPause = false; // to let it play after we've paused x number of times, x=1 now
+			// only pause maxPauses times
+			numPauses++;
+			if (numPauses >= maxPauses) {
+				shouldPause = false;
+			}
 			counter++;
 		}
 		else{
 			counter++;
 		}
 		
-		//have if statment here to test for end of song to keep everything going
+		// if song has ended, reset the app
 		if(audio.ended) {
 			clearInterval(interval);
+			// reset everything for a new start of program
+			$("#startButton").css("display", "initial");
+			shouldPause = true;
+			numPauses = 0;
 		}
 	}
 	
@@ -93,9 +103,9 @@ function interruptSong(){
 	
 	//Add event handler for created button
 	$( "#resumebutton" ).click(function() {
-		document.getElementById("resumebutton").style.display = "none";
  		displayImages();
 		audio.play();
+		$( "#resumebutton" ).remove();
 	});
 
 	
