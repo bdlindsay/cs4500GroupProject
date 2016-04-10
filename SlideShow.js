@@ -10,13 +10,14 @@
 var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
 var imageArray = new Array();
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
-var counter; //setting the counter as global for this iteration for simplicity
+var counter = 0; //setting the counter as global for this iteration for simplicity
+var shouldPause = true;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var DURATION_PER_IMAGE = 1000;
+	var DURATION_PER_IMAGE = 1500;
 	var SONG_DURATION = Math.ceil(audio.duration); //return the duration of the song in seconds,rounded up.
 	numOfImages = 6;
 	
@@ -41,10 +42,11 @@ function displayImages(){
 	var imgArea = document.getElementById("imageBox");
 	var img = document.getElementById("image");
 
-//maybe create another function called start slide show
+	//maybe create another function called start slide show
 	var interval = setInterval(showImage,DURATION_PER_IMAGE);
 	
-	function showImage(){		
+	function showImage(){
+		//console.log(counter);		
 		img.src = imageArray[counter].src;
 		/*
 		$("#image").fadeIn(500, function() {
@@ -54,21 +56,23 @@ function displayImages(){
 		});
 		*/
 		if(counter == (numOfImages-1)){
-		counter = 0;
-		clearInterval(interval);//this eventually will need to be called at end of song or on a pause
+			counter = 0;
+			//clearInterval(interval);//this eventually will need to be called at end of song or on a pause
 		}
-		else if(counter == 3){//Manually setting time of interupt for now
+		else if(counter == 3 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			interruptSong();
+			shouldPause = false; // to let it play after we've paused x number of times, x=1 now
 			counter++;
 		}
 		else{
 			counter++;
-			//console.log(counter);
 		}
 		
 		//have if statment here to test for end of song to keep everything going
-		
+		if(audio.ended) {
+			clearInterval(interval);
+		}
 	}
 	
 	//var songEnded = audio.ended
@@ -84,7 +88,8 @@ function interruptSong(){
 	pauseAudio();
 	
 	//Append a button to the popup div, currently using the sratbutton CSS
-	$( "#popupBox" ).append( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
+	$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
+	$("#resumebutton").appendTo("#popupBox");
 	
 	//Add event handler for created button
 	$( "#resumebutton" ).click(function() {
