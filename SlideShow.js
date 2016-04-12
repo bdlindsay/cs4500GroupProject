@@ -1,10 +1,10 @@
-/* This is the CSS for the "Elena's Love Story" webpage. 
+/* This is the CSS for the "Alaina's Love Story" webpage. 
 /* Project: UMSL CS4500 SS2016 Group Project. 
 /* Author: Chad Nelson  
 /* Partners: Brett Lindsay
              Jason Pharm
-			 Benjamin Leach
-			 Ryan */
+             Benjamin Leach
+	     Ryan Admire*/
 //Globals
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
