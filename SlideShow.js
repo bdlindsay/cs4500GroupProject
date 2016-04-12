@@ -37,7 +37,7 @@ function displayImages(){
 	imageArray[2].src = 'cs4500Media/images/BrotherCullen-USE.JPG';
 	imageArray[3].src = 'cs4500Media/images/Alaina\'s Family-USE.JPG';
 	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
-	imageArray[5].src = 'cs4500Media/images/musicalToy-USE.JPG';
+	imageArray[5].src = 'cs4500Media/images/AlainaGrandad2.JPG';
 	/////////////////////////////////////////////////////////////////////////
 	
 	var imgArea = document.getElementById("imageBox");
@@ -56,7 +56,7 @@ function displayImages(){
 			});
 		});
 		*/
-		if(counter == (numOfImages-1)){
+		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 			counter = 0;
 		}
 		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
@@ -83,10 +83,6 @@ function displayImages(){
 			numPauses = 0;
 		}
 	}
-	
-	//var songEnded = audio.ended
-	//var currentSongTime = audio.getStartDate;//this has an error
-	//console.log(currentSongTime+","+audio.duration);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,12 +90,13 @@ function displayImages(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
+	//Intial way of pausing, plays i love you audio then displays resume button
 	
 	playActionAudio();
 	
 	//Append a button to the popup div, currently using the sratbutton CSS
 	window.setTimeout(function () {
-		$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"startbutton\">RESUME</button>" );
+		$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>" );
 		$("#resumebutton").appendTo("#popupBox");
 		
 		//Add event handler for created button
@@ -109,6 +106,12 @@ function interruptSong(){
 			$( "#resumebutton" ).remove();
 		});
 	}, 2500);
+	/////////////////////////////////////////////////////
+	
+	//attempt at added question for Alania to answer
+	//questionInteruppt();
+	//displayImages();
+	//audio.play();
 }
 
 function pauseAudio(){
@@ -135,6 +138,7 @@ function beginPlaying(){
 }
 
 function playActionAudio() {
+	
 	var actionAudio1 = 
 		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
 	var actionAudio2 = 
@@ -145,6 +149,34 @@ function playActionAudio() {
 	window.setTimeout(function() {
 		actionAudio2.play();
 	}, 1500);	
+}
+
+//Use this function with a while loop, when wrong everything will reappear,when correct all will resume
+function questionInteruppt(){
+	playActionAudio();//play the action audio to prompt the question
+	
+	//images that will popup for Alaina to choose from
+	var correctChoice = new Image();
+	var wrongChoice = new Image();
+	correctChoice.src = 'cs4500Media/images/AlainaGrandad2.JPG';
+	wrongChoice.src = 'cs4500Media/images/beachBall.jpg';
+	
+	
+	$( "#popupBox" ).append( "<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" /> <img id=\"wrongChoice\" class=\"popupImageDisplay\" src=\""+wrongChoice.src+"\" />");
+							 
+	$( "#correctChoice" ).click(function() {
+			console.log("right answer clicked");
+			$( "#correctChoice" ).remove();
+			$( "#wrongChoice" ).remove();
+		});
+
+	$( "#wrongChoice" ).click(function() {
+			console.log("wrong answer clicked");
+			$( "#correctChoice" ).remove();
+			$( "#wrongChoice" ).remove();
+		});
+	
+	
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 

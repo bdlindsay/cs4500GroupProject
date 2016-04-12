@@ -89,6 +89,23 @@ button:hover {
 	transform: translateY(4px);
 }
 
+.resumebutton {
+	position: relative;
+	top: 40%;
+	left: 20%;
+	display: inline-block;
+	border: 5px solid #9999ff;
+}
+.resumbutton:active {
+	/* I changed the posistion and color of the shadow
+	   with box-shadow so it will look like the shadow 
+	   had moved when the user clicks on it. 
+	*/
+	box-shadow: 0 5px #666;
+	/* transform moves the button. translateY(4px) means
+	   move it down 4 pixels. */
+	transform: translateY(4px);
+}
 .imageDisplay{
     height:100%;
     width:100%;
@@ -108,10 +125,22 @@ button:hover {
 	height:300px;
 }
 
-.popupBox {
+.popupBox { /*this probably needs to be done better in the future*/
+	width: 600px;
+	height: 600px;
+	position: absolute;
+	top: 50px;
+	left:30%;
+	/*z-index: 4;*/
+}
+.popupImageDisplay{
+	height: 40%;
+	width: 40%;
 	position: relative;
-	left: 8%;
-	top: 10%;	
+	top: 50px;
+	left: 0px;
+	display: inline-block;
+	border: 5px solid #9999ff;
 }
 
 .inactive {
