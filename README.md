@@ -5,7 +5,7 @@ A production of 10x10 Studios
 Ben Leach
 Brett Lindsay
 Chad Nelson
-Jason Pharm
+Jason Pham
 Ryan Admire
 
 The project is done entirely in standard web languages. Javascript, HTML, CSS.
