@@ -14,6 +14,7 @@ var counter = 0; //setting the counter as global for this iteration for simplici
 var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
+var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
@@ -90,34 +91,29 @@ function displayImages(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
-	//Intial way of pausing, plays i love you audio then displays resume button
-	
-	playActionAudio();
-	
-	//Append a button to the popup div, currently using the sratbutton CSS
-	window.setTimeout(function () {
-		$( "#popupBox" ).after( "<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>" );
-		$("#resumebutton").appendTo("#popupBox");
+
+	if (gameMode[1] == true) {//if statement for first game mode
+		playActionAudio();
+		//Append a button to the popup div, currently using the sratbutton CSS
+		window.setTimeout(function() {
+			$("#popupBox").after("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
+			$("#resumebutton").appendTo("#popupBox");
+
+			//Add event handler for created button
+			$("#resumebutton").click(function() {
+				displayImages();
+				audio.play();
+				$("#resumebutton").remove();
+			});
+		}, 2500);
 		
-		//Add event handler for created button
-		$( "#resumebutton" ).click(function() {
-	 		displayImages();
-			audio.play();
-			$( "#resumebutton" ).remove();
-		});
-	}, 2500);
-	/////////////////////////////////////////////////////
-	/*
-	//attempt at added question for Alania to answer
-	//questionInteruppt();
-	//displayImages();
-	//audio.play();
-	questionInterrupt().done(function(){
-		//displayImages();
-		//audio.play();
-		console.log("got it");
-	});
-	*/
+	}
+	
+	//Game 2 is slected, use question format
+	if(gameMode[2] == true){
+		questionInterrupt();
+	}
+
 }
 
 function pauseAudio(){
@@ -127,9 +123,19 @@ function pauseAudio(){
 }
 
 
-//Ryan Admire function to play music
-function beginPlaying(){
+//this function is called when game button is pressed, the variable passed in is which game mode was selected
+function beginPlaying(gameModeChoice){
 	//audio.canPlayType()//checks if the browser can play the audio file
+	
+	//check and set which gmae mode was sleceted
+	if(gameModeChoice =="game1"){
+		gameMode[1] = true;
+		gameMode[2] = false;
+	}
+	else if(gameModeChoice =="game2"){
+		gameMode[1] = false;
+		gameMode[2] = true;
+	}
 	displayImages();
 
 	//code to stop displaying the initial buttons
@@ -149,6 +155,9 @@ function playActionAudio() {
 		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
 	var actionAudio2 = 
 		new Audio('cs4500Media/i-love-you-audio/girl_i_love_you_too.wav');
+		actionAudio1.media_type = "audio/wav";
+		actionAudio2.media_type = "audio/wav";
+		
 	window.setTimeout(function () {
 		actionAudio1.play();
 	}, 200);
@@ -158,8 +167,9 @@ function playActionAudio() {
 }
 
 //Use this function with a while loop, when wrong everything will reappear,when correct all will resume
+//Currently the function has commented code, leaving this in until i understand it more
 var questionInterrupt = function(){
-	var deferred = new $.Deferred();
+	//var deferred = new $.Deferred();
 	playActionAudio();//play the action audio to prompt the question
 	
 	//images that will popup for Alaina to choose from
@@ -175,17 +185,25 @@ var questionInterrupt = function(){
 			console.log("right answer clicked");
 			$( "#correctChoice" ).remove();
 			$( "#wrongChoice" ).remove();
-			deferred.resolve();
-			return deferred.promise();
+			//deferred.resolve();
+			displayImages();
+			audio.play();
+			//return deferred.promise();
 		});
 
 	$( "#wrongChoice" ).click(function() {
 			console.log("wrong answer clicked");
 			$( "#correctChoice" ).remove();
 			$( "#wrongChoice" ).remove();
-			deferred.resolve();
-			return deferred.promise();
+			//deferred.resolve();
+			//return deferred.promise();
+			window.setTimeout(function () {
+				questionInterrupt();
+			}, 600);
+			
 		});
+		
 };
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
