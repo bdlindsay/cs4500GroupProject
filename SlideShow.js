@@ -2,7 +2,7 @@
 /* Project: UMSL CS4500 SS2016 Group Project. 
 /* Author: Chad Nelson  
 /* Partners: Brett Lindsay
-             Jason Pharm
+             Jason Pham
              Benjamin Leach
 	     Ryan Admire*/
 //Globals
