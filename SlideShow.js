@@ -107,11 +107,17 @@ function interruptSong(){
 		});
 	}, 2500);
 	/////////////////////////////////////////////////////
-	
+	/*
 	//attempt at added question for Alania to answer
 	//questionInteruppt();
 	//displayImages();
 	//audio.play();
+	questionInterrupt().done(function(){
+		//displayImages();
+		//audio.play();
+		console.log("got it");
+	});
+	*/
 }
 
 function pauseAudio(){
@@ -152,7 +158,8 @@ function playActionAudio() {
 }
 
 //Use this function with a while loop, when wrong everything will reappear,when correct all will resume
-function questionInteruppt(){
+var questionInterrupt = function(){
+	var deferred = new $.Deferred();
 	playActionAudio();//play the action audio to prompt the question
 	
 	//images that will popup for Alaina to choose from
@@ -168,15 +175,17 @@ function questionInteruppt(){
 			console.log("right answer clicked");
 			$( "#correctChoice" ).remove();
 			$( "#wrongChoice" ).remove();
+			deferred.resolve();
+			return deferred.promise();
 		});
 
 	$( "#wrongChoice" ).click(function() {
 			console.log("wrong answer clicked");
 			$( "#correctChoice" ).remove();
 			$( "#wrongChoice" ).remove();
+			deferred.resolve();
+			return deferred.promise();
 		});
-	
-	
-}
+};
 //////////////////////////////////////////////////////////////////////////////////////////////
 
