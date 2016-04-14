@@ -20,7 +20,7 @@ body{
 }
 
 /* This is the style rule for the area of the start button. */
-.startbuttonarea {
+.activebuttonarea {
 	position: fixed; 
 	bottom: 5%;
 	width: 100%; 
@@ -28,7 +28,7 @@ body{
 }
 
 /* This is the style rule for the all buttons on the webpage. */
-button {
+.activebutton {
 	/*________________*/
 	/*                */
 	/*     Colors     */
@@ -70,7 +70,7 @@ button {
 
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
-button:hover {
+.activebutton:hover {
 	background-color: #ff1aff; /* light purple */
 	/* font color line below */
 	color: black;
@@ -78,7 +78,7 @@ button:hover {
 
 /* This style rule determines what happens when
    the button is clicked. */
-.startbutton:active {
+.activebutton:active {
 	/* I changed the posistion and color of the shadow
 	   with box-shadow so it will look like the shadow 
 	   had moved when the user clicks on it. 
@@ -148,3 +148,272 @@ button:hover {
 	/* font color line below */
 	color: black;
 }
+
+/*________________*/
+/*                */
+/*  Options Menu  */
+/*________________*/
+.optionsMenu 
+{
+	background-color: white;
+	width: 35%;
+	height: 80%;
+	border-radius: 25px;
+    border: 2px solid black;
+	
+	position: absolute;
+    top:0 ;
+    bottom: 10;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+/* The rule for the button that closes the option menu. */
+.exitOptions
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	background-color: white;
+	border: 1px solid black;
+	
+	position:relative;
+    top: 3%;
+    left: 87%;
+    right: 50%;
+    bottom: 50%;
+}
+
+.optionsMenuButton
+{
+	border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 8px 16px 8px 16px;
+  
+	background-color: blue;
+	border: 1px solid black;
+	
+	position: absolute;
+    
+	
+	box-shadow: 0 9px #999;
+}
+
+#omb1
+{
+	top: 30%;
+    left: 5%;
+}
+
+#omb2
+{
+	top: 40%;
+    left: 5%;
+}
+
+#omb3
+{
+	top: 50%;
+    left: 5%;
+}
+
+#omb4
+{
+	top: 60%;
+    left: 5%;
+}
+
+/* This style rule will determine what happens
+   when the mouse hovers over the button. */
+.optionsMenuButton:hover {
+	background-color: #ff1aff; /* light purple */
+	/* font color line below */
+	color: black;
+}
+
+/* This style rule determines what happens when
+   the button is clicked. */
+.optionsMenuButton:active {
+	/* I changed the posistion and color of the shadow
+	   with box-shadow so it will look like the shadow 
+	   had moved when the user clicks on it. 
+	*/
+	box-shadow: 0 5px #666;
+	/* transform moves the button. translateY(4px) means
+	   move it down 4 pixels. */
+	transform: translateY(4px);
+}
+
+.resetGameButton
+{
+	border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+  
+	background-color: #75138f /* dark blue */;
+	border: 1px solid purple;
+	
+	position: absolute;
+    top: 88%;
+    left: 29%;
+	
+	box-shadow: 0 9px #999;
+}
+
+/* This style rule will determine what happens
+   when the mouse hovers over the button. */
+.resetGameButton:hover {
+	background-color: #ff1aff; /* light purple */
+	/* font color line below */
+	color: black;
+}
+
+/* This style rule determines what happens when
+   the button is clicked. */
+.resetGameButton:active {
+	/* I changed the posistion and color of the shadow
+	   with box-shadow so it will look like the shadow 
+	   had moved when the user clicks on it. 
+	*/
+	box-shadow: 0 5px #666;
+	/* transform moves the button. translateY(4px) means
+	   move it down 4 pixels. */
+	transform: translateY(4px);
+}
+
+#pauseSliderWrapper
+{
+	position: absolute;
+	
+	top: 10%;
+}
+
+/*___________________________*/
+/*                          */
+/*     Input Range Rules     */
+/*__________________________*/
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent; /* Hides the slider so custom styles can be added */
+  border-color: transparent;
+  color: transparent;
+}
+
+/*___________________________*/
+/*                          */
+/*   Rules for the Thumb    */
+/*__________________________*/
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/*___________________________*/
+/*                          */
+/*   Rules for the Track    */
+/*__________________________*/
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+

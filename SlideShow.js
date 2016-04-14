@@ -15,6 +15,15 @@ var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
+
+/* optionMenuOn will be set to true if the options are up. */
+var optionsMenuOn = false;
+
+/* isGameRunning will be a boolean that will see if one of the 
+   games are being ran. This will be used to show different
+   options menus depending on whether the games are being
+   currently ran or not. */
+var isGameRunning = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
@@ -77,7 +86,7 @@ function displayImages(){
 		if(audio.ended) {
 			clearInterval(interval);
 			// reset everything for a new start of program
-			$("#startButton").css("display", "initial");
+			$("#activebutton").css("display", "initial");
 			$("#mode2Button").css("display", "initial");
 			$("#optionsButton").css("display", "initial");
 			shouldPause = true;
@@ -117,7 +126,7 @@ function interruptSong(){
 }
 
 function pauseAudio(){
-	//var button = document.getElementById("startButton");
+	//var button = document.getElementById("activebutton");
 	//button.style.display = "inline";
 	audio.pause();	
 }
@@ -125,6 +134,7 @@ function pauseAudio(){
 
 //this function is called when game button is pressed, the variable passed in is which game mode was selected
 function beginPlaying(gameModeChoice){
+	isGameRunning = true;
 	//audio.canPlayType()//checks if the browser can play the audio file
 	
 	//check and set which gmae mode was sleceted
@@ -140,12 +150,12 @@ function beginPlaying(gameModeChoice){
 
 	//code to stop displaying the initial buttons
 	//is repeated for all 3 initial buttons
-	var button = document.getElementById("startButton");
+	var button = document.getElementById("activebutton");
 	button.style.display = "none";
 	var button = document.getElementById("mode2Button");
 	button.style.display = "none";
 	var button = document.getElementById("optionsButton");
-	button.style.display = "none";
+	//button.style.display = "none";
 	audio.play();
 }
 
@@ -207,3 +217,61 @@ var questionInterrupt = function(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/*_____________________________*/
+/*                             */
+/* START OF OPTIONS MENU CODE  */
+/*_____________________________*/
+
+/*************************************/
+/* The options menu for this website */
+/*   is a white box that only shows  */
+/*   when the user clicks the        */
+/*   "OPTIONS" button.               */
+/**************************************/
+
+/* hideOptionsMenu() hides the <div>
+   for the options menu as soon as 
+   main.html loads. */
+function hideOptionsMenu()
+{
+	$(document).ready(function()  {
+		/* hide the options menu */
+		$(".optionsMenu").hide();
+	});
+}
+
+/* showOptionsMenu() shows the options menu. */
+
+/* The options menu "fades" into place by    */
+/*    using "1000" as the paramter in slow().*/
+function openOptionsMenu()
+{
+	if (isGameRunning == false)
+	{
+		$(".resetGameButton").hide();
+	}
+	
+	else
+	{
+		$(".resetGameButton").show();
+	}
+	
+	$(".optionsMenu").show(1000);
+	optionsMenuOn = true;
+	//document.getElementById("optionsBox").innerHTML = optionsMenuOn;
+	
+}
+
+/* close OptionMenu() closes the options menu. */
+	function closeOptionsMenu()
+{
+	$(".optionsMenu").hide(1000);
+	optionsMenuOn = false;
+}
+	
+
+/*_____________________________*/
+/*                             */
+/*   END OF OPTIONS MENU CODE  */
+/*_____________________________*/

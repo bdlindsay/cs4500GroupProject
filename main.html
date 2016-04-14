@@ -20,7 +20,7 @@
 		
 		
 	</head>
-	<body class = "main">
+	<body class = "main" onload="hideOptionsMenu();">
 		
 		<!--div for displaying images while song is playing-->
 		<div id="imageBox" class="imageDisplayArea">
@@ -32,14 +32,31 @@
 			</div>
 		</div>
 		
-		
+		<!-- Options menu div -->
+		<div class="optionsMenu" id="optionsBox">
+			<button class="exitOptions" onclick="closeOptionsMenu();">X</button>
+			
+			<div id="pauseSliderWrapper">
+				<p>Number of Pauses: </p>
+				<input type="range" class="pausesSlider" min="10" value="10" max="2000" step="100"></input>
+			</div>
+			
+			<button class="optionsMenuButton" id="omb1">Upload Images</button>
+			<button class="optionsMenuButton" id="omb2">Doumentation</button>
+			<button class="optionsMenuButton" id="omb3">Main Menu</button>
+			<button class="optionsMenuButton" id="omb4">About Us</button>
+			
+			<button class="resetGameButton">Start Game Over</button>
+		 </div>
+		<!-- End of the options menu <div> -->
 		
 		 <div style="position: relative">
-			<p class="startbuttonarea">
-		 		<button id ="startButton" class="startbutton" onclick="beginPlaying('game1')">Game 1</button>
-				<button id ="mode2Button" onclick="beginPlaying('game2')" class="startbutton">Game 2</button>
-				<button id ="optionsButton" class="inactive">Options</button>
+			<p class="activebuttonarea">
+		 		<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Game 1</button>
+				<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Game 2</button>
+				<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
 		 	</p>
 		 </div>
+		 
 	</body>
 </html>
