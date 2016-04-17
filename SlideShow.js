@@ -114,7 +114,7 @@ function stopPauses() {
 }
 
 function updatePauses() {
-	if (maxPauses >= numPauses) {
+	if (maxPauses >= numPauses) { // don't let numPauses > than maxPauses display to user
 		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
 	}
 }
