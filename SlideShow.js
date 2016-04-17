@@ -67,7 +67,7 @@ function displayImages(){
 		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			numPauses++; // we paused
-			$(".pausesText").html("Pause Count<br><br>" + numPauses + "/" + maxPauses);
+			updatePauses();
 			interruptSong();
 			// only pause maxPauses times
 			if (numPauses >= maxPauses) {
@@ -104,12 +104,17 @@ function resetGame() {
 	$("#optionsSymDiv").hide();
 	shouldPause = true;
 	numPauses = 0;
-	$(".pausesText").html("Pause Count<br><br>" + numPauses + "/" + maxPauses);
+	updatePauses();
 }
 
 function stopPauses() {
 	shouldPause = false;
-	$(".pausesText").html("Pause Count<br><br>" + maxPauses + "/" + maxPauses);
+	numPauses = maxPauses;
+	updatePauses();
+}
+
+function updatePauses() {
+		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -265,6 +270,16 @@ function hideOptionsMenu()
 	});
 }
 
+/* function allows user to choose the number amount of pauses. */
+function choosePause(num_of_pause) {
+	//update the output text 
+	document.querySelector('#numOfPauses_outputID').value = num_of_pause;
+	maxPauses = num_of_pause; //update
+	updatePauses();
+	//console.log(numPauses);
+}
+
+
 /* showOptionsMenu() shows the options menu. */
 
 /* The options menu "fades" into place by    */
@@ -278,7 +293,8 @@ function openOptionsMenu()
 	}
 	
 	else
-	{
+	{	
+		$("#pSlider").hide(); // hides the slider to choose max number of pauses
 		$(".resetGameButton").show();
 		$(".stopPausesButton").show();
 		$("#resumebutton").hide();

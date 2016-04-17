@@ -39,8 +39,9 @@
 			<button class="exitOptions" onclick="closeOptionsMenu();">X</button>
 			
 			<div id="pauseSliderWrapper">
-				<p>Number of Pauses: </p>
-				<input type="range" class="pausesSlider" min="10" value="10" max="2000" step="100"></input>
+				<p>Number of Pauses: 
+				<output for="pSlider" id="numOfPauses_outputID">3</output></p>
+				<input type="range" class="pausesSlider" id="pSlider" min="0" value="3" max="5" step="1" oninput="choosePause(value)"></input>
 			</div>
 			
 			<button class="optionsMenuButton" id="omb1">Upload Images</button>
@@ -54,7 +55,7 @@
 		<!-- End of the options menu <div> -->
 		 <div style="text-align: center;" class="pausesDiv">
 		 	<p class="pausesText">
-		 		Pause Count<br><br>0/3
+		 		Pause Count<br>0/3
 		 	</p>
 		 </div>
 		 <div style="text-align: center;">
