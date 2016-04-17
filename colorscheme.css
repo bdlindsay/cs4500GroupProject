@@ -24,7 +24,7 @@ body{
 	position: fixed; 
 	bottom: 5%;
 	width: 100%; 
-	text-align: center;
+	/*text-align: center;*/
 }
 
 /* This is the style rule for the all buttons on the webpage. */
@@ -89,6 +89,10 @@ body{
 	transform: translateY(4px);
 }
 
+.optionsSym {
+	height: 40%;
+	width: 40%;
+}
 .resumebutton {
 	/*________________*/
 	/*                */
@@ -128,10 +132,8 @@ body{
 	transition-duration: .4s;
 	
 	position: relative;
-	top: 55%;
-	left: 25%;
 	display: inline-block;
-	border: 5px solid #9999ff;
+	border: 5px solid #9999ff; /*light purple*/
 }
 
 /* This style rule will determine what happens
@@ -170,6 +172,22 @@ body{
 	background-color: white;
 	width:300px;
 	height:300px;
+}
+
+/* Text style for remaining pauses */
+.pausesText {
+	color: pink; 
+	text-align: center;
+	-webkit-text-stroke: 1px #B300B3;/* medium purple */
+	font-size: 300%;
+}
+
+/* area where remaining pauses shows */
+.remainingPauses {
+	position: fixed;
+	bottom: 20%
+	width: 100%;
+	text-align: center;
 }
 
 .popupBox { /*this probably needs to be done better in the future*/
@@ -326,6 +344,45 @@ body{
 /* This style rule determines what happens when
    the button is clicked. */
 .resetGameButton:active {
+	/* I changed the posistion and color of the shadow
+	   with box-shadow so it will look like the shadow 
+	   had moved when the user clicks on it. 
+	*/
+	box-shadow: 0 5px #666;
+	/* transform moves the button. translateY(4px) means
+	   move it down 4 pixels. */
+	transform: translateY(4px);
+}
+
+.stopPausesButton
+{
+	border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+  
+	background-color: #75138f /* dark blue */;
+	border: 1px solid purple;
+	
+	position: absolute;
+    top: 78%;
+    left: 29%;
+	
+	box-shadow: 0 9px #999;
+}
+
+/* This style rule will determine what happens
+   when the mouse hovers over the button. */
+.stopPausesButton:hover {
+	background-color: #ff1aff; /* light purple */
+	/* font color line below */
+	color: black;
+}
+
+/* This style rule determines what happens when
+   the button is clicked. */
+.stopPausesButton:active {
 	/* I changed the posistion and color of the shadow
 	   with box-shadow so it will look like the shadow 
 	   had moved when the user clicks on it. 

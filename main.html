@@ -21,7 +21,9 @@
 		
 	</head>
 	<body class = "main" onload="hideOptionsMenu();">
-		
+		 <div style="text-align: left; position: absolute; top: 3%; left: 3%;" id="optionsSymDiv">
+		 	<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
+		 </div>
 		<!--div for displaying images while song is playing-->
 		<div id="imageBox" class="imageDisplayArea">
 			<img id="image" class="imageDisplay" src="cs4500Media/images/musicalToy-USE.JPG" />
@@ -46,17 +48,21 @@
 			<button class="optionsMenuButton" id="omb3">Main Menu</button>
 			<button class="optionsMenuButton" id="omb4">About Us</button>
 			
-			<button class="resetGameButton">Start Game Over</button>
+			<button class="resetGameButton" onclick="resetGame()">Reset Game</button>
+			<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
 		 </div>
 		<!-- End of the options menu <div> -->
-		
-		 <div style="position: relative">
+		 <div style="text-align: center;" class="pausesDiv">
+		 	<p class="pausesText">
+		 		Pause Count<br><br>0/3
+		 	</p>
+		 </div>
+		 <div style="text-align: center;">
 			<p class="activebuttonarea">
 		 		<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Game 1</button>
 				<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Game 2</button>
 				<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
 		 	</p>
 		 </div>
-		 
 	</body>
 </html>

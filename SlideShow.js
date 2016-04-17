@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
 var imageArray = new Array();
+var DURATION_PER_IMAGE = 2019;
+var interval;
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
 var counter = 0; //setting the counter as global for this iteration for simplicity
 var numPauses = 0;
@@ -29,7 +31,6 @@ var isGameRunning = false;
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var DURATION_PER_IMAGE = 2019;
 	var SONG_DURATION = Math.ceil(audio.duration); //return the duration of the song in seconds,rounded up.
 	numOfImages = 6;
 	
@@ -54,26 +55,21 @@ function displayImages(){
 	var img = document.getElementById("image");
 
 	//maybe create another function called start slide show
-	var interval = setInterval(showImage,DURATION_PER_IMAGE);
+	interval = setInterval(showImage,DURATION_PER_IMAGE);
 	
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
-		/*
-		$("#image").fadeIn(500, function() {
-			$("#image").fadeOut(500, function() {
-				//complete
-			});
-		});
-		*/
+
 		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 			counter = 0;
 		}
 		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
+			numPauses++; // we paused
+			$(".pausesText").html("Pause Count<br><br>" + numPauses + "/" + maxPauses);
 			interruptSong();
 			// only pause maxPauses times
-			numPauses++;
 			if (numPauses >= maxPauses) {
 				shouldPause = false;
 			}
@@ -84,15 +80,36 @@ function displayImages(){
 		}
 		// if song has ended, reset the app
 		if(audio.ended) {
-			clearInterval(interval);
 			// reset everything for a new start of program
-			$("#activebutton").css("display", "initial");
-			$("#mode2Button").css("display", "initial");
-			$("#optionsButton").css("display", "initial");
-			shouldPause = true;
-			numPauses = 0;
+			resetGame();
 		}
 	}
+}
+
+// Functions for options menu
+function resetGame() {
+	if (isGameRunning) { // reset running
+		clearInterval(interval);
+		audio.pause();
+		audio.load();
+		$(".resetGameButton").hide();
+		$(".stopPausesButton").hide();
+		$("#resumebutton").remove();
+		isGameRunning = false;
+	}
+	// reset everything for a new start of program
+	$("#activebutton").css("display", "initial");
+	$("#mode2Button").css("display", "initial");
+	$("#optionsButton").css("display", "initial");
+	$("#optionsSymDiv").hide();
+	shouldPause = true;
+	numPauses = 0;
+	$(".pausesText").html("Pause Count<br><br>" + numPauses + "/" + maxPauses);
+}
+
+function stopPauses() {
+	shouldPause = false;
+	$(".pausesText").html("Pause Count<br><br>" + maxPauses + "/" + maxPauses);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -100,14 +117,15 @@ function displayImages(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
-
 	if (gameMode[1] == true) {//if statement for first game mode
 		playActionAudio();
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
 			$("#popupBox").after("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
-			$("#resumebutton").appendTo("#popupBox");
-
+			$("#resumebutton").appendTo(".pausesDiv");
+			if (optionsMenuOn) {
+				$("#resumebutton").hide();
+			}
 			//Add event handler for created button
 			$("#resumebutton").click(function() {
 				displayImages();
@@ -149,13 +167,18 @@ function beginPlaying(gameModeChoice){
 	displayImages();
 
 	//code to stop displaying the initial buttons
-	//is repeated for all 3 initial buttons
-	var button = document.getElementById("activebutton");
-	button.style.display = "none";
-	var button = document.getElementById("mode2Button");
-	button.style.display = "none";
-	var button = document.getElementById("optionsButton");
-	//button.style.display = "none";
+	//is repeated for all 3 initial buttons - changed to jQuery
+
+	// var button = document.getElementById("activebutton");
+	// button.style.display = "none";
+	// var button = document.getElementById("mode2Button");
+	// button.style.display = "none";
+	// var button = document.getElementById("optionsButton");
+	// button.style.display = "none";
+	$("#activebutton").hide(DURATION_PER_IMAGE);
+	$("#mode2Button").hide(DURATION_PER_IMAGE);
+	$("#optionsButton").hide(DURATION_PER_IMAGE);
+	$("#optionsSymDiv").show(DURATION_PER_IMAGE);
 	audio.play();
 }
 
@@ -238,6 +261,7 @@ function hideOptionsMenu()
 	$(document).ready(function()  {
 		/* hide the options menu */
 		$(".optionsMenu").hide();
+		$("#optionsSymDiv").hide();
 	});
 }
 
@@ -250,11 +274,16 @@ function openOptionsMenu()
 	if (isGameRunning == false)
 	{
 		$(".resetGameButton").hide();
+		$(".stopPausesButton").hide();
 	}
 	
 	else
 	{
 		$(".resetGameButton").show();
+		$(".stopPausesButton").show();
+		$("#resumebutton").hide();
+		// audio.pause(); // want to pause but hard to rest interval off random click time
+		// clearInterval(interval);
 	}
 	
 	$(".optionsMenu").show(1000);
@@ -266,6 +295,11 @@ function openOptionsMenu()
 /* close OptionMenu() closes the options menu. */
 	function closeOptionsMenu()
 {
+	 if (isGameRunning) { // hard to reset interval on random click time?
+		$("#resumebutton").show();
+		// audio.play();
+		// displayImages();
+	 }
 	$(".optionsMenu").hide(1000);
 	optionsMenuOn = false;
 }
