@@ -186,6 +186,7 @@ function beginPlaying(gameModeChoice){
 	$("#optionsSymDiv").show(DURATION_PER_IMAGE);
 	audio.play();
 	document.getElementById("pausesText").style.visibility = "visible"; //shows the pause counter text
+	updatePauses();
 }
 
 function playActionAudio() {
