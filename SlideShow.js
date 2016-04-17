@@ -114,7 +114,9 @@ function stopPauses() {
 }
 
 function updatePauses() {
+	if (maxPauses >= numPauses) {
 		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -275,6 +277,9 @@ function choosePause(num_of_pause) {
 	//update the output text 
 	document.querySelector('#numOfPauses_outputID').value = num_of_pause;
 	maxPauses = num_of_pause; //update
+	if (numPauses < maxPauses) {
+		shouldPause = true;
+	}
 	updatePauses();
 	//console.log(numPauses);
 }
@@ -286,6 +291,10 @@ function choosePause(num_of_pause) {
 /*    using "1000" as the paramter in slow().*/
 function openOptionsMenu()
 {
+	if (optionsMenuOn) {
+		closeOptionsMenu();
+		return;
+	}
 	if (isGameRunning == false)
 	{
 		$(".resetGameButton").hide();
@@ -294,7 +303,7 @@ function openOptionsMenu()
 	
 	else
 	{	
-		$("#pSlider").hide(); // hides the slider to choose max number of pauses
+		// $("#pSlider").hide(); // hides the slider to choose max number of pauses
 		$(".resetGameButton").show();
 		$(".stopPausesButton").show();
 		$("#resumebutton").hide();

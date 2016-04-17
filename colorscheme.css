@@ -236,6 +236,16 @@ body{
 }
 
 /* The rule for the button that closes the option menu. */
+
+.optionsTitle
+{
+	font-size: 250%;
+	color: pink;
+	-webkit-text-stroke: 1px #B300B3;/* medium purple */
+	position:absolute;
+	left: 40%;
+	top: -1%;
+}
 .exitOptions
 {
 	padding-top: 10px;
@@ -243,8 +253,9 @@ body{
 	padding-left: 10px;
 	padding-right: 10px;
 	
-	background-color: white;
-	border: 1px solid black;
+	background-color: pink;
+	border: 1px solid #B300B3;
+	border-radius: 70%;
 	
 	position:relative;
     top: 3%;
@@ -257,12 +268,12 @@ body{
 {
 	border-radius: 28px;
     font-family: Arial;
-    color: #ffffff;
+    color: #B300B3;/* medium purple */
     font-size: 12px;
     padding: 8px 16px 8px 16px;
   
-	background-color: blue;
-	border: 1px solid black;
+	background-color: pink;
+	border: 1px solid #B300B3;/* medium purple */
 	
 	position: absolute;
     
@@ -297,9 +308,10 @@ body{
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
 .optionsMenuButton:hover {
-	background-color: #ff1aff; /* light purple */
+	background-color: #B300B3;/* medium purple */
+	border: 1px solid pink;
 	/* font color line below */
-	color: black;
+	color: white;
 }
 
 /* This style rule determines what happens when
@@ -319,12 +331,12 @@ body{
 {
 	border-radius: 28px;
     font-family: Arial;
-    color: #ffffff;
+    color: #B300B3;/* medium purple */
     font-size: 20px;
     padding: 10px 20px 10px 20px;
   
-	background-color: #75138f /* dark blue */;
-	border: 1px solid purple;
+	background-color: pink;
+	border: 1px solid #B300B3;/* medium purple */
 	
 	position: absolute;
     top: 88%;
@@ -336,9 +348,9 @@ body{
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
 .resetGameButton:hover {
-	background-color: #ff1aff; /* light purple */
+	background-color: #B300B3;/* medium purple */
 	/* font color line below */
-	color: black;
+	color: white;
 }
 
 /* This style rule determines what happens when
@@ -358,12 +370,12 @@ body{
 {
 	border-radius: 28px;
     font-family: Arial;
-    color: #ffffff;
+    color: #B300B3;/* medium purple */
     font-size: 20px;
     padding: 10px 20px 10px 20px;
   
-	background-color: #75138f /* dark blue */;
-	border: 1px solid purple;
+	background-color: pink;
+	border: 1px solid #B300B3;/* medium purple */
 	
 	position: absolute;
     top: 78%;
@@ -375,9 +387,10 @@ body{
 /* This style rule will determine what happens
    when the mouse hovers over the button. */
 .stopPausesButton:hover {
-	background-color: #ff1aff; /* light purple */
+	background-color: #B300B3;/* medium purple */
+	border: 1px solid pink;
 	/* font color line below */
-	color: black;
+	color: white;
 }
 
 /* This style rule determines what happens when
@@ -396,8 +409,11 @@ body{
 #pauseSliderWrapper
 {
 	position: absolute;
-	
+	left: 5%;
 	top: 10%;
+	color: pink;
+	-webkit-text-stroke: .5px #B300B3;/* medium purple */
+	font-size: 125%;
 }
 
 /*___________________________*/
@@ -474,13 +490,13 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 8.4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #3071a9;
+  background: pink;
   border-radius: 1.3px;
-  border: 0.2px solid #010101;
+  border: 0.2px solid purple;
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #367ebd;
+  background: pink;;
 }
 
 input[type=range]::-moz-range-track {
@@ -488,7 +504,7 @@ input[type=range]::-moz-range-track {
   height: 8.4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #3071a9;
+  background: #pink;
   border-radius: 1.3px;
   border: 0.2px solid #010101;
 }
@@ -503,7 +519,7 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-  background: #2a6495;
+  background: pink;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
@@ -512,12 +528,12 @@ input[type=range]:focus::-ms-fill-lower {
   background: #3071a9;
 }
 input[type=range]::-ms-fill-upper {
-  background: #3071a9;
+  background: pink;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: #367ebd;
+  background: pink;
 }
 
