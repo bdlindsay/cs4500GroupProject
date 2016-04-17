@@ -176,6 +176,7 @@ body{
 
 /* Text style for remaining pauses */
 .pausesText {
+	visibility: hidden;
 	color: pink; 
 	text-align: center;
 	-webkit-text-stroke: 1px #B300B3;/* medium purple */
