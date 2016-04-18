@@ -286,8 +286,15 @@ function choosePause(num_of_pause) {
 	//console.log(numPauses);
 }
 
-
-/* showOptionsMenu() shows the options menu. */
+/**********************************************/
+/* The function openOptionsMenu() will contain*/
+/*	everything that happens when the options  */
+/*	menu is open.                             */
+/* The options menu is either opened by       */
+/*	clicking the "Options" button on the main */
+/*  menu or clicking the gear when a game is  */
+/*	running.                                  */
+/**********************************************/
 
 /* The options menu "fades" into place by    */
 /*    using "1000" as the paramter in slow().*/
@@ -297,6 +304,7 @@ function openOptionsMenu()
 		closeOptionsMenu();
 		return;
 	}
+	
 	if (isGameRunning == false)
 	{
 		$(".resetGameButton").hide();
@@ -313,6 +321,11 @@ function openOptionsMenu()
 		// clearInterval(interval);
 	}
 	
+	/* blurBackground blurs everything 
+		except the options Menu. It is 
+		defined futher below. */
+	blurBackground();
+	
 	$(".optionsMenu").show(1000);
 	optionsMenuOn = true;
 	//document.getElementById("optionsBox").innerHTML = optionsMenuOn;
@@ -327,11 +340,40 @@ function openOptionsMenu()
 		// audio.play();
 		// displayImages();
 	 }
+
+	/* blurBackground unblurs everything 
+		It is defined futher below. */
+	unblurBackground();
+	 
 	$(".optionsMenu").hide(1000);
 	optionsMenuOn = false;
 }
-	
 
+
+/********************************/
+/* The function blurBackground()*/
+/* 	causes everything that is   */
+/* 	not the options menu to     */
+/*	become blurry.              */
+/********************************/
+function blurBackground()
+{
+	var blurredBackground = document.querySelector("#notOptionsMenu");
+	blurredBackground.classList.add("notOptionsMenuBlur");
+}
+
+/********************************/
+/* The function blurBackground()*/
+/* 	causes everything that is   */
+/* 	not the options menu to     */
+/*	no longer be blurry.        */
+/********************************/
+function unblurBackground()
+{
+	var blurredBackground = document.querySelector("#notOptionsMenu");
+	blurredBackground.classList.remove("notOptionsMenuBlur");
+}
+   
 /*_____________________________*/
 /*                             */
 /*   END OF OPTIONS MENU CODE  */

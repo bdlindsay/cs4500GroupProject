@@ -537,3 +537,25 @@ input[type=range]:focus::-ms-fill-upper {
   background: pink;
 }
 
+/*___________________________*/
+/*                          */
+/* Rules to blur everything */
+/* 	except the options menu. */
+/*__________________________*/
+.notOptionsMenuBlur
+{
+	/* The following rules use
+	   the CSS filter property.
+	   The filter property is relativly
+	   new. Also, a different rule
+	   is needed for each brower.
+	 */
+	-webkit-filter : blur(5px);
+	-moz-filter    : blur(5px);
+	-o-filter      : blur(5px);
+	-ms-filter     : blur(5px);
+	filter         : blur(5px);
+	opacity        : 0.4      ;
+}
+
+
