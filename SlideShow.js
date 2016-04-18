@@ -105,6 +105,11 @@ function resetGame() {
 	shouldPause = true;
 	numPauses = 0;
 	updatePauses();
+	
+	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
+		$( "#correctChoice" ).remove();
+		$( "#wrongChoice" ).remove();
+	}
 }
 
 function stopPauses() {
