@@ -112,7 +112,7 @@ function stopPauses() {
 	numPauses = maxPauses;
 	updatePauses();
 	if(shouldPause == true) {
-		audio.play;
+		audio.play();
 	}
 }
 
