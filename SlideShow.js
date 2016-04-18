@@ -120,6 +120,11 @@ function stopPauses() {
 		audio.play();
 		displayImages();
 	}
+	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
+		$( "#correctChoice" ).remove();
+		$( "#wrongChoice" ).remove();
+		displayImages();
+	}
 }
 
 function updatePauses() {
