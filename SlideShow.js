@@ -111,6 +111,9 @@ function stopPauses() {
 	shouldPause = false;
 	numPauses = maxPauses;
 	updatePauses();
+	if(shouldPause == true) {
+		audio.play;
+	}
 }
 
 function updatePauses() {
@@ -124,6 +127,7 @@ function updatePauses() {
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
+	shouldPause = true;
 	if (gameMode[1] == true) {//if statement for first game mode
 		playActionAudio();
 		//Append a button to the popup div, currently using the sratbutton CSS
@@ -136,6 +140,7 @@ function interruptSong(){
 			//Add event handler for created button
 			$("#resumebutton").click(function() {
 				displayImages();
+				shouldPause = false;
 				audio.play();
 				$("#resumebutton").remove();
 			});
