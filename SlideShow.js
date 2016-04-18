@@ -113,6 +113,7 @@ function stopPauses() {
 	updatePauses();
 	if(shouldPause == false) {
 		audio.play();
+		displayImages();
 	}
 }
 
