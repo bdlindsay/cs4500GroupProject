@@ -24,13 +24,9 @@
 	
 	
 	<body class = "main" onload="hideOptionsMenu();">
-	
+	<div class="everythingClass" id="everythingID">
 		
-		<!-- The next <div> is the <div> for everything except the options menu. -->
-		<!-- The purpose of this <div> is so everything except the options menu  -->
-		<!-- 	can be blurred when the user clicks on the Options button.       -->
-		<!-- The blurring will occur using the CSS filer propery.                -->
-		<div id="notOptionsMenu">
+		
 		
 			<div style="text-align: left; position: absolute; top: 3%; left: 3%;" id="optionsSymDiv">
 					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
@@ -60,8 +56,9 @@
 					<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
 				</p>
 			</div>
-		</div>
+		
 	
+	</div> <!-- End everything <div> -->
 	<!-- ______________________ -->
 	<!-- Start of options menu  -->
 	<!-- 	division.           -->

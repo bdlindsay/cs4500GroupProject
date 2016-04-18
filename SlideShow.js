@@ -358,8 +358,9 @@ function openOptionsMenu()
 /********************************/
 function blurBackground()
 {
-	var blurredBackground = document.querySelector("#notOptionsMenu");
-	blurredBackground.classList.add("notOptionsMenuBlur");
+	var blurredBackground = document.querySelector("#everythingID");
+	blurredBackground.classList.remove("everythingClass");
+	blurredBackground.classList.add("everythingClassBlurred")
 }
 
 /********************************/
@@ -370,8 +371,9 @@ function blurBackground()
 /********************************/
 function unblurBackground()
 {
-	var blurredBackground = document.querySelector("#notOptionsMenu");
-	blurredBackground.classList.remove("notOptionsMenuBlur");
+	var blurredBackground = document.querySelector("#everythingID");
+	blurredBackground.classList.remove("everythingClassBlurred")
+	blurredBackground.classList.add("everythingClass");
 }
    
 /*_____________________________*/

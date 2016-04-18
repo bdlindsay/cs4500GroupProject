@@ -10,13 +10,51 @@
 	/*                 */
 	/*    Background   */
 	/*_________________*/
-body{
-	/* CSS3 allows using mutiple images as the background. */
-	/* That's what I have done here. */
-	/* I am using the blue bubbles too offset the pink a little. */
-	/* I'm willing to use a different color or picture if need be. */
-	background: url(cs4500Media/backgrounds/bubbles.jpg) no-repeat top right, url(cs4500Media/backgrounds/pink_butterfly.jpg) no-repeat center center fixed;
+
+
+.everythingClass
+{
+	background-image: url(cs4500Media/backgrounds/pink_butterfly.jpg);
 	
+	position:fixed;
+
+	padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.everythingClassBlurred
+{
+	background-image: url(cs4500Media/backgrounds/pink_butterfly.jpg);
+	
+	position:fixed;
+
+	padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+	
+	/* The following rules use
+	   the CSS filter property.
+	   The filter property is relativly
+	   new. Also, a different rule
+	   is needed for each brower.
+	 */
+	-webkit-filter : blur(5px);
+	-moz-filter    : blur(5px);
+	-o-filter      : blur(5px);
+	-ms-filter     : blur(5px);
+	filter         : blur(5px);
+	opacity        : 0.4      ;
 }
 
 /* This is the style rule for the area of the start button. */
@@ -537,25 +575,6 @@ input[type=range]:focus::-ms-fill-upper {
   background: pink;
 }
 
-/*___________________________*/
-/*                          */
-/* Rules to blur everything */
-/* 	except the options menu. */
-/*__________________________*/
-.notOptionsMenuBlur
-{
-	/* The following rules use
-	   the CSS filter property.
-	   The filter property is relativly
-	   new. Also, a different rule
-	   is needed for each brower.
-	 */
-	-webkit-filter : blur(5px);
-	-moz-filter    : blur(5px);
-	-o-filter      : blur(5px);
-	-ms-filter     : blur(5px);
-	filter         : blur(5px);
-	opacity        : 0.4      ;
-}
+
 
 
