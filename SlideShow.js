@@ -17,6 +17,7 @@ var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
+var wrongChoicesForGame2 = 2; //this is the number of wrong choices that will display on game 2
 
 /* optionMenuOn will be set to true if the options are up. */
 var optionsMenuOn = false;
@@ -213,7 +214,7 @@ function playActionAudio() {
 		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
 	var actionAudio2 = 
 		new Audio('cs4500Media/i-love-you-audio/girl_i_love_you_too.wav');
-		actionAudio1.media_type = "audio/wav";
+		actionAudio1.media_type = "audio/wav"; //Set audio type, this helps with browser compatability
 		actionAudio2.media_type = "audio/wav";
 		
 	window.setTimeout(function () {
@@ -224,43 +225,65 @@ function playActionAudio() {
 	}, 1500);	
 }
 
-//Use this function with a while loop, when wrong everything will reappear,when correct all will resume
-//Currently the function has commented code, leaving this in until i understand it more
+//Use this function with a while loop, when wrong answer is choosen it will disappear,when correct all will resume
 var questionInterrupt = function(){
-	//var deferred = new $.Deferred();
-	playActionAudio();//play the action audio to prompt the question
+	var wrongChoice = new Array();//array for wrong choice images
+	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
 	
-	//images that will popup for Alaina to choose from
+	//create the array for the wrong images, will use the max allowed wrong answers
+	for(var i = 0;i < maxWrongChoicesForGame2;i++){
+		wrongChoice[i] = new Image();
+	}
+	//manually assign all the wrong answer image sources
+	wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
+	wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
+	wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
+	
+	//The correct image to choose should always be set here
 	var correctChoice = new Image();
-	var wrongChoice = new Image();
 	correctChoice.src = 'cs4500Media/images/AlainaGrandad2.JPG';
-	wrongChoice.src = 'cs4500Media/images/beachBall.jpg';
 	
+	//This array is used to append images to the popup div randomly
+	var area = new Array(
+		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
+		"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongChoice[0].src+"\" />",
+		"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongChoice[1].src+"\" />",
+		"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongChoice[2].src+"\" />");
+		
+	//append the wrong answers to the popup div
+	for(var i = 0;i<wrongChoicesForGame2+1;i++){
+		$( "#popupBox" ).append(area[i]);
+	}
 	
-	$( "#popupBox" ).append( "<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" /> <img id=\"wrongChoice\" class=\"popupImageDisplay\" src=\""+wrongChoice.src+"\" />");
+	playActionAudio();//play the action audio to prompt the question
 							 
+	//creating click event for the correct choice chosen img ID						
 	$( "#correctChoice" ).click(function() {
-			console.log("right answer clicked");
 			$( "#correctChoice" ).remove();
-			$( "#wrongChoice" ).remove();
-			//deferred.resolve();
+			for(var i = 0;i < wrongChoicesForGame2;i++){
+				$( "#wrongChoice"+i ).remove();
+			}
 			displayImages();
 			audio.play();
-			//return deferred.promise();
 		});
-
-	$( "#wrongChoice" ).click(function() {
-			console.log("wrong answer clicked");
-			$( "#correctChoice" ).remove();
-			$( "#wrongChoice" ).remove();
-			//deferred.resolve();
-			//return deferred.promise();
-			window.setTimeout(function () {
-				questionInterrupt();
-			}, 600);
-			
-		});
-		
+/*
+	for(var i = 0;i < wrongChoicesForGame2;i++){
+		//for some reason the code below does not work. Will have to reasearch why later
+		$( "#wrongChoice"+i).click(function() {
+			console.log("wrongChoice");
+				$( "#wrongChoice"+i).remove();
+			});
+	}*/
+	
+	//Manually assigning click events to wrong answers for now, until better solution is found.
+			$( "#wrongChoice0").click(function() {
+			console.log("wrongChoice");
+				$( "#wrongChoice0").css("visibility", "hidden");
+			});
+			$( "#wrongChoice1").click(function() {
+			console.log("wrongChoice");
+				$( "#wrongChoice1").css("visibility", "hidden");
+			});
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
