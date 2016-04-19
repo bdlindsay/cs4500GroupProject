@@ -1,10 +1,13 @@
-/* This is the CSS for the "Alaina's Love Story" webpage. 
+/* This is the Javascript for the "Alaina's Love Story" webpage. 
 /* Project: UMSL CS4500 SS2016 Group Project. 
 /* Author: Chad Nelson  
 /* Partners: Brett Lindsay
              Jason Pham
              Benjamin Leach
 	     Ryan Admire*/
+	    
+/* Description: SildeShow.js is the main piece of the entire project. It contains code for both game modes as well as the menu system
+	        and audio control. A brief description of the components and game modes can be found in the README.*/
 //Globals
 //////////////////////////////////////////////////////////////////////////////////////////////////
 var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
