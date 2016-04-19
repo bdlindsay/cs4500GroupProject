@@ -144,8 +144,8 @@ function interruptSong(){
 		playActionAudio();
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
-			$("#popupBox").after("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
-			$("#resumebutton").appendTo(".pausesDiv");
+			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
+			//$("#resumebutton").appendTo(".pausesDiv");
 			if (optionsMenuOn) {
 				$("#resumebutton").hide();
 			}
@@ -276,8 +276,9 @@ var questionInterrupt = function(){
 			audio.play();
 		});
 /*
+ 	//for some reason the code below does not work. Will have to reasearch why later
 	for(var i = 0;i < wrongChoicesForGame2;i++){
-		//for some reason the code below does not work. Will have to reasearch why later
+		
 		$( "#wrongChoice"+i).click(function() {
 			console.log("wrongChoice");
 				$( "#wrongChoice"+i).css("visibility", "hidden");
