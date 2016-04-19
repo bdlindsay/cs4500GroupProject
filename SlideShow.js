@@ -250,6 +250,15 @@ var questionInterrupt = function(){
 		"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongChoice[1].src+"\" />",
 		"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongChoice[2].src+"\" />");
 		
+	//Shuffle Array Of images a few times,This could be optimized in future if needed
+	var temp,randomIndex;
+		for(var i = 0;i<wrongChoicesForGame2+1;i++){
+			randomIndex = Math.floor(Math.random()*(wrongChoicesForGame2+1));
+			temp = area[i];
+			area[i]=area[randomIndex];
+			area[randomIndex] = temp;
+		}
+		
 	//append the wrong answers to the popup div
 	for(var i = 0;i<wrongChoicesForGame2+1;i++){
 		$( "#popupBox" ).append(area[i]);
@@ -271,17 +280,15 @@ var questionInterrupt = function(){
 		//for some reason the code below does not work. Will have to reasearch why later
 		$( "#wrongChoice"+i).click(function() {
 			console.log("wrongChoice");
-				$( "#wrongChoice"+i).remove();
+				$( "#wrongChoice"+i).css("visibility", "hidden");
 			});
 	}*/
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
-			console.log("wrongChoice");
 				$( "#wrongChoice0").css("visibility", "hidden");
 			});
 			$( "#wrongChoice1").click(function() {
-			console.log("wrongChoice");
 				$( "#wrongChoice1").css("visibility", "hidden");
 			});
 };
