@@ -22,6 +22,12 @@ var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2 = 2; //this is the number of wrong choices that will display on game 2
 
+/* variable to randomize between correct emotion or correct person
+if question_type is 1 then elaina chooses a person
+if question_type is 2 then elaina chooses an emotion
+*/
+var question_type; // assigned 1 or 2
+
 /* optionMenuOn will be set to true if the options are up. */
 var optionsMenuOn = false;
 
@@ -165,7 +171,16 @@ function interruptSong(){
 	
 	//Game 2 is slected, use question format
 	if(gameMode[2] == true){
-		questionInterrupt();
+		question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+		
+		if (question_type == 1) { // question_type 1 is to pick the correct person
+			console.log("Pick the correct person");
+			questionInterrupt();
+		}
+		else { // question_type 2 is to pick the correct emotion
+			console.log("Pick the correct emotion");
+			questionInterrupt(); //using same function to continue NEEDS TO UPDATE
+		}
 	}
 
 }
