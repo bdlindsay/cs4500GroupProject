@@ -281,6 +281,7 @@ function playActionAudio() {
 /////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var questionInterrupt = function(){
+	var madeWrongChoice;
 	var wrongChoice = new Array();//array for wrong choice images
 	var maxWrongChoicesForGame2 = 1+dynamic_counter;//This is the max number of wrong choices for each interrupt for game 2
 	
@@ -373,10 +374,14 @@ var questionInterrupt = function(){
 				$( "#wrongChoice"+i ).remove();
 			}
 
-			dynamic_counter++; // Increase the dynamic counter which increases the maxWrongChoices
+			if(madeWrongChoice != true) { // If elaina made a wrong choice dynamic_counter is unaffected after she hits right one	
+				dynamic_counter++; // Increase the dynamic counter which increases the maxWrongChoices
+			}
+
 			if(dynamic_counter > 2) { //bound to 2 
 				dynamic_counter = 2;
 			}
+			madeWrongChoice = false;
 
 			displayImages();
 			audio.play();
@@ -394,6 +399,7 @@ var questionInterrupt = function(){
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
 				$( "#wrongChoice0").remove();
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
@@ -402,6 +408,7 @@ var questionInterrupt = function(){
 
 			$( "#wrongChoice1").click(function() {
 				$( "#wrongChoice1").remove();
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
@@ -410,6 +417,7 @@ var questionInterrupt = function(){
 
 			$( "#wrongChoice2").click(function() {
 				$( "#wrongChoice2").remove();
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
