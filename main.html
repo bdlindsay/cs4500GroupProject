@@ -37,11 +37,15 @@
 	<body class = "main" onload="hideOptionsMenu();">
 	<div class="everythingClass" id="everythingID">
 		
-		
-		
 			<div style="text-align: left; position: absolute; top: 3%; left: 3%;" id="optionsSymDiv">
 					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
 			</div>
+			
+			<!-- The following <p> should display the words "I love you"
+					when a Solo Play pause occurs. This is done in 
+					the Javascript function interruptSong() in 
+					SlideShow.js -->
+			<p id="textOnSoloPlayInterrupt"></p>
 			
 			<!--div for displaying images while song is playing-->
 			<div id="imageBox" class="imageDisplayArea">
@@ -62,8 +66,8 @@
 			</div>
 			<div style="text-align: center;">
 				<p class="activebuttonarea">
-					<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Together</button>
-					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Play Solo</button>
+					<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Solo</button>
+					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Play Together</button>
 					<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
 				</p>
 			</div>
@@ -86,12 +90,26 @@
 		<!-- ------------------------ -->
 		<!-- Buttons for Options Menu -->
 		<!-- ------------------------ -->
-		<button class="optionsMenuButton" id="omb1">Upload Images</button>
-		<button class="optionsMenuButton" id="omb2">Doumentation</button>
-		<button class="optionsMenuButton" id="omb3">Main Menu</button>
-		<button class="optionsMenuButton" id="omb4">About Us</button>
+		<button class="optionsMenuButton" id="omb1">How to Use this Website</button>
+		<button class="optionsMenuButton" id="omb2">About Us</button>
 		
-		<button class="resetGameButton" onclick="resetGame()">Reset Game</button>
+		<!-- A textbox for the user to choose the text to show
+		    on the pauses on Solo Play. -->
+		<!-- The form for the textbox is in a <div> that acts
+		     as a container for it so it can be moved in
+			 the CSS file. -->
+		<div id="optionsMenuTextbox">
+			<form>
+				Show text on pauses
+				<input type="checkbox" id="text_on_pauses_checkbox" onclick="textboxAvailability();" checked>
+				<br>
+				Text to display on pauses: 
+				<br>
+				<input type="text" id="text_on_pauses_id" maxlength="15"> 
+			</form>
+		</div>
+		
+		<button class="resetGameButton" id="omb4" onclick="resetGame()">Reset Game</button>
 		<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
 	</div>
 	<!-- ______________________ -->

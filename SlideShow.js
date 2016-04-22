@@ -36,6 +36,12 @@ var optionsMenuOn = false;
    options menus depending on whether the games are being
    currently ran or not. */
 var isGameRunning = false;
+
+/* text_on_pause will be a string that will be displayed on
+   the webpage when the song pauses on Solo Play. It will
+   be removed form the webpage when the user clicks the 
+   "RESUME" button. */
+var text_on_pause = "I love you";
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
@@ -98,6 +104,11 @@ function displayImages(){
 
 // Functions for options menu
 function resetGame() {
+	
+	/* When the "Reset Game" button is clicked, remove the text
+	   on pause from the webpage. */
+	document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
+	
 	if (isGameRunning) { // reset running
 		clearInterval(interval);
 		audio.pause();
@@ -151,6 +162,20 @@ function interruptSong(){
 	shouldPause = true;
 	if (gameMode[1] == true) {//if statement for first game mode
 		playActionAudio();
+		
+		/* When the song interrupts, the webpage should display the 
+	    words "I love you." The words should be removed when the 
+	    user clicks on the RESUME button.*/
+		
+		/* There is an option to not show text on pauses. This condition
+		   will be checked. */
+		var text_on_pauses_boolean = document.getElementById("text_on_pauses_checkbox");
+		
+		if (text_on_pauses_boolean.checked)
+		{
+			document.getElementById("textOnSoloPlayInterrupt").innerHTML = text_on_pause;
+		}
+		
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
 			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
@@ -160,6 +185,11 @@ function interruptSong(){
 			}
 			//Add event handler for created button
 			$("#resumebutton").click(function() {
+				
+				/* When the RESUME button is clicked, remove the text
+				   "I love you" from the webpage. */
+				document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
+				
 				displayImages();
 				shouldPause = false;
 				audio.play();
@@ -327,6 +357,7 @@ var questionInterrupt = function(){
 /*   "OPTIONS" button.               */
 /**************************************/
 
+
 /* hideOptionsMenu() hides the <div>
    for the options menu as soon as 
    main.html loads. */
@@ -400,6 +431,10 @@ function openOptionsMenu()
 /* close OptionMenu() closes the options menu. */
 	function closeOptionsMenu()
 {
+	/* Get the string the user typed in the textbox in
+	   the options menu and save it. */
+	 text_on_pause = document.getElementById("text_on_pauses_id").value;
+	 
 	 if (isGameRunning) { // hard to reset interval on random click time?
 		$("#resumebutton").show();
 		// audio.play();
@@ -439,6 +474,27 @@ function unblurBackground()
 	var blurredBackground = document.querySelector("#everythingID");
 	blurredBackground.classList.remove("everythingClassBlurred")
 	blurredBackground.classList.add("everythingClass");
+}
+
+/********************************/
+/* textboxAvailability()        */
+/* 	will grey or ungrey the     */
+/* 	text on pauses textbox      */
+/*	no longer be blurry.        */
+/********************************/
+function textboxAvailability()
+{
+	document.getElementById('text_on_pauses_checkbox').onclick = function() {
+    // access properties using this keyword
+    if ( this.checked ) {
+        // if checked ...
+		document.getElementById("text_on_pauses_id").disabled = false;
+    } else if ( !this.checked) {
+        // if not checked ...
+		document.getElementById("text_on_pauses_id").disabled = true;
+    }
+};
+	
 }
    
 /*_____________________________*/

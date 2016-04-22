@@ -215,6 +215,26 @@
 	height:450px;
 }
 
+/************************/
+/* The rules below are  */
+/* for the "I love you" */
+/* text that appears    */
+/* on Solo Play when    */
+/* the song is stopped. */
+/************************/
+#textOnSoloPlayInterrupt
+{
+	position: absolute;
+	top: 30%;
+	left: 10%;
+	
+	font-family: Candara;
+	
+	font-size: 400%;
+	
+	color: blue;
+}
+
 /* Text style for remaining pauses */
 .pausesText {
 	color: pink; 
@@ -322,27 +342,43 @@
 	box-shadow: 0 9px #999;
 }
 
-#omb1
+/* The following id rules are 
+   the rules for the textbox
+   that shows up in the options 
+   menu for the text on Solo Play
+   on song pause. */
+#optionsMenuTextbox
 {
+	position: absolute;
 	top: 30%;
     left: 5%;
+	
+	color: pink;
+	-webkit-text-stroke: .5px #B300B3;/* medium purple */
+	font-size: 125%;
 }
 
-#omb2
-{
-	top: 40%;
-    left: 5%;
-}
-
-#omb3
+#omb1
 {
 	top: 50%;
     left: 5%;
 }
 
-#omb4
+#omb2
 {
 	top: 60%;
+    left: 5%;
+}
+
+#omb4
+{
+	top: 70%;
+    left: 5%;
+}
+
+#omb5
+{
+	top: 80%;
     left: 5%;
 }
 
