@@ -28,6 +28,9 @@ if question_type is 2 then elaina chooses an emotion
 */
 var question_type; // assigned 1 or 2
 
+/* dynamic counter will inrement and decrement as necessarily and will be added on to the maxWrongChoicesForGame2 variable in questionInterrupt function */
+var dynamic_counter = 0;
+
 /* optionMenuOn will be set to true if the options are up. */
 var optionsMenuOn = false;
 
@@ -273,30 +276,79 @@ function playActionAudio() {
 	}, 1500);	
 }
 
-//Use this function with a while loop, when wrong answer is choosen it will disappear,when correct all will resume
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// Use this function with a while loop, when wrong answer is choosen it will disappear,when correct all will resume ///////////
+/////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var questionInterrupt = function(){
 	var wrongChoice = new Array();//array for wrong choice images
-	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
+	var maxWrongChoicesForGame2 = 1+dynamic_counter;//This is the max number of wrong choices for each interrupt for game 2
 	
+
+	/*This array will hold all the wrong answer pictures and wrongchoice array can pick out from*/	
+	var wrongAnswerArray = new Array();
+	for(var i = 0; i<3; i++) {
+		wrongAnswerArray[i] = new Image();
+		wrongAnswerArray[i].src = 'cs4500Media/images/beachBall.jpg';
+	}
+
 	//create the array for the wrong images, will use the max allowed wrong answers
 	for(var i = 0;i < maxWrongChoicesForGame2;i++){
 		wrongChoice[i] = new Image();
+		wrongChoice[i].src = wrongAnswerArray[i]; 
+		//call random generator for wrongAnswerArray to get different wrong answers each time
 	}
+
+
+
+
+
 	//manually assign all the wrong answer image sources
-	wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
-	wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
-	wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
+	//wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
+	//wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
+	//wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
 	
+
+
+
+
 	//The correct image to choose should always be set here
 	var correctChoice = new Image();
 	correctChoice.src = 'cs4500Media/images/AlainaGrandad2.JPG';
 	
 	//This array is used to append images to the popup div randomly
+	
+	switch (maxWrongChoicesForGame2) {
+		 case 1:
+		 	var area = new Array( 
+		 		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
+				"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[0].src+"\" />");
+		 	break;
+
+		 case 2:
+		 	var area = new Array( 
+		 		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
+				"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[0].src+"\" />",
+				"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[1].src+"\" />");
+		 	break;
+
+		 case 3:
+		 	var area = new Array(
+				"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
+				"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[0].src+"\" />",
+				"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[1].src+"\" />",
+				"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[2].src+"\" />");	
+		 	break;
+	}
+
+/*
 	var area = new Array(
 		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
-		"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongChoice[0].src+"\" />",
-		"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongChoice[1].src+"\" />",
-		"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongChoice[2].src+"\" />");
+		"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[0].src+"\" />",
+		"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[1].src+"\" />",
+		"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[2].src+"\" />");
+*/	
+	
 		
 	//Shuffle Array Of images a few times,This could be optimized in future if needed
 	var temp,randomIndex;
@@ -308,7 +360,7 @@ var questionInterrupt = function(){
 		}
 		
 	//append the wrong answers to the popup div
-	for(var i = 0;i<wrongChoicesForGame2+1;i++){
+	for(var i = 0;i<wrongChoicesForGame2+2;i++){
 		$( "#popupBox" ).append(area[i]);
 	}
 	
@@ -320,6 +372,12 @@ var questionInterrupt = function(){
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
+
+			dynamic_counter++; // Increase the dynamic counter which increases the maxWrongChoices
+			if(dynamic_counter > 2) { //bound to 2 
+				dynamic_counter = 2;
+			}
+
 			displayImages();
 			audio.play();
 		});
@@ -335,11 +393,29 @@ var questionInterrupt = function(){
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
-				$( "#wrongChoice0").css("visibility", "hidden");
+				$( "#wrongChoice0").remove();
+				dynamic_counter--;
+				if(dynamic_counter < 0) {
+					dynamic_counter = 0;
+				}
 			});
+
 			$( "#wrongChoice1").click(function() {
-				$( "#wrongChoice1").css("visibility", "hidden");
+				$( "#wrongChoice1").remove();
+				dynamic_counter--;
+				if(dynamic_counter < 0) {
+					dynamic_counter = 0;
+				}
 			});
+
+			$( "#wrongChoice2").click(function() {
+				$( "#wrongChoice2").remove();
+				dynamic_counter--;
+				if(dynamic_counter < 0) {
+					dynamic_counter = 0;
+				}
+			});
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
