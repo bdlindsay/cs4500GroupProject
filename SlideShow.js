@@ -398,7 +398,7 @@ var questionInterrupt = function(){
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
-				$( "#wrongChoice0").remove();
+				$( "#wrongChoice0").css("visibility", "hidden");
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
@@ -407,7 +407,7 @@ var questionInterrupt = function(){
 			});
 
 			$( "#wrongChoice1").click(function() {
-				$( "#wrongChoice1").remove();
+				$( "#wrongChoice1").css("visibility", "hidden");
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
@@ -416,7 +416,7 @@ var questionInterrupt = function(){
 			});
 
 			$( "#wrongChoice2").click(function() {
-				$( "#wrongChoice2").remove();
+				$( "#wrongChoice2").css("visibility", "hidden");
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
