@@ -528,6 +528,11 @@ function openOptionsMenu()
 	/* blurBackground unblurs everything 
 		It is defined futher below. */
 	unblurBackground();
+	
+	/* Get the color of the text for the 
+	   text that shows up on pauses on 
+	   "Solo Play". */
+	getPauseTextColor();
 	 
 	$(".optionsMenu").hide(1000);
 	optionsMenuOn = false;
@@ -568,20 +573,66 @@ function unblurBackground()
 /********************************/
 function textboxAvailability()
 {
-	document.getElementById('text_on_pauses_checkbox').onclick = function() {
+	document.getElementById('text_on_pauses_checkbox').onchange = function() {
     // access properties using this keyword
     if ( this.checked ) {
         // if checked ...
 		document.getElementById("text_on_pauses_id").disabled = false;
+		document.getElementById("text_on_pauses_color").disabled = false;
+
     } else if ( !this.checked) {
         // if not checked ...
 		document.getElementById("text_on_pauses_id").disabled = true;
+		document.getElementById("text_on_pauses_color").disabled = true;
     }
 };
 	
+}
+
+
+/********************************/
+/* getPauseTextColor() gets     */
+/* 	a color typed into a textbox*/
+/* 	by a user and changes the   */
+/*	CSS to change the font color*/
+/*  for the text on pauses.     */
+/********************************/
+function getPauseTextColor()
+{	
+	var text_on_pause_color = document.getElementById("text_on_pauses_color").value;
+	document.getElementById("textOnSoloPlayInterrupt").style.color = text_on_pause_color;
 }
    
 /*_____________________________*/
 /*                             */
 /*   END OF OPTIONS MENU CODE  */
+/*_____________________________*/
+
+/*******************************/
+
+/*_____________________________*/
+/*                             */
+/* START OF "ABOUT US" AND     */
+/* DOCUMENTATION CODE          */
+/*_____________________________*/
+
+/* The next two functions open new URLs in a tab/window using
+   the window.open function of Javascript. */
+function openAboutUs() 
+{
+	/* window.open() opens the specificed URL */
+    window.open("http://benjaminsl.neocities.org/autismProject/aboutus.html");
+}
+
+function openDocumentation()
+{
+	/* window.open() opens the specificed URL */
+	window.open("http://benjaminsl.neocities.org/autismProject/documentation.html")
+}
+
+
+/*_____________________________*/
+/*                             */
+/*   END OF "ABOUT US" AND     */
+/*   DOCUMENTATION CODE        */
 /*_____________________________*/
