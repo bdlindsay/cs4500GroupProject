@@ -153,6 +153,10 @@
 		/*________________*/
 		/* font-size determines the size of the button. */
 		font-size: 25px;
+		/* padding is how much extra space there is
+		 in the button beyond the font. */
+		padding: 15px 15px;
+		width: 250px;
 		/*________________*/
 		/*                */
 		/*      Look      */
@@ -168,14 +172,9 @@
 		 to mouse hovers over the button. */
 		transition-duration: .4s;
 		position: relative;
+		left: 125px;
+		top: 0px;
 		border: 5px solid #9999ff; /*light purple*/
-		
-		/*changed for MediaQuery*/
-		padding: 4%;
-		width: 22vw;
-		left: 25%;
-		top: 85%;
-		
 	}
 
 	/* This style rule will determine what happens
@@ -230,6 +229,7 @@
 		font-size: 400%;
 		color: blue;
 	}
+	
 	/* Div for remaining pauses Text*/
 	.pausesDiv{
 		position: absolute;

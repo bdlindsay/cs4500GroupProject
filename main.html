@@ -90,8 +90,8 @@
 		<!-- ------------------------ -->
 		<!-- Buttons for Options Menu -->
 		<!-- ------------------------ -->
-		<button class="optionsMenuButton" id="omb1">How to Use this Website</button>
-		<button class="optionsMenuButton" id="omb2">About Us</button>
+		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
+		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
 		
 		<!-- A textbox for the user to choose the text to show
 		    on the pauses on Solo Play. -->
@@ -101,11 +101,23 @@
 		<div id="optionsMenuTextbox">
 			<form>
 				Show text on pauses
-				<input type="checkbox" id="text_on_pauses_checkbox" onclick="textboxAvailability();" checked>
+				<input type="checkbox" id="text_on_pauses_checkbox" onchange="textboxAvailability();" checked>
 				<br>
-				Text to display on pauses: 
+				&nbsp Text to display on pauses:
+				<input type="text" id="text_on_pauses_id" maxlength="15" size="5" value="I love you"> 
 				<br>
-				<input type="text" id="text_on_pauses_id" maxlength="15"> 
+				&nbsp Color of text on pauses:
+				<select id="text_on_pauses_color">
+					<option value="blue">Blue</option>
+					<option value="pink">Pink</option>
+					<option value="lightpink">Light Pink</option>
+					<option value="peachpuff">Peach</option>
+					<option value="purple">Purple</option>
+					<option value="blueviolet">Blue Violet</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="black">Black</option>
+				</select> 
 			</form>
 		</div>
 		
