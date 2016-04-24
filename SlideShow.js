@@ -179,6 +179,16 @@ function interruptSong(){
 			document.getElementById("textOnSoloPlayInterrupt").innerHTML = text_on_pause;
 		}
 		
+		/* This is an option to not not show images on pause through a checkbox. 
+		   This condition will be checked. */
+		var image_on_pause_boolean = document.getElementById("images_on_pauses_checkbox");
+		
+		if (image_on_pause_boolean.checked)
+		{
+			/* Change the source image of song_pause_picture_id to a drawing of kids hugging. */
+			document.getElementById("song_pause_picture_id").src = "cs4500Media/love_pictures/kidshug.jpg";
+		}
+		
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
 			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
@@ -192,6 +202,9 @@ function interruptSong(){
 				/* When the RESUME button is clicked, remove the text
 				   "I love you" from the webpage. */
 				document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
+				
+				/* Change source image of song_pause_picture_id to nothing. */
+				document.getElementById("song_pause_picture_id").src = "";
 				
 				displayImages();
 				shouldPause = false;
@@ -630,9 +643,11 @@ function openDocumentation()
 	window.open("http://benjaminsl.neocities.org/autismProject/documentation.html")
 }
 
-
 /*_____________________________*/
 /*                             */
 /*   END OF "ABOUT US" AND     */
 /*   DOCUMENTATION CODE        */
 /*_____________________________*/
+
+
+

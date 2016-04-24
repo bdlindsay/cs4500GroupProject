@@ -41,11 +41,27 @@
 					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
 			</div>
 			
+		<!-- ______________________ -->
+		<!--  Start of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
+			
 			<!-- The following <p> should display the words "I love you"
-					when a Solo Play pause occurs. This is done in 
-					the Javascript function interruptSong() in 
-					SlideShow.js -->
+			 when a Solo Play pause occurs. This is done in 
+			 the Javascript function interruptSong() in 
+			 SlideShow.js -->
 			<p id="textOnSoloPlayInterrupt"></p>
+			
+			<div id="song_pause_picture_box">
+				<img id="song_pause_picture_id" src="" />
+			</div>
+			
+		<!-- ______________________ -->
+		<!--  End of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
 			
 			<!--div for displaying images while song is playing-->
 			<div id="imageBox" class="imageDisplayArea">
@@ -56,8 +72,7 @@
 
 				</div>
 			</div>
-		
-		
+			
 			<!-- div for displaying the number of pauses -->
 			<div class="pausesDiv">
 				<p class="pausesText" id="pausesText">
@@ -74,6 +89,7 @@
 		
 	
 	</div> <!-- End everything <div> -->
+	
 	<!-- ______________________ -->
 	<!-- Start of options menu  -->
 	<!-- 	division.           -->
@@ -117,7 +133,11 @@
 					<option value="red">Red</option>
 					<option value="green">Green</option>
 					<option value="black">Black</option>
-				</select> 
+				</select>
+				<br>
+				<br>
+				Show image on pauses
+				<input type="checkbox" id="images_on_pauses_checkbox" checked>
 			</form>
 		</div>
 		

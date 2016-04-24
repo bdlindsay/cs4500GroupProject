@@ -207,6 +207,8 @@
 		left: 0%;
 		top: 0%;
 	}
+	
+	
 
 	.imageDisplayArea {
 		margin-left: auto;
@@ -232,6 +234,33 @@
 		font-family: Candara;
 		font-size: 400%;
 		color: blue;
+	}
+	/************************/
+	/* The rules below are  */
+	/* for the <div> that   */
+	/* shows images         */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#song_pause_picture_box {
+		position: absolute;
+		top: 50%;
+		left: 75%;
+		width: 200px;
+		height: 200px;
+		border-style: none;
+	}
+	
+	/* The actual image in the 
+	   song_pause_picture_box <div> */
+	#song_pause_picture_id 
+	{
+		height: 100%;
+		width: 100%;
+		position: relative;
+		left: 0%;
+		top: 0%;
+		border-style: none;
 	}
 	
 	/* Div for remaining pauses Text*/
@@ -355,23 +384,23 @@
 	}
 
 	#omb1 {
-		top: 50%;
+		top: 55%;
 		left: 5%;
 	}
 
 	#omb2 {
-		top: 60%;
+		top: 65%;
 		left: 5%;
 	}
 
 	#omb4 {
-		top: 70%;
-		left: 5%;
+		top: 75%;
+		left: 30%;
 	}
 
 	#omb5 {
-		top: 80%;
-		left: 5%;
+		top: 85%;
+		left: 30%;
 	}
 
 	/* This style rule will determine what happens
@@ -808,6 +837,26 @@
 		font-size: 400%;
 		color: blue;
 	}
+	#song_pause_picture_box {
+		position: absolute;
+		top: 50%;
+		left: 75%;
+		width: 200px;
+		height: 200px;
+		border: 0;
+	}
+	
+	/* The actual image in the 
+	   song_pause_picture_box <div> */
+	#song_pause_picture_id 
+	{
+		height: 100%;
+		width: 100%;
+		position: relative;
+		left: 0%;
+		top: 0%;
+		border: 0;
+	}
 
 	/* Text style for remaining pauses */
 	.pausesText {
@@ -918,12 +967,12 @@
 	}
 
 	#omb1 {
-		top: 50%;
+		top: 55%;
 		left: 5%;
 	}
 
 	#omb2 {
-		top: 60%;
+		top: 65%;
 		left: 5%;
 	}
 
@@ -1038,6 +1087,8 @@
 		-webkit-text-stroke: .5px #B300B3;/* medium purple */
 		font-size: 125%;
 	}
+	
+	
 
 	/*___________________________*/
 	/*                          */
