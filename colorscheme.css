@@ -32,7 +32,7 @@
 	/*_________________*/
 
 	.everythingClass {
-		background-image: url(cs4500Media/backgrounds/pink_butterfly.jpg);
+		background: url(cs4500Media/backgrounds/pink_butterfly.jpg);
 		position: fixed;
 		padding: 0;
 		margin: 0;
@@ -321,7 +321,7 @@
 	.optionsMenu {
 		background-color: white;
 		width: 35%;
-		height: 80%;
+		height: 90%;
 		border-radius: 25px;
 		border: 2px solid black;
 		position: absolute;
@@ -384,22 +384,22 @@
 	}
 
 	#omb1 {
-		top: 55%;
+		top: 60%;
 		left: 5%;
 	}
 
 	#omb2 {
-		top: 65%;
+		top: 70%;
 		left: 5%;
 	}
 
 	#omb4 {
-		top: 75%;
+		top: 80%;
 		left: 30%;
 	}
 
 	#omb5 {
-		top: 85%;
+		top: 90%;
 		left: 30%;
 	}
 
@@ -641,7 +641,7 @@
 	/*_________________*/
 
 	.everythingClass {
-		background-image: url(cs4500Media/backgrounds/pink_butterfly.jpg);
+		background: url(cs4500Media/backgrounds/pink_butterfly.jpg);
 		position: fixed;
 		padding: 0;
 		margin: 0;
@@ -904,7 +904,7 @@
 	.optionsMenu {
 		background-color: white;
 		width: 35%;
-		height: 80%;
+		height: 90%;
 		border-radius: 25px;
 		border: 2px solid black;
 		position: absolute;

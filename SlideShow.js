@@ -542,6 +542,8 @@ function openOptionsMenu()
 		It is defined futher below. */
 	unblurBackground();
 	
+	changeBackgroundImage();
+	
 	/* Get the color of the text for the 
 	   text that shows up on pauses on 
 	   "Solo Play". */
@@ -615,7 +617,26 @@ function getPauseTextColor()
 	var text_on_pause_color = document.getElementById("text_on_pauses_color").value;
 	document.getElementById("textOnSoloPlayInterrupt").style.color = text_on_pause_color;
 }
-   
+
+/*********************************/
+/* changeBackgroundImage()       */
+/* 	changes the background image.*/
+/*********************************/ 
+function changeBackgroundImage()
+{
+	var backgroundURL = document.getElementById("background_option").value;
+	
+	var cols = document.getElementsByClassName('everythingClassBlurred');
+	for(i=0; i<cols.length; i++) {
+    cols[i].style.background = backgroundURL;
+	}
+	
+	cols = document.getElementsByClassName('everythingClass');
+	for(i=0; i<cols.length; i++) {
+    cols[i].style.background = backgroundURL;
+	}
+}   
+
 /*_____________________________*/
 /*                             */
 /*   END OF OPTIONS MENU CODE  */
