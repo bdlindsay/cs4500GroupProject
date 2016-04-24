@@ -616,7 +616,6 @@
 
 	/* Div for remaining pauses Text*/
 	.pausesDiv{
-		position: absolute;
 		top: 20%; /*changed for this media query*/
 		/*added for this media query*/
 		left:73%;
@@ -653,7 +652,7 @@
 
 	/* This is the style rule for the area of the start button. */
 	.activebuttonarea {
-		bottom: 5%;
+		top: 89%;
 		width: 100%;
 	}
 
@@ -664,19 +663,16 @@
 	}
 
 	.resumebutton {
-		padding: 15px 15px;
+		left: 32%;
+		top: 73%;
+		padding: 3%;
 		width: 250px;
-		position: relative;
-		left: 125px;
-		top: 0px;
 	}
 
 /* Div for remaining pauses Text*/
 	.pausesDiv{
-		position: absolute;
-		top: 70%; /*changed for this media query*/
-		/*added for this media query*/
-		left:30%;
+		top: 73%; 
+		left:43%;
 	}
 	
 	/************************/
@@ -687,7 +683,7 @@
 	/* the song is stopped. */
 	/************************/
 	#song_pause_picture_box {
-		top: 35%;
+		top: 20%;
 		left: 40%;
 	}
 	
@@ -699,10 +695,9 @@
 	/* the song is stopped. */
 	/************************/
 	#textOnSoloPlayInterrupt {
-		top: 30%;
-		left: 10%;
+		top: 2%;
+		left: 40%;
 	}
-
 }
 
 
