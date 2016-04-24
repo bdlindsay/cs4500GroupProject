@@ -171,9 +171,6 @@
 	.imageDisplay {
 		height: 100%;
 		width: 100%;
-		position: relative;
-		left: 0%;
-		top: 0%;
 	}
 	
 	.imageDisplayArea {
@@ -194,8 +191,6 @@
 	/************************/
 	#textOnSoloPlayInterrupt {
 		position: absolute;
-		top: 30%;
-		left: 10%;
 		font-family: Candara;
 		font-size: 400%;
 		color: blue;
@@ -210,11 +205,9 @@
 	/************************/
 	#song_pause_picture_box {
 		position: absolute;
-		top: 50%;
-		left: 75%;
-		width: 200px;
-		height: 200px;
-		border-style: none;
+		width: 20vw;
+		height: 20vw;
+		visibility:hidden;
 	}
 	
 	/* The actual image in the 
@@ -223,10 +216,6 @@
 	{
 		height: 100%;
 		width: 100%;
-		position: relative;
-		left: 0%;
-		top: 0%;
-		border-style: none;
 	}
 	
 	/*div for pauses display*/
@@ -632,6 +621,30 @@
 		/*added for this media query*/
 		left:73%;
 	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the <div> that   */
+	/* shows images         */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#song_pause_picture_box {
+		top: 20%;
+		left: 40%;
+	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the "I love you" */
+	/* text that appears    */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#textOnSoloPlayInterrupt {
+		top: 0%;
+		left: 37%;
+	}
 
 }
 
@@ -664,6 +677,30 @@
 		top: 70%; /*changed for this media query*/
 		/*added for this media query*/
 		left:30%;
+	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the <div> that   */
+	/* shows images         */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#song_pause_picture_box {
+		top: 35%;
+		left: 40%;
+	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the "I love you" */
+	/* text that appears    */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#textOnSoloPlayInterrupt {
+		top: 30%;
+		left: 10%;
 	}
 
 }

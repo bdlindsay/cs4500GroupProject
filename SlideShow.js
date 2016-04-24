@@ -192,7 +192,8 @@ function interruptSong(){
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
 			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
-			//$("#resumebutton").appendTo(".pausesDiv");
+			//make the div of the song_pause_picture_box visible
+			document.getElementById("song_pause_picture_box").style.visibility = "visible";
 			if (optionsMenuOn) {
 				$("#resumebutton").hide();
 			}
@@ -205,6 +206,9 @@ function interruptSong(){
 				
 				/* Change source image of song_pause_picture_id to nothing. */
 				document.getElementById("song_pause_picture_id").src = "";
+				
+				//make the div of the song_pause_picture_box invisible
+				document.getElementById("song_pause_picture_box").style.visibility = "hidden";
 				
 				displayImages();
 				shouldPause = false;
