@@ -176,10 +176,7 @@
 	.imageDisplayArea {
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 3vw;
 		border: 5px solid #9999ff;
-		width: 40vw;
-		height: 40vw;
 	}
 	
 	/************************/
@@ -240,18 +237,11 @@
 	}
 	
 	.popupBox {
-		width: 45vw;
-		height: 45vw;
 		position: absolute;
-		top: 2vw;
-		left: 28vw;
 	}
 
 	.popupImageDisplay {
-		height: 20vw;
-		width: 20vw;
 		border: 5px solid #9999ff;
-		margin:5px;
 		float:left;
 	}
 
@@ -581,11 +571,78 @@
 @media screen and (min-width:0px) and (max-width:768px)
 {
 	
+	/* This is the style rule for the area of the start button. */
+	.activebuttonarea {
+		top: 68%;
+		width: 100%;
+	}
+
+	/* This is the style rule for the all buttons on the webpage. */
+	.activebutton {
+		padding: 2%;
+		width: 51vw;
+		margin: 1%;
+	}
+	
+	.resumebutton {
+		left: 32%;
+		top: 73%;
+		padding: 3%;
+		width: 250px;
+	}
+	
+	.imageDisplayArea {
+		margin-top: 9vw;
+		width: 60vw;
+		height: 60vw;
+	}
+/* Div for remaining pauses Text*/
+	.pausesDiv{
+		top: 63%; 
+		left:34%;
+	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the <div> that   */
+	/* shows images         */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#song_pause_picture_box {
+		top: 20%;
+		left: 40%;
+	}
+	
+	/************************/
+	/* The rules below are  */
+	/* for the "I love you" */
+	/* text that appears    */
+	/* on Solo Play when    */
+	/* the song is stopped. */
+	/************************/
+	#textOnSoloPlayInterrupt {
+		top: 2%;
+		left: 40%;
+	}
+		.popupBox {
+		width: 45vw;
+		height: 45vw;
+		top: 2vw;
+		left: 28vw;
+	}
+
+	.popupImageDisplay {
+		height: 20vw;
+		width: 20vw;
+		margin:5px;
+	}
+
 }
 
 /*for tablet in lanscape and smaller computers screens*/
-
-@media screen and (min-width: 769px) and (max-width: 1440px){
+@media screen and (min-width: 769px) and (max-width: 1440px)
+{
 
 
 	/* This is the style rule for the area of the start button. */
@@ -604,6 +661,12 @@
 		/*changed for this media query*/
 		padding: 4%;
 		width: 22vw;
+	}
+	
+	.imageDisplayArea {
+		margin-top: 3vw;
+		width: 40vw;
+		height: 40vw;
 	}
 
 	.resumebutton {
@@ -645,10 +708,24 @@
 		left: 37%;
 	}
 
+	.popupBox {
+		width: 45vw;
+		height: 45vw;
+		top: 2vw;
+		left: 28vw;
+	}
+
+	.popupImageDisplay {
+		height: 20vw;
+		width: 20vw;
+		margin:5px;
+	}
+
 }
 
 /*for larger computer screens */
-@media screen and (min-width: 1439px) {
+@media screen and (min-width: 1439px) 
+{
 
 	/* This is the style rule for the area of the start button. */
 	.activebuttonarea {
@@ -667,6 +744,12 @@
 		top: 73%;
 		padding: 3%;
 		width: 250px;
+	}
+	
+	.imageDisplayArea {
+		margin-top: 3vw;
+		width: 40vw;
+		height: 40vw;
 	}
 
 /* Div for remaining pauses Text*/
@@ -698,6 +781,20 @@
 		top: 2%;
 		left: 40%;
 	}
+	
+	.popupBox {
+		width: 45vw;
+		height: 45vw;
+		top: 2vw;
+		left: 28vw;
+	}
+
+	.popupImageDisplay {
+		height: 20vw;
+		width: 20vw;
+		margin:5px;
+	}
+
 }
 
 
