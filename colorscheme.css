@@ -243,6 +243,18 @@
 	font-size: 300%;
 }
 
+.pickEmoPersonText {
+	color: pink;
+	position: fixed;
+	bottom: 50%;
+	width: 20%;
+	text-align: left;
+	/*text-align: center;*/
+	-webkit-text-stroke: 1px #B300B3;/* medium purple */
+	font-size: 300%;
+	visibility: hidden;
+}
+
 /* area where remaining pauses shows */
 .remainingPauses {
 	position: fixed;

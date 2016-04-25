@@ -208,10 +208,14 @@ function interruptSong(){
 		
 		if (question_type == 1) { // question_type 1 is to pick the correct person
 			console.log("Pick the correct person");
+			$(".pickEmoPersonText").html("Pick Grandad"); // can remove string "Grandad" and put object.name
+			document.getElementById("pickEmoPersonText").style.visibility="visible";
 			questionInterrupt();
 		}
 		else { // question_type 2 is to pick the correct emotion
 			console.log("Pick the correct emotion");
+			$(".pickEmoPersonText").html("Pick Emotion"); // can remove string "Grandad" and put object.name
+			document.getElementById("pickEmoPersonText").style.visibility="visible";
 			questionInterrupt(); //using same function to continue NEEDS TO UPDATE
 		}
 	}
@@ -369,6 +373,7 @@ var questionInterrupt = function(){
 	//creating click event for the correct choice chosen img ID						
 	$( "#correctChoice" ).click(function() {
 			$( "#correctChoice" ).remove();
+			document.getElementById("pickEmoPersonText").style.visibility="hidden";
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
