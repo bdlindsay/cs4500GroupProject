@@ -15,21 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="colorscheme.css">
 		<title>Alaina's Love Story</title>
         	<meta charset="UTF-8"/>
-        	
-		<!--<script src="Audio.js"></script>-->
-		
-		<!-- Added source files -->
-		<script src="SlideShow.js"></script>
-		<!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script> For JQuery Old Script -->
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<!--Meta set and script files to use Bootstrap API
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-  		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  		-->
-		
-		
+	
 	</head>
 	
 	
@@ -41,11 +27,27 @@
 					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
 			</div>
 			
+		<!-- ______________________ -->
+		<!--  Start of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
+			
 			<!-- The following <p> should display the words "I love you"
-					when a Solo Play pause occurs. This is done in 
-					the Javascript function interruptSong() in 
-					SlideShow.js -->
+			 when a Solo Play pause occurs. This is done in 
+			 the Javascript function interruptSong() in 
+			 SlideShow.js -->
 			<p id="textOnSoloPlayInterrupt"></p>
+			
+			<div id="song_pause_picture_box">
+				<img id="song_pause_picture_id" src="" />
+			</div>
+			
+		<!-- ______________________ -->
+		<!--  End of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
 			
 			<!--div for displaying images while song is playing-->
 			<div id="imageBox" class="imageDisplayArea">
@@ -56,10 +58,9 @@
 
 				</div>
 			</div>
-		
-		
+			
 			<!-- div for displaying the number of pauses -->
-			<div style="text-align: center;" class="pausesDiv">
+			<div class="pausesDiv">
 				<p class="pausesText" id="pausesText">
 					Pause Count<br>0/3
 				</p>
@@ -73,14 +74,15 @@
  
 			<div style="text-align: center;">
 				<p class="activebuttonarea">
-					<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Solo</button>
-					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Play Together</button>
+					<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Together</button>
+					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Play Solo</button>
 					<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
 				</p>
 			</div>
 		
 	
 	</div> <!-- End everything <div> -->
+	
 	<!-- ______________________ -->
 	<!-- Start of options menu  -->
 	<!-- 	division.           -->
@@ -97,8 +99,8 @@
 		<!-- ------------------------ -->
 		<!-- Buttons for Options Menu -->
 		<!-- ------------------------ -->
-		<button class="optionsMenuButton" id="omb1">How to Use this Website</button>
-		<button class="optionsMenuButton" id="omb2">About Us</button>
+		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
+		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
 		
 		<!-- A textbox for the user to choose the text to show
 		    on the pauses on Solo Play. -->
@@ -108,13 +110,42 @@
 		<div id="optionsMenuTextbox">
 			<form>
 				Show text on pauses
-				<input type="checkbox" id="text_on_pauses_checkbox" onclick="textboxAvailability();" checked>
+				<input type="checkbox" id="text_on_pauses_checkbox" onchange="textboxAvailability();" checked>
 				<br>
-				Text to display on pauses: 
+				&nbsp Text to display on pauses:
+				<input type="text" id="text_on_pauses_id" maxlength="15" size="5" value="I love you"> 
 				<br>
-				<input type="text" id="text_on_pauses_id" maxlength="15"> 
+				&nbsp Color of text on pauses:
+				<select id="text_on_pauses_color">
+					<option value="blue">Blue</option>
+					<option value="pink">Pink</option>
+					<option value="lightpink">Light Pink</option>
+					<option value="peachpuff">Peach</option>
+					<option value="purple">Purple</option>
+					<option value="blueviolet">Blue Violet</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="black">Black</option>
+				</select>
+				<br>
+				<br>
+				Show image on pauses
+				<input type="checkbox" id="images_on_pauses_checkbox" checked>
+				
+				<br>
+				<br>
+				Background image
+				<select id="background_option">
+					<option value="url(cs4500Media/backgrounds/pink_butterfly.jpg)">Pink Leaf</option>
+					<option value="url(cs4500Media/backgrounds/purplewhitecircles.jpg)">Purple and White Circles</option>
+					<option value="url(cs4500Media/backgrounds/bluepinklights.jpg">Blue Pink Lights</option>
+					<option value="url(cs4500Media/backgrounds/pinkheartleaves.jpg">Pink Swishes</option>
+					<option value="url(cs4500Media/backgrounds/emptyimage.png)">None</option>
+				</select>
 			</form>
 		</div>
+		
+		
 		
 		<button class="resetGameButton" id="omb4" onclick="resetGame()">Reset Game</button>
 		<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
@@ -124,5 +155,11 @@
 	<!-- 	division.           -->
 	<!-- ______________________ -->
 		
+		<!--div that gets displayed over the whole screen when the screen size is too small-->
+		<div class="device_not_supported"><p>DEVICE NOT SUPPORTED</p></div>
+		
+		<!-- Script files are placed at the bottom of HTML for performance increase-->
+		<script src="SlideShow.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</body>
 </html>

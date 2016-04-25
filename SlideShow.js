@@ -16,6 +16,8 @@ var DURATION_PER_IMAGE = 2019;
 var interval;
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
 var counter = 0; //setting the counter as global for this iteration for simplicity
+var pausePlacement = 0;
+var pausePlacementCounter = 0;
 var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
@@ -45,12 +47,27 @@ var isGameRunning = false;
    be removed form the webpage when the user clicks the 
    "RESUME" button. */
 var text_on_pause = "I love you";
+
+
+/* This is an array containing a JSON a few JSON objects. These "people"
+   objects will be named after Alaina's family members and will be used
+   in Game Mode 2. For now it is just names; but later audio and video files will be added.*/
+ var family = [
+ 	{"name":"Grandpa"},
+ 	{"name":"Grandma"},
+ 	{"name":"Mom"},
+ 	{"name":"Dad"},
+ 	{"name":"Colin"}
+ ];
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var SONG_DURATION = Math.ceil(audio.duration); //return the duration of the song in seconds,rounded up.
+	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
+	var croppedDuration = SONG_DURATION - 60;
+	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
+	//console.log(pausePlacement);
 	numOfImages = 6;
 	
 	if(isNaN(counter)){
@@ -82,8 +99,9 @@ function displayImages(){
 
 		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 			counter = 0;
+			pausePlacementCounter++;
 		}
-		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
+		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			numPauses++; // we paused
 			updatePauses();
@@ -93,9 +111,11 @@ function displayImages(){
 				shouldPause = false;
 			}
 			counter++;
+			pausePlacementCounter = 0;
 		}
 		else{
 			counter++;
+			pausePlacementCounter++;
 		}
 		// if song has ended, reset the app
 		if(audio.ended) {
@@ -129,6 +149,7 @@ function resetGame() {
 	shouldPause = true;
 	numPauses = 0;
 	updatePauses();
+	pausePlacementCounter = 0;
 	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
@@ -140,18 +161,18 @@ function stopPauses() {
 	shouldPause = false;
 	numPauses = maxPauses;
 	updatePauses();
-	if(shouldPause == false) {
-		audio.play();
-		displayImages();
-	}
+	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
 		$( "#wrongChoice" ).remove();
-		displayImages();
 	}
 }
 
 function updatePauses() {
+	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
+	var croppedDuration = SONG_DURATION - 45;
+	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
+	//console.log(pausePlacement);
 	if (maxPauses >= numPauses) { // don't let numPauses > than maxPauses display to user
 		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
 	}
@@ -179,10 +200,21 @@ function interruptSong(){
 			document.getElementById("textOnSoloPlayInterrupt").innerHTML = text_on_pause;
 		}
 		
+		/* This is an option to not not show images on pause through a checkbox. 
+		   This condition will be checked. */
+		var image_on_pause_boolean = document.getElementById("images_on_pauses_checkbox");
+		
+		if (image_on_pause_boolean.checked)
+		{
+			/* Change the source image of song_pause_picture_id to a drawing of kids hugging. */
+			document.getElementById("song_pause_picture_id").src = "cs4500Media/love_pictures/kidshug.jpg";
+		}
+		
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
 			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
-			//$("#resumebutton").appendTo(".pausesDiv");
+			//make the div of the song_pause_picture_box visible
+			document.getElementById("song_pause_picture_box").style.visibility = "visible";
 			if (optionsMenuOn) {
 				$("#resumebutton").hide();
 			}
@@ -193,8 +225,13 @@ function interruptSong(){
 				   "I love you" from the webpage. */
 				document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
 				
+				/* Change source image of song_pause_picture_id to nothing. */
+				document.getElementById("song_pause_picture_id").src = "";
+				
+				//make the div of the song_pause_picture_box invisible
+				document.getElementById("song_pause_picture_box").style.visibility = "hidden";
+				
 				displayImages();
-				shouldPause = false;
 				audio.play();
 				$("#resumebutton").remove();
 			});
@@ -285,6 +322,7 @@ function playActionAudio() {
 /////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var questionInterrupt = function(){
+	var madeWrongChoice;
 	var wrongChoice = new Array();//array for wrong choice images
 	var maxWrongChoicesForGame2 = 1+dynamic_counter;//This is the max number of wrong choices for each interrupt for game 2
 	
@@ -304,15 +342,10 @@ var questionInterrupt = function(){
 	}
 
 
-
-
-
 	//manually assign all the wrong answer image sources
 	//wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
 	//wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
 	//wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
-	
-
 
 
 
@@ -378,10 +411,14 @@ var questionInterrupt = function(){
 				$( "#wrongChoice"+i ).remove();
 			}
 
-			dynamic_counter++; // Increase the dynamic counter which increases the maxWrongChoices
+			if(madeWrongChoice != true) { // If elaina made a wrong choice dynamic_counter is unaffected after she hits right one	
+				dynamic_counter++; // Increase the dynamic counter which increases the maxWrongChoices
+			}
+
 			if(dynamic_counter > 2) { //bound to 2 
 				dynamic_counter = 2;
 			}
+			madeWrongChoice = false;
 
 			displayImages();
 			audio.play();
@@ -398,7 +435,8 @@ var questionInterrupt = function(){
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
-				$( "#wrongChoice0").remove();
+				$( "#wrongChoice0").css("visibility", "hidden");
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
@@ -406,7 +444,8 @@ var questionInterrupt = function(){
 			});
 
 			$( "#wrongChoice1").click(function() {
-				$( "#wrongChoice1").remove();
+				$( "#wrongChoice1").css("visibility", "hidden");
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
@@ -414,7 +453,8 @@ var questionInterrupt = function(){
 			});
 
 			$( "#wrongChoice2").click(function() {
-				$( "#wrongChoice2").remove();
+				$( "#wrongChoice2").css("visibility", "hidden");
+				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
 					dynamic_counter = 0;
@@ -525,6 +565,13 @@ function openOptionsMenu()
 	/* blurBackground unblurs everything 
 		It is defined futher below. */
 	unblurBackground();
+	
+	changeBackgroundImage();
+	
+	/* Get the color of the text for the 
+	   text that shows up on pauses on 
+	   "Solo Play". */
+	getPauseTextColor();
 	 
 	$(".optionsMenu").hide(1000);
 	optionsMenuOn = false;
@@ -565,20 +612,87 @@ function unblurBackground()
 /********************************/
 function textboxAvailability()
 {
-	document.getElementById('text_on_pauses_checkbox').onclick = function() {
+	document.getElementById('text_on_pauses_checkbox').onchange = function() {
     // access properties using this keyword
     if ( this.checked ) {
         // if checked ...
 		document.getElementById("text_on_pauses_id").disabled = false;
+		document.getElementById("text_on_pauses_color").disabled = false;
+
     } else if ( !this.checked) {
         // if not checked ...
 		document.getElementById("text_on_pauses_id").disabled = true;
+		document.getElementById("text_on_pauses_color").disabled = true;
     }
 };
 	
 }
-   
+
+
+/********************************/
+/* getPauseTextColor() gets     */
+/* 	a color typed into a textbox*/
+/* 	by a user and changes the   */
+/*	CSS to change the font color*/
+/*  for the text on pauses.     */
+/********************************/
+function getPauseTextColor()
+{	
+	var text_on_pause_color = document.getElementById("text_on_pauses_color").value;
+	document.getElementById("textOnSoloPlayInterrupt").style.color = text_on_pause_color;
+}
+
+/*********************************/
+/* changeBackgroundImage()       */
+/* 	changes the background image.*/
+/*********************************/ 
+function changeBackgroundImage()
+{
+	var backgroundURL = document.getElementById("background_option").value;
+	
+	var cols = document.getElementsByClassName('everythingClassBlurred');
+	for(i=0; i<cols.length; i++) {
+    cols[i].style.background = backgroundURL;
+	}
+	
+	cols = document.getElementsByClassName('everythingClass');
+	for(i=0; i<cols.length; i++) {
+    cols[i].style.background = backgroundURL;
+	}
+}   
+
 /*_____________________________*/
 /*                             */
 /*   END OF OPTIONS MENU CODE  */
 /*_____________________________*/
+
+/*******************************/
+
+/*_____________________________*/
+/*                             */
+/* START OF "ABOUT US" AND     */
+/* DOCUMENTATION CODE          */
+/*_____________________________*/
+
+/* The next two functions open new URLs in a tab/window using
+   the window.open function of Javascript. */
+function openAboutUs() 
+{
+	/* window.open() opens the specificed URL */
+    window.open("http://benjaminsl.neocities.org/autismProject/aboutus.html");
+}
+
+function openDocumentation()
+{
+	/* window.open() opens the specificed URL */
+	window.open("http://benjaminsl.neocities.org/autismProject/documentation.html")
+}
+
+/*_____________________________*/
+/*                             */
+/*   END OF "ABOUT US" AND     */
+/*   DOCUMENTATION CODE        */
+/*_____________________________*/
+
+
+
