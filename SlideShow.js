@@ -47,6 +47,18 @@ var isGameRunning = false;
    be removed form the webpage when the user clicks the 
    "RESUME" button. */
 var text_on_pause = "I love you";
+
+
+/* This is an array containing a JSON a few JSON objects. These "people"
+   objects will be named after Alaina's family members and will be used
+   in Game Mode 2. For now it is just names; but later audio and video files will be added.*/
+ var family = [
+ 	{"name":"Grandpa"},
+ 	{"name":"Grandma"},
+ 	{"name":"Mom"},
+ 	{"name":"Dad"},
+ 	{"name":"Colin"}
+ ];
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
