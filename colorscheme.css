@@ -220,6 +220,18 @@
 		position: absolute;
 	}
 	
+	.textSupportText {
+		color: pink;
+		-webkit-text-stroke: 1px #B300B3;/* medium purple */
+		font-size: 300%;
+		visibility: hidden;
+		position: fixed;
+		top: 20%;
+		width: 100%;
+		text-align: left;
+	}
+
+
 	/* Text style for remaining pauses */
 	.pausesText {
 		color: pink;
