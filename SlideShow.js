@@ -142,12 +142,12 @@ function stopPauses() {
 	updatePauses();
 	if(shouldPause == false) {
 		audio.play();
-		displayImages();
+		//displayImages(); //Can't call displayImages() without clearing interval or adding a control to the function
 	}
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
 		$( "#wrongChoice" ).remove();
-		displayImages();
+		//displayImages(); //Can't call displayImages() without clearing interval or adding a control to the function
 	}
 }
 
