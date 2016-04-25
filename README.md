@@ -9,7 +9,7 @@ Jason Pham
 Ryan Admire
 
 The project is done entirely in standard web languages. Javascript, HTML, CSS.
-Exactly how to go about playing depends on which game mode is chosen. For now the only option is Mode #1 - the Slideshow game.
+Exactly how to go about playing depends on which game mode is chosen. A list of the game mode choices is below.
 
 PLAY TOGETHER
 
@@ -32,5 +32,3 @@ SlideShow.js - The main file for game mode #1. It contains code to run the slide
 colorscheme.css - This page defines all the syling for the pages and windows of the project. Purples and pinks are prefered by Alaina, so we're sticking with those.  We hope to use bootstrapping to aid in the look of our page(s).
 
 main.html - the webpage itself, it contains references to the style sheet to make it look the way we want; as well as the javascript file(s) to make it behave the way we want.
-
-
