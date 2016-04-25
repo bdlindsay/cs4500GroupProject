@@ -563,14 +563,31 @@
 	input[type=range]:focus::-ms-fill-upper {
 		background: pink;
 	}
+	
+	.device_not_supported{
+		display:none;
+	}
 
 /********************************************************/
 /*******Media Queries**************************************/	 
 /********************************************************/ 
-/*for phone and tablet in potrait tablet 10in and under*/
-@media screen and (min-width:0px) and (max-width:768px)
-{
+
+/*for devices that are not supported*/
+@media screen and (min-width:0px) and (max-width:500px){
 	
+	.device_not_supported {
+		display: inline-block;
+		background-color: #FFFFFF;
+		height: 100vw;
+		width: 100vw;
+	}
+	.everythingClass{
+		display: none;
+	}
+}
+@media screen and (min-width:500px) and (max-width:768px)
+{	
+
 	/* This is the style rule for the area of the start button. */
 	.activebuttonarea {
 		top: 68%;
@@ -598,7 +615,7 @@
 	}
 /* Div for remaining pauses Text*/
 	.pausesDiv{
-		top: 63%; 
+		top: 67%; 
 		left:34%;
 	}
 	
@@ -626,6 +643,11 @@
 		left: 40%;
 	}
 	
+	.optionsSym {
+		float: left;
+		margin-top: 100vw;
+	}
+
 	.popupBox {
 		width: 66vw;
 		height: 70vw;
@@ -645,7 +667,6 @@
 /*for tablet in lanscape and smaller computers screens*/
 @media screen and (min-width: 769px) and (max-width: 1440px)
 {
-
 
 	/* This is the style rule for the area of the start button. */
 	.activebuttonarea {
