@@ -593,8 +593,8 @@
 	
 	.imageDisplayArea {
 		margin-top: 9vw;
-		width: 60vw;
-		height: 60vw;
+		width: 60vh;
+		height: 60vh;
 	}
 /* Div for remaining pauses Text*/
 	.pausesDiv{
@@ -625,18 +625,20 @@
 		top: 2%;
 		left: 40%;
 	}
-		.popupBox {
-		width: 45vw;
-		height: 45vw;
-		top: 2vw;
-		left: 28vw;
+	
+	.popupBox {
+		width: 66vw;
+		height: 70vw;
+		top: 7vw;
+		left: 17vw;
 	}
 
 	.popupImageDisplay {
-		height: 20vw;
-		width: 20vw;
-		margin:5px;
+		height: 30vw;
+		width: 30vw;
+		margin: 5px;
 	}
+
 
 }
 

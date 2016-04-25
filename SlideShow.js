@@ -140,14 +140,10 @@ function stopPauses() {
 	shouldPause = false;
 	numPauses = maxPauses;
 	updatePauses();
-	if(shouldPause == false) {
-		audio.play();
-		//displayImages(); //Can't call displayImages() without clearing interval or adding a control to the function
-	}
+	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
 		$( "#wrongChoice" ).remove();
-		//displayImages(); //Can't call displayImages() without clearing interval or adding a control to the function
 	}
 }
 
@@ -211,7 +207,6 @@ function interruptSong(){
 				document.getElementById("song_pause_picture_box").style.visibility = "hidden";
 				
 				displayImages();
-				shouldPause = false;
 				audio.play();
 				$("#resumebutton").remove();
 			});
