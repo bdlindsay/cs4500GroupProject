@@ -16,6 +16,8 @@ var DURATION_PER_IMAGE = 2019;
 var interval;
 var numOfImages = 0; //This constant can be set incase they want to upload their own images for a song.
 var counter = 0; //setting the counter as global for this iteration for simplicity
+var pausePlacement = 0;
+var pausePlacementCounter = 0;
 var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
@@ -50,7 +52,10 @@ var text_on_pause = "I love you";
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var SONG_DURATION = Math.ceil(audio.duration); //return the duration of the song in seconds,rounded up.
+	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
+	var croppedDuration = SONG_DURATION - 60;
+	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
+	//console.log(pausePlacement);
 	numOfImages = 6;
 	
 	if(isNaN(counter)){
@@ -82,8 +87,9 @@ function displayImages(){
 
 		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 			counter = 0;
+			pausePlacementCounter++;
 		}
-		else if(counter == 4 && shouldPause){//Manually setting time of interupt for now
+		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			numPauses++; // we paused
 			updatePauses();
@@ -93,9 +99,11 @@ function displayImages(){
 				shouldPause = false;
 			}
 			counter++;
+			pausePlacementCounter = 0;
 		}
 		else{
 			counter++;
+			pausePlacementCounter++;
 		}
 		// if song has ended, reset the app
 		if(audio.ended) {
@@ -129,6 +137,7 @@ function resetGame() {
 	shouldPause = true;
 	numPauses = 0;
 	updatePauses();
+	pausePlacementCounter = 0;
 	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
@@ -148,6 +157,10 @@ function stopPauses() {
 }
 
 function updatePauses() {
+	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
+	var croppedDuration = SONG_DURATION - 45;
+	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
+	//console.log(pausePlacement);
 	if (maxPauses >= numPauses) { // don't let numPauses > than maxPauses display to user
 		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
 	}
@@ -313,15 +326,10 @@ var questionInterrupt = function(){
 	}
 
 
-
-
-
 	//manually assign all the wrong answer image sources
 	//wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
 	//wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
 	//wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
-	
-
 
 
 
