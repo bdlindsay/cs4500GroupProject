@@ -177,6 +177,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		border: 5px solid #9999ff;
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 	
 	/************************/
@@ -222,22 +223,30 @@
 	
 	.textSupportText {
 		color: pink;
-		-webkit-text-stroke: 1px #B300B3;/* medium purple */
-		font-size: 300%;
+		text-shadow: 1px 1px 2px #B300B3;/* medium purple */
+		/*font-size: 300%;*/
 		visibility: hidden;
-		position: fixed;
-		top: 20%;
-		width: 100%;
-		text-align: left;
+		text-align: center;
+		margin:10px;
 	}
 
+	.textSupportDiv {
+		position: absolute;
+		background-color: plum;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border-radius: 15px 50px;
+		word-wrap: normal;
+		font-size: 155%;
+		visibility: hidden;
+	}
 
 	/* Text style for remaining pauses */
 	.pausesText {
 		color: pink;
 		text-align: center;
-		-webkit-text-stroke: 1px #B300B3;/* medium purple */
 		font-size: 300%;
+		/*using text-shadow instead of webkit for compatability*/
+		text-shadow: 1px 1px 2px #B300B3;/* medium purple */
 	}
 
 	/* area where remaining pauses shows */
@@ -584,8 +593,9 @@
 /*******Media Queries**************************************/	 
 /********************************************************/ 
 
-/*for devices that are not supported*/
-@media screen and (min-width:0px) and (max-width:500px){
+/*for devices that are not supported. NOTE: this does not cover the iphone 6 and like size phone screens.*/
+@media screen and (min-width:0px) and (max-width:500px)
+{
 	
 	.device_not_supported {
 		display: inline-block;
@@ -657,7 +667,7 @@
 	
 	.optionsSym {
 		float: left;
-		margin-top: 100vw;
+		margin-top: 84vh;
 	}
 
 	.popupBox {
@@ -672,6 +682,14 @@
 		width: 30vw;
 		margin: 5px;
 	}
+	
+	.textSupportDiv {
+		height: 11vw;
+		width: 80vw;
+		top: 84vw;
+		left: 10vw;
+	}
+
 
 
 }
@@ -756,6 +774,14 @@
 		margin:5px;
 	}
 
+	.textSupportDiv {
+		height: 11vw;
+		width: 80vw;
+		top: 47vw;
+		left: 10vw;
+		font-size: 270%
+	}
+
 }
 
 /*for larger computer screens */
@@ -828,6 +854,14 @@
 		height: 20vw;
 		width: 20vw;
 		margin:5px;
+	}
+
+	.textSupportDiv {
+		height: 7vw;
+		width: 64vw;
+		top: 44vw;
+		left: 18vw;
+		font-size: 270%
 	}
 
 }

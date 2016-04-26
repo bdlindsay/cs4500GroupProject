@@ -247,12 +247,14 @@ function interruptSong(){
 			console.log("Pick the correct person");
 			$(".textSupportText").html("Pick <br>" + "Grandad"); // can replace grandad string with object.name
 			document.getElementById("textSupportText").style.visibility = "visible";
+			document.getElementById("textSupportDiv").style.visibility = "visible";
 			questionInterrupt();
 		}
 		else { // question_type 2 is to pick the correct emotion
 			console.log("Pick the correct emotion");
 			$(".textSupportText").html("Pick <br>" + "Emotion"); // can replace grandad string with object.name
 			document.getElementById("textSupportText").style.visibility = "visible";
+			document.getElementById("textSupportDiv").style.visibility = "visible";
 			questionInterrupt(); //using same function to continue NEEDS TO UPDATE
 		}
 	}
@@ -407,6 +409,7 @@ var questionInterrupt = function(){
 	$( "#correctChoice" ).click(function() {
 			$( "#correctChoice" ).remove();
 			document.getElementById("textSupportText").style.visibility = "hidden";
+			document.getElementById("textSupportDiv").style.visibility = "hidden";
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
