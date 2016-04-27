@@ -187,7 +187,7 @@
 	/* on Solo Play when    */
 	/* the song is stopped. */
 	/************************/
-	#textOnSoloPlayInterrupt {
+	#text_on_together_pause {
 		position: absolute;
 		font-family: Candara;
 		font-size: 400%;
@@ -660,9 +660,18 @@
 	/* on Solo Play when    */
 	/* the song is stopped. */
 	/************************/
-	#textOnSoloPlayInterrupt {
-		top: 2%;
+	#text_on_together_pause_wrapper
+	{
+		width: 45vw;
+		height: 45vw;
+		top: 10%;
 		left: 40%;
+	}
+	
+	#text_on_together_pause {
+		position: absolute;
+		top: 45%;
+		left: 5%;
 	}
 	
 	.optionsSym {
@@ -745,8 +754,8 @@
 	/* the song is stopped. */
 	/************************/
 	#song_pause_picture_box {
-		top: 20%;
-		left: 40%;
+		top: 45%;
+		left: 77%;
 	}
 	
 	/************************/
@@ -756,9 +765,18 @@
 	/* on Solo Play when    */
 	/* the song is stopped. */
 	/************************/
-	#textOnSoloPlayInterrupt {
-		top: 0%;
-		left: 37%;
+	#text_on_together_pause_wrapper
+	{
+		width: 45vw;
+		height: 45vw;
+		top: 10%;
+		left: 40%;
+	}
+	
+	#text_on_together_pause {
+		position: absolute;
+		top: 45%;
+		left: 5%;
 	}
 
 	.popupBox {
@@ -838,9 +856,18 @@
 	/* on Solo Play when    */
 	/* the song is stopped. */
 	/************************/
-	#textOnSoloPlayInterrupt {
-		top: 2%;
+	#text_on_together_pause_wrapper
+	{
+		width: 45vw;
+		height: 45vw;
+		top: 10%;
 		left: 40%;
+	}
+	
+	#text_on_together_pause {
+		position: absolute;
+		top: 45%;
+		left: 5%;
 	}
 	
 	.popupBox {

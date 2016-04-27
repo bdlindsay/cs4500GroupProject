@@ -130,7 +130,7 @@ function resetGame() {
 	
 	/* When the "Reset Game" button is clicked, remove the text
 	   on pause from the webpage. */
-	document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
+	document.getElementById("text_on_together_pause").innerHTML = "";
 	
 	if (isGameRunning) { // reset running
 		clearInterval(interval);
@@ -197,7 +197,7 @@ function interruptSong(){
 		
 		if (text_on_pauses_boolean.checked)
 		{
-			document.getElementById("textOnSoloPlayInterrupt").innerHTML = text_on_pause;
+			document.getElementById("text_on_together_pause").innerHTML = text_on_pause;
 		}
 		
 		/* This is an option to not not show images on pause through a checkbox. 
@@ -223,7 +223,7 @@ function interruptSong(){
 				
 				/* When the RESUME button is clicked, remove the text
 				   "I love you" from the webpage. */
-				document.getElementById("textOnSoloPlayInterrupt").innerHTML = "";
+				document.getElementById("text_on_together_pause").innerHTML = "";
 				
 				/* Change source image of song_pause_picture_id to nothing. */
 				document.getElementById("song_pause_picture_id").src = "";
@@ -642,7 +642,7 @@ function textboxAvailability()
 function getPauseTextColor()
 {	
 	var text_on_pause_color = document.getElementById("text_on_pauses_color").value;
-	document.getElementById("textOnSoloPlayInterrupt").style.color = text_on_pause_color;
+	document.getElementById("text_on_together_pause").style.color = text_on_pause_color;
 }
 
 /*********************************/
