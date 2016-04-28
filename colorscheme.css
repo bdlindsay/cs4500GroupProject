@@ -607,7 +607,7 @@
 		display: none;
 	}
 }
-@media screen and (min-width:500px) and (max-width:768px)
+@media screen and (min-width:500px) and (max-width:790px)
 {	
 
 	/* This is the style rule for the area of the start button. */
@@ -704,7 +704,7 @@
 }
 
 /*for tablet in lanscape and smaller computers screens*/
-@media screen and (min-width: 769px) and (max-width: 1440px)
+@media screen and (min-width: 790px) and (max-width: 1440px)
 {
 
 	/* This is the style rule for the area of the start button. */
