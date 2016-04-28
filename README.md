@@ -11,19 +11,7 @@ Ryan Admire
 The project is done entirely in standard web languages. Javascript, HTML, CSS.
 Exactly how to go about playing depends on which game mode is chosen. A list of the game mode choices is below.
 
-PLAY TOGETHER
-
-How to Play: 
-Upon selection of this mode, the song will start; for now Taylor Swift's 'Love Song' is the song playing but this may be changed later. The song will play while showing various pictures provided to by Alaina's family. At intervals throughout, the song will pause and whomever is with Alaina will need to prompt her to repeat what she hears. Once she successfully does so(or gets to frustrated) the resume button will play the song again. This will continue until the song is over.
-
-PLAY SOLO
-
-How to Play:
-Upon selection of this mode, the song will start; as with "PLAY TOGETHER" 'Love Song' is the defualt choice. The song will pause and then a number of pictures will appear along with a command, such as "Find Grandpa". If Alaina successfully finds him the song resumes playing; if not the wrong selection will disappear and she will be prompted to choos again. This will continue for a set number of interrupts available from the Options menu.
-
-OPTIONS
-
-From this sub-menu you can reset the game, stop the pauses entirely for the duration of the song, and adjust the number of pauses. There will also be (hopefully) future options to upload new songs and pictures to customize the game modes.
+See the User's Guide for more info on how to play the game!
 
 File Descriptions:
 
