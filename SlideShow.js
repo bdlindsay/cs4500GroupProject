@@ -102,7 +102,6 @@ function displayImages(){
 			pausePlacementCounter++;
 		}
 		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
-		//else if (counter ==4 ) {	// USE FOR FASTER TESTING COMMENT OUT ELSE IF ABOVE
 			clearInterval(interval);
 			numPauses++; // we paused
 			updatePauses();
