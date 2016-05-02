@@ -22,7 +22,7 @@ var numPauses = 0;
 var maxPauses = 3; // hard coded for now. adjust with user options later
 var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
-var wrongChoicesForGame2 = 2; //this is the number of wrong choices that will display on game 2
+var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
 
 /* variable to randomize between correct emotion or correct person
 if question_type is 1 then elaina chooses a person
@@ -101,7 +101,7 @@ function displayImages(){
 			counter = 0;
 			pausePlacementCounter++;
 		}
-		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
+		else if(/*pausePlacementCounter >= pausePlacement*/ counter == 2 && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			numPauses++; // we paused
 			updatePauses();
@@ -332,7 +332,7 @@ var questionInterrupt = function(){
 	var madeWrongChoice;
 	var wrongChoice = new Array();//array for wrong choice images
 	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
-	var wrongChoicesForGame2 = 1 + dynamic_counter;
+	wrongChoicesForGame2 = 1 + dynamic_counter;
 	
 
 	/*This array will hold all the wrong answer pictures and wrongchoice array can pick out from*/	
