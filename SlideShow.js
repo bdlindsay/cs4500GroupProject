@@ -331,16 +331,17 @@ function playActionAudio() {
 var questionInterrupt = function(){
 	var madeWrongChoice;
 	var wrongChoice = new Array();//array for wrong choice images
-	var maxWrongChoicesForGame2 = 1+dynamic_counter;//This is the max number of wrong choices for each interrupt for game 2
+	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
+	var wrongChoicesForGame2 = 1 + dynamic_counter;
 	
 
 	/*This array will hold all the wrong answer pictures and wrongchoice array can pick out from*/	
 	var wrongAnswerArray = new Array();
-	for(var i = 0; i<3; i++) {
+	for(var i = 0; i<maxWrongChoicesForGame2; i++) {
 		wrongAnswerArray[i] = new Image();
 		wrongAnswerArray[i].src = 'cs4500Media/images/beachBall.jpg';
 	}
-
+/*
 	//create the array for the wrong images, will use the max allowed wrong answers
 	for(var i = 0;i < maxWrongChoicesForGame2;i++){
 		wrongChoice[i] = new Image();
@@ -354,7 +355,7 @@ var questionInterrupt = function(){
 	//wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
 	//wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
 
-
+*/
 
 	//The correct image to choose should always be set here
 	var correctChoice = new Image();
@@ -362,7 +363,7 @@ var questionInterrupt = function(){
 	
 	//This array is used to append images to the popup div randomly
 	
-	switch (maxWrongChoicesForGame2) {
+	switch (wrongChoicesForGame2) {
 		 case 1:
 		 	var area = new Array( 
 		 		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
@@ -404,7 +405,7 @@ var questionInterrupt = function(){
 		}
 		
 	//append the wrong answers to the popup div
-	for(var i = 0;i<wrongChoicesForGame2+2;i++){
+	for(var i = 0;i<wrongChoicesForGame2+1;i++){
 		$( "#popupBox" ).append(area[i]);
 	}
 	
