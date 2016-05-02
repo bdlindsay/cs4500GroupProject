@@ -224,20 +224,22 @@
 	.textSupportText {
 		color: pink;
 		text-shadow: 1px 1px 2px #B300B3;/* medium purple */
-		/*font-size: 300%;*/
 		visibility: hidden;
 		text-align: center;
 		margin:10px;
 	}
 
 	.textSupportDiv {
-		position: absolute;
-		background-color: plum;
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		border-radius: 15px 50px;
+		background-color: #9999ff;
 		word-wrap: normal;
-		font-size: 155%;
 		visibility: hidden;
+		margin-left: auto;
+		margin-right: auto;
+		border-width: 5px;
+		border-style: solid;
+		border-color: #99F;
+		height:auto;
+		font-size: 200%;
 	}
 
 	/* Text style for remaining pauses */
@@ -594,7 +596,7 @@
 /*******Media Queries**************************************/	 
 /********************************************************/ 
 
-/*for devices that are not supported. NOTE: this does not cover the iphone 6 and like size phone screens.*/
+/*for devices that are not supported.*/
 @media screen and (min-width:0px) and (max-width:500px)
 {
 	
@@ -608,7 +610,21 @@
 		display: none;
 	}
 }
-@media screen and (min-width:500px) and (max-width:790px)
+/*for devices that are not supported. */
+@media screen and (min-width:500px) and (max-width:790px) and (orientation:landscape)
+{
+	
+	.device_not_supported {
+		display: inline-block;
+		background-color: #FFFFFF;
+		height: 100vw;
+		width: 100vw;
+	}
+	.everythingClass{
+		display: none;
+	}
+}
+@media screen and (min-width:500px) and (max-width:790px) and (orientation: portrait)
 {	
 
 	/* This is the style rule for the area of the start button. */
@@ -681,7 +697,7 @@
 	}
 
 	.popupBox {
-		width: 66vw;
+		width: 68vw;
 		height: 70vw;
 		top: 7vw;
 		left: 17vw;
@@ -694,10 +710,7 @@
 	}
 	
 	.textSupportDiv {
-		height: 11vw;
-		width: 80vw;
-		top: 84vw;
-		left: 10vw;
+		width: 60vh;
 	}
 
 
@@ -781,7 +794,7 @@
 	}
 
 	.popupBox {
-		width: 45vw;
+		width: 46vw;
 		height: 45vw;
 		top: 2vw;
 		left: 28vw;
@@ -794,11 +807,7 @@
 	}
 
 	.textSupportDiv {
-		height: 11vw;
-		width: 80vw;
-		top: 47vw;
-		left: 10vw;
-		font-size: 270%
+		width: 40vw;
 	}
 
 }
@@ -885,11 +894,7 @@
 	}
 
 	.textSupportDiv {
-		height: 7vw;
-		width: 64vw;
-		top: 44vw;
-		left: 18vw;
-		font-size: 270%
+		width: 40vw;
 	}
 
 }
