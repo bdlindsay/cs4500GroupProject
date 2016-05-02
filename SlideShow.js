@@ -150,10 +150,15 @@ function resetGame() {
 	numPauses = 0;
 	updatePauses();
 	pausePlacementCounter = 0;
+
 	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
-		$( "#wrongChoice" ).remove();
+		for(var i = 0;i < wrongChoicesForGame2;i++){
+			$( "#wrongChoice"+i ).remove();
+		}
+		document.getElementById("textSupportText").style.visibility = "hidden";
+		document.getElementById("textSupportDiv").style.visibility = "hidden";
 	}
 }
 
@@ -529,10 +534,8 @@ function openOptionsMenu()
 	{
 		$(".resetGameButton").hide();
 		$(".stopPausesButton").hide();
-	}
-	
-	else
-	{	
+	}	
+	else {	
 		// $("#pSlider").hide(); // hides the slider to choose max number of pauses
 		$(".resetGameButton").show();
 		$(".stopPausesButton").show();
@@ -546,6 +549,7 @@ function openOptionsMenu()
 		defined futher below. */
 	blurBackground();
 	
+	$(".optionsMenu").css("visibility", "visible");
 	$(".optionsMenu").show(1000);
 	optionsMenuOn = true;
 	//document.getElementById("optionsBox").innerHTML = optionsMenuOn;

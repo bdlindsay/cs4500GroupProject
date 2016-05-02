@@ -289,6 +289,7 @@
 		left: 0;
 		right: 0;
 		margin: auto;
+		visibility: hidden;
 	}
 
 	/* The rule for the button that closes the option menu. */
