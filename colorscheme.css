@@ -624,6 +624,7 @@
 		display: none;
 	}
 }
+/*for tablets in portrait mode  NEEDS ADJUST*/
 @media screen and (min-width:500px) and (max-width:790px) and (orientation: portrait)
 {	
 
@@ -677,14 +678,6 @@
 	/* on Solo Play when    */
 	/* the song is stopped. */
 	/************************/
-	#text_on_together_pause_wrapper
-	{
-		width: 45vw;
-		height: 45vw;
-		top: 10%;
-		left: 40%;
-	}
-	
 	#text_on_together_pause {
 		position: absolute;
 		top: 45%;
@@ -717,7 +710,7 @@
 
 }
 
-/*for tablet in lanscape and smaller computers screens*/
+/*for tablet in lanscape and smaller computers screens NEEDS ADJUST option view and play together pause */
 @media screen and (min-width: 790px) and (max-width: 1440px)
 {
 
@@ -741,8 +734,8 @@
 	
 	.imageDisplayArea {
 		margin-top: 3vw;
-		width: 40vw;
-		height: 40vw;
+		width: 35vw;
+		height: 35vw;
 	}
 
 	.resumebutton {
@@ -778,15 +771,7 @@
 	/* text that appears    */
 	/* on Solo Play when    */
 	/* the song is stopped. */
-	/************************/
-	#text_on_together_pause_wrapper
-	{
-		width: 45vw;
-		height: 45vw;
-		top: 10%;
-		left: 40%;
-	}
-	
+	/************************/	
 	#text_on_together_pause {
 		position: absolute;
 		top: 45%;
@@ -794,25 +779,26 @@
 	}
 
 	.popupBox {
-		width: 46vw;
-		height: 45vw;
+		width: 41vw;
+		height: 37vw;
 		top: 2vw;
-		left: 28vw;
+		left: 31vw;
 	}
 
+
 	.popupImageDisplay {
-		height: 20vw;
-		width: 20vw;
+		height: 16vw;
+		width: 16vw;
 		margin:5px;
 	}
 
 	.textSupportDiv {
-		width: 40vw;
+		width: 35vw;
 	}
 
 }
 
-/*for larger computer screens */
+/*for larger computer screens NEEDS ADJUST*/
 @media screen and (min-width: 1439px) 
 {
 
@@ -865,15 +851,7 @@
 	/* text that appears    */
 	/* on Solo Play when    */
 	/* the song is stopped. */
-	/************************/
-	#text_on_together_pause_wrapper
-	{
-		width: 45vw;
-		height: 45vw;
-		top: 10%;
-		left: 40%;
-	}
-	
+	/************************/	
 	#text_on_together_pause {
 		position: absolute;
 		top: 45%;
