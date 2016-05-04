@@ -445,7 +445,7 @@ var questionInterrupt = function(){
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
 				//If wrong choice is made, add a red X over the image
-				$( "#wrongChoice0").attr("src","cs4500Media/Red_X.png");
+				$( "#wrongChoice0").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice0").css("background-image", "url(\'"+wrongAnswerArray[0].src+"\')");
 				$( "#wrongChoice0").css("background-size", "cover");
 				madeWrongChoice = true;
@@ -457,7 +457,7 @@ var questionInterrupt = function(){
 
 			$( "#wrongChoice1").click(function() {
 				//If wrong choice is made, add a red X over the image
-				$( "#wrongChoice1").attr("src","cs4500Media/Red_X.png");
+				$( "#wrongChoice1").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice1").css("background-image", "url(\'"+wrongAnswerArray[1].src+"\')");
 				$( "#wrongChoice1").css("background-size", "cover");
 				madeWrongChoice = true;
@@ -469,7 +469,7 @@ var questionInterrupt = function(){
 
 			$( "#wrongChoice2").click(function() {
 				//If wrong choice is made, add a red X over the image
-				$( "#wrongChoice2").attr("src","cs4500Media/Red_X.png");
+				$( "#wrongChoice2").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice2").css("background-image", "url(\'"+wrongAnswerArray[2].src+"\')");
 				$( "#wrongChoice2").css("background-size", "cover");
 				madeWrongChoice = true;
