@@ -179,7 +179,7 @@ function updatePauses() {
 	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
 	//console.log(pausePlacement);
 	if (maxPauses >= numPauses) { // don't let numPauses > than maxPauses display to user
-		$(".pausesText").html("Pause Count<br>" + numPauses + "/" + maxPauses);
+		$(".pausesText").html("Pauses Remain<br>" + (maxPauses-numPauses));
 	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
