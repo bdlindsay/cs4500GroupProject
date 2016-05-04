@@ -53,11 +53,36 @@ var text_on_pause = "I love you";
    objects will be named after Alaina's family members and will be used
    in Game Mode 2. For now it is just names; but later audio and video files will be added.*/
  var family = [
- 	{"name":"Grandpa"},
- 	{"name":"Grandma"},
- 	{"name":"Mom"},
- 	{"name":"Dad"},
- 	{"name":"Colin"}
+ 	{ name:"Grandpa",
+ 		angry:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/angry2.jpg",
+ 		happy:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/happy2.jpg",
+ 		sad:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/sad2.jpg",
+ 		suprised:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/surprised2.jpg",
+ 		audio:""},
+ 	{ name:"Grandma",
+ 		angry:"cs4500GroupProject/cs4500Media/images/grandma/emotions/angry2.jpg",
+ 		happy:"cs4500GroupProject/cs4500Media/images/grandma/emotions/happy2.jpg",
+ 		sad:"cs4500GroupProject/cs4500Media/images/grandma/emotions/sad2.jpg",
+ 		suprised:"cs4500GroupProject/cs4500Media/images/grandma/emotions/surprised2.jpg",
+ 		audio:""},
+ 	{ name:"Mom",
+ 		angry:"cs4500GroupProject/cs4500Media/images/mom/emotions/angry.jpg",
+ 		happy:"cs4500GroupProject/cs4500Media/images/mom/emotions/happy.jpg",
+ 		sad:"cs4500GroupProject/cs4500Media/images/mom/emotions/sad.jpg",
+ 		suprised:"cs4500GroupProject/cs4500Media/mom/grandma/emotions/surprised.jpg",
+ 		audio:""},
+ 	{ name:"Dad",
+ 		angry:"cs4500GroupProject/cs4500Media/images/dad/emotions/angry2.jpg",
+ 		happy:"cs4500GroupProject/cs4500Media/images/dad/emotions/happy2.jpg",
+ 		sad:"cs4500GroupProject/cs4500Media/images/dad/emotions/sad2.jpg",
+ 		suprised:"cs4500GroupProject/cs4500Media/images/dad/emotions/surprised2.jpg",
+ 		audio:""},
+ 	{ name:"Colin",
+ 		angry:"cs4500GroupProject/cs4500Media/images/brother/emotions/angry2.jpg",
+ 		happy:"cs4500GroupProject/cs4500Media/images/brother/emotions/happy2.jpg",
+ 		sad:"cs4500GroupProject/cs4500Media/images/brother/emotions/sad2.jpg",
+ 		suprised:"cs4500GroupProject/cs4500Media/brother/grandma/emotions/surprised2.jpg",
+ 		audio:""}
  ];
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
