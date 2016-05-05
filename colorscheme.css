@@ -224,7 +224,6 @@
 	.textSupportText {
 		color: pink;
 		text-shadow: 1px 1px 2px #B300B3;/* medium purple */
-		visibility: hidden;
 		text-align: center;
 		margin:10px;
 	}

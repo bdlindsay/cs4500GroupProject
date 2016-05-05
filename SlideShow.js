@@ -28,7 +28,12 @@ var wrongChoicesForGame2; //this is the number of wrong choices that will displa
 if question_type is 1 then elaina chooses a person
 if question_type is 2 then elaina chooses an emotion
 */
-var question_type; // assigned 1 or 2
+//var question_type; // assigned 1 or 2
+
+ /*used to set the source of the audio that plays on the interrupt,
+  *used in playactionAudio(), set in questionInterrupt() and interrupt song(),
+  * prefer the song be in .mp3 or mp4 for best results*/
+var cueAudio;
 
 /* dynamic counter will inrement and decrement as necessarily and will be added on to the maxWrongChoicesForGame2 variable in questionInterrupt function */
 var dynamic_counter = 0;
@@ -51,43 +56,48 @@ var text_on_pause = "I love you";
 
 /* This is an array containing a JSON a few JSON objects. These "people"
    objects will be named after Alaina's family members and will be used
-   in Game Mode 2. For now it is just names; but later audio and video files will be added.*/
+   in Game Mode 2. The main purpose is to hold the soruce of images and audio files.
+   self:picture of the named family member
+   emotions:pictures of them making the given emotion
+   whoAudio: a audio file of them saying "Who is ****" where the *'s are the named family member
+   IF YOU ADD A FAMILY MEMBER YOU MUST HAVE self,angry,happy,sad,surprised PICTURES AND THE whoAudio
+   if you want to add an emotion, it must be added to each object and change the emotionOptions array in questionInteruppt() and emotionAudio source*/
  var family = [
  	{ name:"Grandpa",
- 		image:"",
- 		angry:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/angry2.jpg",
- 		happy:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/happy2.jpg",
- 		sad:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/sad2.jpg",
- 		suprised:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/surprised2.jpg",
- 		audio:""},
+ 		self:"",
+ 		angry:"cs4500Media/images/grandpa/emotions/angry2.jpg",
+ 		happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
+ 		sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
+ 		surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg",
+ 		whoAudio:""},
  	{ name:"Grandma",
- 		image:"",
- 		angry:"cs4500GroupProject/cs4500Media/images/grandma/emotions/angry2.jpg",
- 		happy:"cs4500GroupProject/cs4500Media/images/grandma/emotions/happy2.jpg",
- 		sad:"cs4500GroupProject/cs4500Media/images/grandma/emotions/sad2.jpg",
- 		suprised:"cs4500GroupProject/cs4500Media/images/grandma/emotions/surprised2.jpg",
- 		audio:""},
+ 		self:"",
+ 		angry:"cs4500Media/images/grandma/emotions/angry2.jpg",
+ 		happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
+ 		sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
+ 		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
+ 		whoAudio:""},
  	{ name:"Mom",
- 		image:"",
- 		angry:"cs4500GroupProject/cs4500Media/images/mom/emotions/angry.jpg",
- 		happy:"cs4500GroupProject/cs4500Media/images/mom/emotions/happy.jpg",
- 		sad:"cs4500GroupProject/cs4500Media/images/mom/emotions/sad.jpg",
- 		suprised:"cs4500GroupProject/cs4500Media/mom/grandma/emotions/surprised.jpg",
- 		audio:""},
+ 		self:"",
+ 		angry:"cs4500Media/images/mom/emotions/angry.jpg",
+ 		happy:"cs4500Media/images/mom/emotions/happy.jpg",
+ 		sad:"cs4500Media/images/mom/emotions/sad.jpg",
+ 		surprised:"cs4500Media/mom/grandma/emotions/surprised.jpg",
+ 		whoAudio:""},
  	{ name:"Dad",
- 		image:"",
- 		angry:"cs4500GroupProject/cs4500Media/images/dad/emotions/angry2.jpg",
- 		happy:"cs4500GroupProject/cs4500Media/images/dad/emotions/happy2.jpg",
- 		sad:"cs4500GroupProject/cs4500Media/images/dad/emotions/sad2.jpg",
- 		suprised:"cs4500GroupProject/cs4500Media/images/dad/emotions/surprised2.jpg",
- 		audio:""},
+ 		self:"",
+ 		angry:"cs4500Media/images/dad/emotions/angry2.jpg",
+ 		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
+ 		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
+ 		surprised:"cs4500Media/images/dad/emotions/surprised2.jpg",
+ 		whoAudio:""},
  	{ name:"Colin",
- 		image:"",
- 		angry:"cs4500GroupProject/cs4500Media/images/brother/emotions/angry2.jpg",
- 		happy:"cs4500GroupProject/cs4500Media/images/brother/emotions/happy2.jpg",
- 		sad:"cs4500GroupProject/cs4500Media/images/brother/emotions/sad2.jpg",
- 		suprised:"cs4500GroupProject/cs4500Media/brother/grandma/emotions/surprised2.jpg",
- 		audio:""}
+ 		self:"",
+ 		angry:"cs4500Media/images/brother/emotions/angry2.jpg",
+ 		happy:"cs4500Media/images/brother/emotions/happy2.jpg",
+ 		sad:"cs4500Media/images/brother/emotions/sad2.jpg",
+ 		surprised:"cs4500Media/brother/grandma/emotions/surprised2.jpg",
+ 		whoAudio:""}
  ];
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -190,7 +200,6 @@ function resetGame() {
 		for(var i = 0;i < wrongChoicesForGame2;i++){
 			$( "#wrongChoice"+i ).remove();
 		}
-		document.getElementById("textSupportText").style.visibility = "hidden";
 		document.getElementById("textSupportDiv").style.visibility = "hidden";
 	}
 }
@@ -223,6 +232,9 @@ function interruptSong(){
 	pauseAudio();
 	shouldPause = true;
 	if (gameMode[1] == true) {//if statement for first game mode
+		
+		//hard code the source for the cueAudio for this game mode
+		cueAudio = 'cs4500Media/i-love-you-audio/girl_voice.wav';
 		playActionAudio();
 		
 		/* When the song interrupts, the webpage should display the 
@@ -277,28 +289,9 @@ function interruptSong(){
 		
 	}
 	
-	//Game 2 is slected, use question format
-	//variables for game two options
-	var emotion,person;
-	
+	//Game 2 is selected, use question format
 	if(gameMode[2] == true){
-		question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
-		//person = family[Math.floor(Math.random()*(family.length-1))].name;
-		
-		if (question_type == 1) { // question_type 1 is to pick the correct person
-			console.log("Pick the correct person");
-			$(".textSupportText").html("Pick <br>" + person); // can replace grandad string with object.name
-			document.getElementById("textSupportText").style.visibility = "visible";
-			document.getElementById("textSupportDiv").style.visibility = "visible";
-			questionInterrupt();
-		}
-		else { // question_type 2 is to pick the correct emotion
-			console.log("Pick the correct emotion");
-			$(".textSupportText").html("Pick <br>" + "Emotion"); // can replace grandad string with object.name
-			document.getElementById("textSupportText").style.visibility = "visible";
-			document.getElementById("textSupportDiv").style.visibility = "visible";
-			questionInterrupt(); //using same function to continue NEEDS TO UPDATE
-		}
+		questionInterrupt();
 	}
 
 }
@@ -335,8 +328,16 @@ function beginPlaying(gameModeChoice){
 	updatePauses();
 }
 
+/*This function will play the action audio to tell endUser what to do
+ uses cueAudio variable for the source of the audio*/
 function playActionAudio() {
 	
+	var actionAudio = new Audio(cueAudio);
+	window.setTimeout(function () {
+		actionAudio.play();
+	}, 200);
+	
+	/*old method
 	var actionAudio1 = 
 		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
 	var actionAudio2 = 
@@ -350,46 +351,74 @@ function playActionAudio() {
 	window.setTimeout(function() {
 		actionAudio2.play();
 	}, 1500);	
+	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// Use this function with a while loop, when wrong answer is choosen it will disappear,when correct all will resume ///////////
 /////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var questionInterrupt = function(correctAnswer,questionType){
+var questionInterrupt = function(){
+	var correctChoice = new Image();
 	var madeWrongChoice;
-	var wrongChoice = new Array();//array for wrong choice images
+	//var wrongChoice = new Array();//array for wrong choice images
+	var wrongAnswerArray = new Array();//This array will hold all the wrong answer pictures and wrongchoice array can pick out from
 	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
 	wrongChoicesForGame2 = 1 + dynamic_counter;
 	
+	//---------------------------------------------------//
+	//Choose right answer and worng answers for question-//
+	//---------------------------------------------------//
+		var question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+		var familyMemberChosen = Math.floor(Math.random()*(family.length-1)); //pick random family member for correct answer
+		var emotionOptions = ["Angry","Surprised","Happy","Sad"]; //possible emotions,these must be in family objects
+		var emotionChosen = emotionOptions[Math.floor(Math.random()*(emotionOptions.length-1))];//randomly choose correct emotion
+		var emotionAudio = {//this object holds the source files for the emtions audio questions
+				angry:"",
+				sad:"",
+				happy:"",
+				surprised:""
+			};
+		
+		if (question_type == 1) { // question_type 1 is to pick the correct person
+			
+			$(".textSupportText").html("Pick <br>" + family[familyMemberChosen].name); // display chosen family member name to find
+			document.getElementById("textSupportDiv").style.visibility = "visible";
+			
+			correctChoice.src = family[familyMemberChosen].self;//set correct answer
+			
+			cueAudio = family[familyMemberChosen].whoAudio;//set the correct audio to prompt
+			
+			var j = 0; //this will be used to skip the index that is already chosen
+			for(var i = 0; i<maxWrongChoicesForGame2; i++) {//set wrong answers
+				wrongAnswerArray[i] = new Image();
+				if(family[familyMemberChosen].name == family[i].name){//make sure correct answer is not set as wrong answer
+					j++;
+				}
+				wrongAnswerArray[i].src = family[j].self;
+				j++;
+			}
+		}
+		else { // question_type 2 is to pick the correct emotion
+			
+			$(".textSupportText").html("Pick <br>" + emotionChosen); // set to ask the chosen emotion
+			document.getElementById("textSupportDiv").style.visibility = "visible";
+		
+			correctChoice.src = family[familyMemberChosen][emotionChosen.toLowerCase()];//set correct answer
+			
+			cueAudio = emotionAudio[emotionChosen];//set cue audio
+			
+			var j = 0; //this will be used to skip the index that is already chosen
+			for(var i = 0; i<maxWrongChoicesForGame2; i++) {//set wrong answers
+				wrongAnswerArray[i] = new Image();
+				if(emotionOptions[i] == emotionChosen){
+					j++;
+				}
+				wrongAnswerArray[i].src = family[familyMemberChosen][emotionOptions[j].toLowerCase()];
+				j++;
+			}
+		}
 
-	/*This array will hold all the wrong answer pictures and wrongchoice array can pick out from*/	
-	var wrongAnswerArray = new Array();
-	for(var i = 0; i<maxWrongChoicesForGame2; i++) {
-		wrongAnswerArray[i] = new Image();
-		wrongAnswerArray[i].src = 'cs4500Media/images/beachBall.jpg';
-	}
-/*
-	//create the array for the wrong images, will use the max allowed wrong answers
-	for(var i = 0;i < maxWrongChoicesForGame2;i++){
-		wrongChoice[i] = new Image();
-		wrongChoice[i].src = wrongAnswerArray[i]; 
-		//call random generator for wrongAnswerArray to get different wrong answers each time
-	}
-
-
-	//manually assign all the wrong answer image sources
-	//wrongChoice[0].src = 'cs4500Media/images/beachBall.jpg';
-	//wrongChoice[1].src = 'cs4500Media/images/beachBall.jpg';
-	//wrongChoice[2].src = 'cs4500Media/images/beachBall.jpg';
-
-*/
-
-	//The correct image to choose should always be set here
-	var correctChoice = new Image();
-	correctChoice.src = 'cs4500Media/images/AlainaGrandad2.JPG';
-	
-	
 	//--------------------------------------------------------------------------//
 	//once question type is identified and correct/wrong answers are assigned,
 	//map the choices randomly to the popupDiv using the area Array
@@ -437,7 +466,6 @@ var questionInterrupt = function(correctAnswer,questionType){
 	//creating click event for the correct choice chosen img ID						
 	$( "#correctChoice" ).click(function() {
 			$( "#correctChoice" ).remove();
-			document.getElementById("textSupportText").style.visibility = "hidden";
 			document.getElementById("textSupportDiv").style.visibility = "hidden";
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
@@ -451,7 +479,8 @@ var questionInterrupt = function(correctAnswer,questionType){
 				dynamic_counter = 2;
 			}
 			madeWrongChoice = false;
-
+			
+			//NEED TO PLAY GOOD JOB ALANIA AUDIO HERE
 			displayImages();
 			audio.play();
 		});
@@ -462,6 +491,7 @@ var questionInterrupt = function(correctAnswer,questionType){
 				$( "#wrongChoice0").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice0").css("background-image", "url(\'"+wrongAnswerArray[0].src+"\')");
 				$( "#wrongChoice0").css("background-size", "cover");
+				playActionAudio();//replay audio question
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
@@ -474,6 +504,7 @@ var questionInterrupt = function(correctAnswer,questionType){
 				$( "#wrongChoice1").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice1").css("background-image", "url(\'"+wrongAnswerArray[1].src+"\')");
 				$( "#wrongChoice1").css("background-size", "cover");
+				playActionAudio();//replay audio question
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
@@ -486,6 +517,7 @@ var questionInterrupt = function(correctAnswer,questionType){
 				$( "#wrongChoice2").attr("src","cs4500Media/images/Red_X.png");
 				$( "#wrongChoice2").css("background-image", "url(\'"+wrongAnswerArray[2].src+"\')");
 				$( "#wrongChoice2").css("background-size", "cover");
+				playActionAudio();//replay audio question
 				madeWrongChoice = true;
 				dynamic_counter--;
 				if(dynamic_counter < 0) {
