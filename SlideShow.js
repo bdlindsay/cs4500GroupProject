@@ -54,30 +54,35 @@ var text_on_pause = "I love you";
    in Game Mode 2. For now it is just names; but later audio and video files will be added.*/
  var family = [
  	{ name:"Grandpa",
+ 		image:"",
  		angry:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/angry2.jpg",
  		happy:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/happy2.jpg",
  		sad:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/sad2.jpg",
  		suprised:"cs4500GroupProject/cs4500Media/images/grandpa/emotions/surprised2.jpg",
  		audio:""},
  	{ name:"Grandma",
+ 		image:"",
  		angry:"cs4500GroupProject/cs4500Media/images/grandma/emotions/angry2.jpg",
  		happy:"cs4500GroupProject/cs4500Media/images/grandma/emotions/happy2.jpg",
  		sad:"cs4500GroupProject/cs4500Media/images/grandma/emotions/sad2.jpg",
  		suprised:"cs4500GroupProject/cs4500Media/images/grandma/emotions/surprised2.jpg",
  		audio:""},
  	{ name:"Mom",
+ 		image:"",
  		angry:"cs4500GroupProject/cs4500Media/images/mom/emotions/angry.jpg",
  		happy:"cs4500GroupProject/cs4500Media/images/mom/emotions/happy.jpg",
  		sad:"cs4500GroupProject/cs4500Media/images/mom/emotions/sad.jpg",
  		suprised:"cs4500GroupProject/cs4500Media/mom/grandma/emotions/surprised.jpg",
  		audio:""},
  	{ name:"Dad",
+ 		image:"",
  		angry:"cs4500GroupProject/cs4500Media/images/dad/emotions/angry2.jpg",
  		happy:"cs4500GroupProject/cs4500Media/images/dad/emotions/happy2.jpg",
  		sad:"cs4500GroupProject/cs4500Media/images/dad/emotions/sad2.jpg",
  		suprised:"cs4500GroupProject/cs4500Media/images/dad/emotions/surprised2.jpg",
  		audio:""},
  	{ name:"Colin",
+ 		image:"",
  		angry:"cs4500GroupProject/cs4500Media/images/brother/emotions/angry2.jpg",
  		happy:"cs4500GroupProject/cs4500Media/images/brother/emotions/happy2.jpg",
  		sad:"cs4500GroupProject/cs4500Media/images/brother/emotions/sad2.jpg",
@@ -92,7 +97,7 @@ function displayImages(){
 	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
 	var croppedDuration = SONG_DURATION - 60;
 	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
-	//console.log(pausePlacement);
+	
 	numOfImages = 6;
 	
 	if(isNaN(counter)){
@@ -110,7 +115,6 @@ function displayImages(){
 	imageArray[3].src = 'cs4500Media/images/Alaina\'s Family-USE.JPG';
 	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
 	imageArray[5].src = 'cs4500Media/images/AlainaGrandad2.JPG';
-	/////////////////////////////////////////////////////////////////////////
 	
 	var imgArea = document.getElementById("imageBox");
 	var img = document.getElementById("image");
@@ -118,6 +122,8 @@ function displayImages(){
 	//maybe create another function called start slide show
 	interval = setInterval(showImage,DURATION_PER_IMAGE);
 	
+	//Funciton that display the image
+	///////////////////////////////////////////////////////////////////
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
@@ -148,7 +154,9 @@ function displayImages(){
 			resetGame();
 		}
 	}
+	////end of show image///////////////////////////////////////////////////////////////
 }
+/////////////////////////////////////////////////////////////////////////////////////
 
 // Functions for options menu
 function resetGame() {
@@ -270,12 +278,16 @@ function interruptSong(){
 	}
 	
 	//Game 2 is slected, use question format
+	//variables for game two options
+	var emotion,person;
+	
 	if(gameMode[2] == true){
 		question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+		//person = family[Math.floor(Math.random()*(family.length-1))].name;
 		
 		if (question_type == 1) { // question_type 1 is to pick the correct person
 			console.log("Pick the correct person");
-			$(".textSupportText").html("Pick <br>" + "Grandad"); // can replace grandad string with object.name
+			$(".textSupportText").html("Pick <br>" + person); // can replace grandad string with object.name
 			document.getElementById("textSupportText").style.visibility = "visible";
 			document.getElementById("textSupportDiv").style.visibility = "visible";
 			questionInterrupt();
@@ -292,8 +304,6 @@ function interruptSong(){
 }
 
 function pauseAudio(){
-	//var button = document.getElementById("activebutton");
-	//button.style.display = "inline";
 	audio.pause();	
 }
 
@@ -316,13 +326,6 @@ function beginPlaying(gameModeChoice){
 
 	//code to stop displaying the initial buttons
 	//is repeated for all 3 initial buttons - changed to jQuery
-
-	// var button = document.getElementById("activebutton");
-	// button.style.display = "none";
-	// var button = document.getElementById("mode2Button");
-	// button.style.display = "none";
-	// var button = document.getElementById("optionsButton");
-	// button.style.display = "none";
 	$("#activebutton").hide(DURATION_PER_IMAGE);
 	$("#mode2Button").hide(DURATION_PER_IMAGE);
 	$("#optionsButton").hide(DURATION_PER_IMAGE);
@@ -353,7 +356,7 @@ function playActionAudio() {
 /////////////// Use this function with a while loop, when wrong answer is choosen it will disappear,when correct all will resume ///////////
 /////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var questionInterrupt = function(){
+var questionInterrupt = function(correctAnswer,questionType){
 	var madeWrongChoice;
 	var wrongChoice = new Array();//array for wrong choice images
 	var maxWrongChoicesForGame2 = 3;//This is the max number of wrong choices for each interrupt for game 2
@@ -386,7 +389,11 @@ var questionInterrupt = function(){
 	var correctChoice = new Image();
 	correctChoice.src = 'cs4500Media/images/AlainaGrandad2.JPG';
 	
-	//This array is used to append images to the popup div randomly
+	
+	//--------------------------------------------------------------------------//
+	//once question type is identified and correct/wrong answers are assigned,
+	//map the choices randomly to the popupDiv using the area Array
+	//--------------------------------------------------------------------------//
 	
 	switch (wrongChoicesForGame2) {
 		 case 1:
@@ -411,15 +418,6 @@ var questionInterrupt = function(){
 		 	break;
 	}
 
-/*
-	var area = new Array(
-		"<img id=\"correctChoice\" class=\"popupImageDisplay\" src=\""+correctChoice.src+"\" />",
-		"<img id=\"wrongChoice0\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[0].src+"\" />",
-		"<img id=\"wrongChoice1\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[1].src+"\" />",
-		"<img id=\"wrongChoice2\" class=\"popupImageDisplay\" src=\""+wrongAnswerArray[2].src+"\" />");
-*/	
-	
-		
 	//Shuffle Array Of images a few times,This could be optimized in future if needed
 	var temp,randomIndex;
 		for(var i = 0;i<wrongChoicesForGame2+1;i++){
@@ -429,7 +427,7 @@ var questionInterrupt = function(){
 			area[randomIndex] = temp;
 		}
 		
-	//append the wrong answers to the popup div
+	//append the answers to the popup div
 	for(var i = 0;i<wrongChoicesForGame2+1;i++){
 		$( "#popupBox" ).append(area[i]);
 	}
@@ -457,15 +455,6 @@ var questionInterrupt = function(){
 			displayImages();
 			audio.play();
 		});
-/*
- 	//for some reason the code below does not work. Will have to reasearch why later
-	for(var i = 0;i < wrongChoicesForGame2;i++){
-		
-		$( "#wrongChoice"+i).click(function() {
-			console.log("wrongChoice");
-				$( "#wrongChoice"+i).css("visibility", "hidden");
-			});
-	}*/
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
 			$( "#wrongChoice0").click(function() {
@@ -526,7 +515,7 @@ var questionInterrupt = function(){
    for the options menu as soon as 
    main.html loads. */
 function hideOptionsMenu()
-{
+{		
 	$(document).ready(function()  {
 		/* hide the options menu */
 		$(".optionsMenu").hide();
