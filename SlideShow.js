@@ -552,6 +552,7 @@ function hideOptionsMenu()
 		/* hide the options menu */
 		$(".optionsMenu").hide();
 		$("#optionsSymDiv").hide();
+		document.querySelector('#numOfPauses_outputID').value = document.getElementById("pSlider").value;
 	});
 }
 
@@ -651,7 +652,7 @@ function blurBackground()
 {
 	var blurredBackground = document.querySelector("#everythingID");
 	blurredBackground.classList.remove("everythingClass");
-	blurredBackground.classList.add("everythingClassBlurred")
+	blurredBackground.classList.add("everythingClassBlurred");
 }
 
 /********************************/
@@ -663,7 +664,7 @@ function blurBackground()
 function unblurBackground()
 {
 	var blurredBackground = document.querySelector("#everythingID");
-	blurredBackground.classList.remove("everythingClassBlurred")
+	blurredBackground.classList.remove("everythingClassBlurred");
 	blurredBackground.classList.add("everythingClass");
 }
 
@@ -748,7 +749,7 @@ function openAboutUs()
 function openDocumentation()
 {
 	/* window.open() opens the specificed URL */
-	window.open("http://benjaminsl.neocities.org/autismProject/documentation.html")
+	window.open("http://benjaminsl.neocities.org/autismProject/documentation.html");
 }
 
 /*_____________________________*/
