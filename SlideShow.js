@@ -481,8 +481,13 @@ var questionInterrupt = function(){
 			madeWrongChoice = false;
 			
 			//NEED TO PLAY GOOD JOB ALANIA AUDIO HERE
-			displayImages();
-			audio.play();
+			var goodJobAudio = new Audio("");
+			goodJobAudio.play();
+			window.setTimeout(function() {
+				displayImages();
+				audio.play();
+			}, 1500);
+			
 		});
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
