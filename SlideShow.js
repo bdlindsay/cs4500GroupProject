@@ -62,43 +62,51 @@ var text_on_pause = "I love you";
    whoAudio: a audio file of them saying "Who is ****" where the *'s are the named family member
    IF YOU ADD A FAMILY MEMBER YOU MUST HAVE self,angry,happy,sad,surprised PICTURES AND THE whoAudio
    if you want to add an emotion, it must be added to each object and change the emotionOptions array in questionInteruppt() and emotionAudio source*/
- var family = [
+var family = [
  	{ name:"Grandpa",
- 		self:"",
+ 		self:"cs4500Media/images/grandpa/AlainaGrandad1-USE copy.jpg",
  		angry:"cs4500Media/images/grandpa/emotions/angry2.jpg",
  		happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
  		sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg",
- 		whoAudio:""},
+ 		whoAudio:"cs4500Media/images/grandpa/whoisgrandpa.mp3"},
  	{ name:"Grandma",
- 		self:"",
+ 		self:"cs4500Media/images/grandma/Grandparents-Alaina-USE copy.jpg",
  		angry:"cs4500Media/images/grandma/emotions/angry2.jpg",
  		happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
  		sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
- 		whoAudio:""},
+ 		whoAudio:"cs4500Media/images/grandma/whoisgrandma.mp3"},
  	{ name:"Mom",
- 		self:"",
+ 		self:"cs4500Media/images/mom/Alaina's Family-USE copy.jpg",
  		angry:"cs4500Media/images/mom/emotions/angry.jpg",
  		happy:"cs4500Media/images/mom/emotions/happy.jpg",
  		sad:"cs4500Media/images/mom/emotions/sad.jpg",
- 		surprised:"cs4500Media/mom/grandma/emotions/surprised.jpg",
- 		whoAudio:""},
+ 		surprised:"cs4500Media/images/mom/emotions/surprised.jpg",
+ 		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
- 		self:"",
+ 		self:"cs4500Media/images/dad/Alaina's Family-USE copy.jpg",
  		angry:"cs4500Media/images/dad/emotions/angry2.jpg",
  		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
  		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/dad/emotions/surprised2.jpg",
- 		whoAudio:""},
+ 		whoAudio:"cs4500Media/images/dad/whoisdad.mp3"},
  	{ name:"Colin",
- 		self:"",
+ 		self:"cs4500Media/images/brother/BrotherCullen-USE copy.jpg",
  		angry:"cs4500Media/images/brother/emotions/angry2.jpg",
  		happy:"cs4500Media/images/brother/emotions/happy2.jpg",
  		sad:"cs4500Media/images/brother/emotions/sad2.jpg",
- 		surprised:"cs4500Media/brother/grandma/emotions/surprised2.jpg",
- 		whoAudio:""}
+ 		surprised:"cs4500Media/images/brother/emotions/surprised2.jpg",
+ 		whoAudio:"cs4500Media/images/brother/whoisbro.mp3"}
  ];
+
+
+/////////////////////////////////////////////////////////////////////////
+//// This array holds all the encouragement/congratulation rewards //////
+//// when Alaina answer correctly.								   //////
+/////////////////////////////////////////////////////////////////////////
+var congratsArray = ["cs4500Media/encouragement/tada.mp3","cs4500Media/encouragement/kidsyay.mp3","cs4500Media/encouragement/goodjob.mp3"];
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Functions to manipulate Image Area
@@ -374,12 +382,15 @@ var questionInterrupt = function(){
 		var emotionOptions = ["Angry","Surprised","Happy","Sad"]; //possible emotions,these must be in family objects
 		var emotionChosen = emotionOptions[Math.floor(Math.random()*(emotionOptions.length-1))];//randomly choose correct emotion
 		var emotionAudio = {//this object holds the source files for the emtions audio questions
-				angry:"",
-				sad:"",
-				happy:"",
-				surprised:""
+				Angry:"cs4500Media/whoisangry.mp3",
+				Sad:"cs4500Media/whoissad.mp3",
+				Happy:"cs4500Media/whoishappy.mp3",
+				Surprised:"cs4500Media/whoissurprised.mp3"
 			};
 		
+		
+		
+
 		if (question_type == 1) { // question_type 1 is to pick the correct person
 			
 			$(".textSupportText").html("Pick <br>" + family[familyMemberChosen].name); // display chosen family member name to find
@@ -388,7 +399,9 @@ var questionInterrupt = function(){
 			correctChoice.src = family[familyMemberChosen].self;//set correct answer
 			
 			cueAudio = family[familyMemberChosen].whoAudio;//set the correct audio to prompt
-			
+		
+
+
 			var j = 0; //this will be used to skip the index that is already chosen
 			for(var i = 0; i<maxWrongChoicesForGame2; i++) {//set wrong answers
 				wrongAnswerArray[i] = new Image();
@@ -407,7 +420,9 @@ var questionInterrupt = function(){
 			correctChoice.src = family[familyMemberChosen][emotionChosen.toLowerCase()];//set correct answer
 			
 			cueAudio = emotionAudio[emotionChosen];//set cue audio
-			
+		
+
+
 			var j = 0; //this will be used to skip the index that is already chosen
 			for(var i = 0; i<maxWrongChoicesForGame2; i++) {//set wrong answers
 				wrongAnswerArray[i] = new Image();
@@ -461,6 +476,9 @@ var questionInterrupt = function(){
 		$( "#popupBox" ).append(area[i]);
 	}
 	
+	///////////////////////////////////	
+	//// Audio Support Play Action ////
+	///////////////////////////////////
 	playActionAudio();//play the action audio to prompt the question
 							 
 	//creating click event for the correct choice chosen img ID						
@@ -481,7 +499,10 @@ var questionInterrupt = function(){
 			madeWrongChoice = false;
 			
 			//NEED TO PLAY GOOD JOB ALANIA AUDIO HERE
-			var goodJobAudio = new Audio("");
+			//var goodJobAudio = new Audio("cs4500Media/encouragement/kidsYAY.mp3");
+			var u = Math.floor(Math.random()*(congratsArray.length));
+			var goodJobAudio = new Audio(congratsArray[Math.floor(Math.random()*(congratsArray.length))]);
+			//var goodJobAudio = new Audio(congratsArray[u]);
 			goodJobAudio.play();
 			window.setTimeout(function() {
 				displayImages();
@@ -532,6 +553,8 @@ var questionInterrupt = function(){
 
 };
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
