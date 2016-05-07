@@ -499,10 +499,9 @@ var questionInterrupt = function(){
 			madeWrongChoice = false;
 			
 			//NEED TO PLAY GOOD JOB ALANIA AUDIO HERE
-			//var goodJobAudio = new Audio("cs4500Media/encouragement/kidsYAY.mp3");
-			var u = Math.floor(Math.random()*(congratsArray.length));
+			
 			var goodJobAudio = new Audio(congratsArray[Math.floor(Math.random()*(congratsArray.length))]);
-			//var goodJobAudio = new Audio(congratsArray[u]);
+			
 			goodJobAudio.play();
 			window.setTimeout(function() {
 				displayImages();
