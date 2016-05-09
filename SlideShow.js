@@ -64,35 +64,35 @@ var text_on_pause = "I love you";
    if you want to add an emotion, it must be added to each object and change the emotionOptions array in questionInteruppt() and emotionAudio source*/
 var family = [
  	{ name:"Grandpa",
- 		self:"cs4500Media/images/grandpa/AlainaGrandad1-USE copy.jpg",
+ 		self:"cs4500Media/images/grandpa/AlainaGrandad1-USE copy.JPG",
  		angry:"cs4500Media/images/grandpa/emotions/angry2.jpg",
  		happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
  		sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/grandpa/whoisgrandpa.mp3"},
  	{ name:"Grandma",
- 		self:"cs4500Media/images/grandma/Grandparents-Alaina-USE copy.jpg",
+ 		self:"cs4500Media/images/grandma/Grandparents-Alaina-USE copy.JPG",
  		angry:"cs4500Media/images/grandma/emotions/angry2.jpg",
  		happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
  		sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/grandma/whoisgrandma.mp3"},
  	{ name:"Mom",
- 		self:"cs4500Media/images/mom/Alaina's Family-USE copy.jpg",
+ 		self:"cs4500Media/images/mom/Alaina's Family-USE copy.JPG",
  		angry:"cs4500Media/images/mom/emotions/angry.jpg",
  		happy:"cs4500Media/images/mom/emotions/happy.jpg",
  		sad:"cs4500Media/images/mom/emotions/sad.jpg",
  		surprised:"cs4500Media/images/mom/emotions/surprised.jpg",
  		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
- 		self:"cs4500Media/images/dad/Alaina's Family-USE copy.jpg",
+ 		self:"cs4500Media/images/dad/Alaina's Family-USE copy.JPG",
  		angry:"cs4500Media/images/dad/emotions/angry2.jpg",
  		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
  		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/dad/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/dad/whoisdad.mp3"},
  	{ name:"Colin",
- 		self:"cs4500Media/images/brother/BrotherCullen-USE copy.jpg",
+ 		self:"cs4500Media/images/brother/BrotherCullen-USE copy.JPG",
  		angry:"cs4500Media/images/brother/emotions/angry2.jpg",
  		happy:"cs4500Media/images/brother/emotions/happy2.jpg",
  		sad:"cs4500Media/images/brother/emotions/sad2.jpg",
@@ -197,6 +197,8 @@ function resetGame() {
 	$("#mode2Button").css("display", "initial");
 	$("#optionsButton").css("display", "initial");
 	$("#optionsSymDiv").hide();
+	document.getElementById("imageBox").style.visibility = "visible";
+	document.getElementById("replayAudioCue").style.visibility = "hidden";
 	shouldPause = true;
 	numPauses = 0;
 	updatePauses();
@@ -234,7 +236,7 @@ function updatePauses() {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-//Audio Manipluation Functions
+//Main Audio Manipluation Functions
 //////////////////////////////////////////////////////////////////////////////////////////////
 function interruptSong(){
 	pauseAudio();
@@ -244,6 +246,8 @@ function interruptSong(){
 		//hard code the source for the cueAudio for this game mode
 		cueAudio = 'cs4500Media/i-love-you-audio/girl_voice.wav';
 		playActionAudio();
+		
+		document.getElementById("imageBox").style.visibility = "hidden";
 		
 		/* When the song interrupts, the webpage should display the 
 	    words "I love you." The words should be removed when the 
@@ -258,21 +262,10 @@ function interruptSong(){
 			document.getElementById("text_on_together_pause").innerHTML = text_on_pause;
 		}
 		
-		/* This is an option to not not show images on pause through a checkbox. 
-		   This condition will be checked. */
-		var image_on_pause_boolean = document.getElementById("images_on_pauses_checkbox");
-		
-		if (image_on_pause_boolean.checked)
-		{
-			/* Change the source image of song_pause_picture_id to a drawing of kids hugging. */
-			document.getElementById("song_pause_picture_id").src = "cs4500Media/love_pictures/kidshug.jpg";
-		}
-		
 		//Append a button to the popup div, currently using the sratbutton CSS
 		window.setTimeout(function() {
-			$("#popupBox").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
-			//make the div of the song_pause_picture_box visible
-			document.getElementById("song_pause_picture_box").style.visibility = "visible";
+			$("#resumeButtonDiv").append("<button id=\"resumebutton\" class=\"resumebutton\">RESUME</button>");
+			
 			if (optionsMenuOn) {
 				$("#resumebutton").hide();
 			}
@@ -282,12 +275,7 @@ function interruptSong(){
 				/* When the RESUME button is clicked, remove the text
 				   "I love you" from the webpage. */
 				document.getElementById("text_on_together_pause").innerHTML = "";
-				
-				/* Change source image of song_pause_picture_id to nothing. */
-				document.getElementById("song_pause_picture_id").src = "";
-				
-				//make the div of the song_pause_picture_box invisible
-				document.getElementById("song_pause_picture_box").style.visibility = "hidden";
+				document.getElementById("imageBox").style.visibility = "visible";
 				
 				displayImages();
 				audio.play();
@@ -344,22 +332,7 @@ function playActionAudio() {
 	window.setTimeout(function () {
 		actionAudio.play();
 	}, 200);
-	
-	/*old method
-	var actionAudio1 = 
-		new Audio('cs4500Media/i-love-you-audio/girl_voice.wav');
-	var actionAudio2 = 
-		new Audio('cs4500Media/i-love-you-audio/girl_i_love_you_too.wav');
-		actionAudio1.media_type = "audio/wav"; //Set audio type, this helps with browser compatability
-		actionAudio2.media_type = "audio/wav";
-		
-	window.setTimeout(function () {
-		actionAudio1.play();
-	}, 200);
-	window.setTimeout(function() {
-		actionAudio2.play();
-	}, 1500);	
-	*/
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -396,11 +369,10 @@ var questionInterrupt = function(){
 			$(".textSupportText").html("Pick <br>" + family[familyMemberChosen].name); // display chosen family member name to find
 			document.getElementById("textSupportDiv").style.visibility = "visible";
 			
+			
 			correctChoice.src = family[familyMemberChosen].self;//set correct answer
 			
 			cueAudio = family[familyMemberChosen].whoAudio;//set the correct audio to prompt
-		
-
 
 			var j = 0; //this will be used to skip the index that is already chosen
 			for(var i = 0; i<maxWrongChoicesForGame2; i++) {//set wrong answers
@@ -480,11 +452,13 @@ var questionInterrupt = function(){
 	//// Audio Support Play Action ////
 	///////////////////////////////////
 	playActionAudio();//play the action audio to prompt the question
+	document.getElementById("replayAudioCue").style.visibility = "visible"; //show replay question button
 							 
 	//creating click event for the correct choice chosen img ID						
 	$( "#correctChoice" ).click(function() {
 			$( "#correctChoice" ).remove();
 			document.getElementById("textSupportDiv").style.visibility = "hidden";
+			document.getElementById("replayAudioCue").style.visibility = "hidden";
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
@@ -498,10 +472,11 @@ var questionInterrupt = function(){
 			}
 			madeWrongChoice = false;
 			
-			//NEED TO PLAY GOOD JOB ALANIA AUDIO HERE
-			
+			//PLAY GOOD JOB ALANIA AUDIO
+			//var goodJobAudio = new Audio("cs4500Media/encouragement/kidsYAY.mp3");
+			var u = Math.floor(Math.random()*(congratsArray.length));
 			var goodJobAudio = new Audio(congratsArray[Math.floor(Math.random()*(congratsArray.length))]);
-			
+			//var goodJobAudio = new Audio(congratsArray[u]);
 			goodJobAudio.play();
 			window.setTimeout(function() {
 				displayImages();

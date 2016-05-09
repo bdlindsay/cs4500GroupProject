@@ -193,29 +193,7 @@
 		font-size: 400%;
 		color: blue;
 	}
-	
-	/************************/
-	/* The rules below are  */
-	/* for the <div> that   */
-	/* shows images         */
-	/* on Solo Play when    */
-	/* the song is stopped. */
-	/************************/
-	#song_pause_picture_box {
-		position: absolute;
-		width: 20vw;
-		height: 20vw;
-		visibility:hidden;
-	}
-	
-	/* The actual image in the 
-	   song_pause_picture_box <div> */
-	#song_pause_picture_id 
-	{
-		height: 100%;
-		width: 100%;
-	}
-	
+
 	/*div for pauses display*/
 	.pausesDiv{
 		position: absolute;
@@ -240,7 +218,59 @@
 		height:auto;
 		font-size: 200%;
 	}
+	
+	.replayButton{
+		/*________________*/
+		/*                */
+		/*     Colors     */
+		/*________________*/
+		background-color: #b300b3; /* medium-purple */
+		color: white;
+		/* border adds a colored border to the button. */
+		border: 2px solid #f7f7f7; /* off white */
+		/*________________*/
+		/*                */
+		/*     Size       */
+		/*________________*/
+		/* font-size determines the size of the button. */
+		font-size: 25px;
+		/*________________*/
+		/*                */
+		/*      Look      */
+		/*________________*/
+		/* border-radius determines how round the button is. */
+		border-radius: 20px;
+		/* I went with a "softer" font for the text. */
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
+		/* Give is a shadow with the box-shadow feature. */
+		box-shadow: 0 9px #999;
+		/* transition-duration: .4s means wait a
+		 little to change the button look when
+		 to mouse hovers over the button. */
+		transition-duration: .4s;
+		position: absolute;
+		border: 5px solid #9999ff; /*light purple*/
+		visibility:hidden;
+	}
+	
+	/* This style rule will determine what happens
+	 when the mouse hovers over the button. */
+	.replayButton:hover {
+		background-color: #ff1aff; /* light purple */
+		/* font color line below */
+		color: black;
+	}
 
+	.replayButton:active {
+		/* I changed the posistion and color of the shadow
+		 with box-shadow so it will look like the shadow
+		 had moved when the user clicks on it.
+		 */
+		box-shadow: 0 5px #666;
+		/* transform moves the button. translateY(4px) means
+		 move it down 4 pixels. */
+		transform: translateY(4px);
+	}
 	/* Text style for remaining pauses */
 	.pausesText {
 		color: pink;
@@ -267,7 +297,6 @@
 		float:left;
 	}
 
-
 	.inactive {
 		background-color: #ff1aff; /* light purple */
 		/* font color line below */
@@ -280,8 +309,8 @@
 	/*________________*/
 	.optionsMenu {
 		background-color: white;
-		width: 35%;
-		height: 90%;
+		width: 50vw;
+		height: 71vw;
 		border-radius: 25px;
 		border: 2px solid black;
 		position: absolute;
@@ -296,12 +325,10 @@
 	/* The rule for the button that closes the option menu. */
 
 	.optionsTitle {
-		font-size: 250%;
+		font-size: 5vw;
 		color: pink;
 		-webkit-text-stroke: 1px #B300B3;/* medium purple */
-		position: absolute;
-		left: 40%;
-		top: -1%;
+		margin-left: 17vw;
 	}
 	.exitOptions {
 		padding-top: 10px;
@@ -311,22 +338,21 @@
 		background-color: pink;
 		border: 1px solid #B300B3;
 		border-radius: 70%;
-		position: relative;
-		top: 3%;
-		left: 87%;
-		right: 50%;
-		bottom: 50%;
+		position: absolute;
+		top: 2vw;
+		left: 43vw;
 	}
 
 	.optionsMenuButton {
 		border-radius: 28px;
 		font-family: Arial;
 		color: #B300B3;/* medium purple */
-		font-size: 12px;
+		font-size: 2vw;
 		padding: 8px 16px 8px 16px;
 		background-color: pink;
 		border: 1px solid #B300B3;/* medium purple */
-		position: absolute;
+		margin-top: 11vw;
+		margin-left: 3vw;
 		box-shadow: 0 9px #999;
 	}
 
@@ -336,32 +362,12 @@
 	 menu for the text on Solo Play
 	 on song pause. */
 	#optionsMenuTextbox {
-		position: absolute;
-		top: 30%;
-		left: 5%;
-		color: pink;
-		-webkit-text-stroke: .5px #B300B3;/* medium purple */
-		font-size: 125%;
-	}
-
-	#omb1 {
-		top: 60%;
-		left: 5%;
-	}
-
-	#omb2 {
-		top: 70%;
-		left: 5%;
-	}
-
-	#omb4 {
-		top: 80%;
-		left: 30%;
-	}
-
-	#omb5 {
-		top: 90%;
-		left: 30%;
+		margin-top: 3vw;
+		margin-left: 3vw;
+		margin-bottom: 1vw;
+		color: #FFC0CB;
+		font-size: 3vw;
+		height: 5vw;
 	}
 
 	/* This style rule will determine what happens
@@ -386,18 +392,18 @@
 		transform: translateY(4px);
 	}
 
+
 	.resetGameButton {
 		border-radius: 28px;
 		font-family: Arial;
-		color: #B300B3;/* medium purple */
-		font-size: 20px;
-		padding: 10px 20px 10px 20px;
-		background-color: pink;
-		border: 1px solid #B300B3;/* medium purple */
-		position: absolute;
-		top: 88%;
-		left: 29%;
-		box-shadow: 0 9px #999;
+		color: #B300B3;
+		padding: 10px 20px;
+		background-color: #FFC0CB;
+		border: 1px solid #B300B3;
+		box-shadow: 0px 9px #999;
+		margin-top: 4vw;
+		margin-left: 17vw;
+		font-size: 2vw;
 	}
 
 	/* This style rule will determine what happens
@@ -425,13 +431,12 @@
 		border-radius: 28px;
 		font-family: Arial;
 		color: #B300B3;/* medium purple */
-		font-size: 20px;
 		padding: 10px 20px 10px 20px;
 		background-color: pink;
 		border: 1px solid #B300B3;/* medium purple */
-		position: absolute;
-		top: 78%;
-		left: 29%;
+		margin-top: 2vw;
+		margin-left: 17vw;
+		font-size: 2vw;
 		box-shadow: 0 9px #999;
 	}
 
@@ -458,12 +463,13 @@
 	}
 
 	#pauseSliderWrapper {
-		position: absolute;
-		left: 5%;
-		top: 10%;
 		color: pink;
-		-webkit-text-stroke: .5px #B300B3;/* medium purple */
-		font-size: 125%;
+		/*not supported in all browsers
+		 * -webkit-text-stroke: .5px #B300B3; medium purple */
+		text-shadow: .1px .1px .1px #B300B3
+		font-size: 3vw;
+		margin-left: 3vw;
+		margin-top:-3vw;
 	}
 
 	/*___________________________*/
@@ -472,7 +478,6 @@
 	/*__________________________*/
 	input[type=range] {
 		-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-		width: 100%; /* Specific width is required for Firefox. */
 	}
 
 	input[type=range]::-webkit-slider-thumb {
@@ -623,8 +628,9 @@
 		display: none;
 	}
 }
-/*for tablets in portrait mode  NEEDS ADJUST*/
-@media screen and (min-width:500px) and (max-width:790px) and (orientation: portrait)
+
+/*for tablets in portrait mode */
+@media screen and (min-width:500px) and (max-width:1440px) and (orientation: portrait)
 {	
 
 	/* This is the style rule for the area of the start button. */
@@ -641,9 +647,9 @@
 	}
 	
 	.resumebutton {
-		left: 32%;
-		top: 73%;
-		padding: 3%;
+		/*changes for media query*/
+		left: 31vw;
+		padding: 2vw;
 		width: 250px;
 	}
 	
@@ -654,20 +660,8 @@
 	}
 /* Div for remaining pauses Text*/
 	.pausesDiv{
-		top: 67%; 
-		left:34%;
-	}
-	
-	/************************/
-	/* The rules below are  */
-	/* for the <div> that   */
-	/* shows images         */
-	/* on Solo Play when    */
-	/* the song is stopped. */
-	/************************/
-	#song_pause_picture_box {
-		top: 20%;
-		left: 40%;
+		top: 78%; 
+		left:31%;
 	}
 	
 	/************************/
@@ -679,8 +673,8 @@
 	/************************/
 	#text_on_together_pause {
 		position: absolute;
-		top: 45%;
-		left: 5%;
+		top: 23%;
+		left: 21%;
 	}
 	
 	.optionsSym {
@@ -705,12 +699,17 @@
 		width: 60vh;
 	}
 
-
+	.replayButton {
+		width: 24vw;
+		padding: 2vw;
+		margin-left: 72vw;
+		margin-top: 9vw;
+	}
 
 }
 
-/*for tablet in lanscape and smaller computers screens NEEDS ADJUST option view and play together pause */
-@media screen and (min-width: 790px) and (max-width: 1440px)
+/*for tablet in lanscape and smaller computers screens*/
+@media screen and (min-width: 790px) and (max-width: 1440px) and (orientation:landscape)
 {
 
 	/* This is the style rule for the area of the start button. */
@@ -724,9 +723,7 @@
 
 	/* This is the style rule for the all buttons on the webpage. */
 	.activebutton {
-		/*added for this media query*/
 		margin-top: 15%;
-		/*changed for this media query*/
 		padding: 4%;
 		width: 22vw;
 	}
@@ -739,9 +736,8 @@
 
 	.resumebutton {
 		/*changes for media query*/
-		left: 24%;
-		top: 73%;
-		padding: 3%;
+		left: 37vw;
+		padding: 2vw;
 		width: 23vw;
 	}
 
@@ -754,18 +750,6 @@
 	
 	/************************/
 	/* The rules below are  */
-	/* for the <div> that   */
-	/* shows images         */
-	/* on Solo Play when    */
-	/* the song is stopped. */
-	/************************/
-	#song_pause_picture_box {
-		top: 45%;
-		left: 77%;
-	}
-	
-	/************************/
-	/* The rules below are  */
 	/* for the "I love you" */
 	/* text that appears    */
 	/* on Solo Play when    */
@@ -773,8 +757,8 @@
 	/************************/	
 	#text_on_together_pause {
 		position: absolute;
-		top: 45%;
-		left: 5%;
+		top: 12vw;
+		left: 30vw;
 	}
 
 	.popupBox {
@@ -793,6 +777,13 @@
 
 	.textSupportDiv {
 		width: 35vw;
+	}
+	
+	.replayButton {
+		width: 24vw;
+		padding: 2vw;
+		margin-left: 2vw;
+		margin-top: -28vw;
 	}
 
 }
@@ -814,34 +805,22 @@
 	}
 
 	.resumebutton {
-		left: 32%;
-		top: 73%;
-		padding: 3%;
-		width: 250px;
+    	left: 42%;
+    	top: -280%;
+    	padding: 1vw;
+   	 	width: 250px;
 	}
 	
 	.imageDisplayArea {
 		margin-top: 3vw;
-		width: 40vw;
-		height: 40vw;
+		width: 37vw;
+		height: 37vw;
 	}
 
 /* Div for remaining pauses Text*/
 	.pausesDiv{
-		top: 73%; 
-		left:43%;
-	}
-	
-	/************************/
-	/* The rules below are  */
-	/* for the <div> that   */
-	/* shows images         */
-	/* on Solo Play when    */
-	/* the song is stopped. */
-	/************************/
-	#song_pause_picture_box {
-		top: 20%;
-		left: 40%;
+		top: 43%; 
+		left: 76%;
 	}
 	
 	/************************/
@@ -853,27 +832,71 @@
 	/************************/	
 	#text_on_together_pause {
 		position: absolute;
-		top: 45%;
-		left: 5%;
+		top: 23%;
+		left: 38%;
 	}
 	
 	.popupBox {
-		width: 45vw;
-		height: 45vw;
+		width: 40vw;
+		height: 40vw;
 		top: 2vw;
-		left: 28vw;
+		left: 30.5 vw;
 	}
 
 	.popupImageDisplay {
-		height: 20vw;
-		width: 20vw;
+		height: 17vw;
+		width: 17vw;
 		margin:5px;
 	}
 
 	.textSupportDiv {
-		width: 40vw;
+		width: 37vw;
 	}
-
+	
+	.replayButton {
+		width: 19vw;
+		padding: 2vw;
+		margin-left: 6vw;
+		margin-top: -22vw;
+	}
+	
+	.optionsMenu{
+		height: 47vw;
+		width: 31vw;
+	}
+	
+	.optionsTitle{
+		font-size:3vw;
+		margin-left: 11vw;
+	}
+	
+	#pauseSliderWrapper{
+		font-size: 2vw;	
+		margin-top: -1vw;
+	}
+	
+	#optionsMenuTextbox{
+		font-size:2vw;
+		height: 0vw;
+	}
+	.optionsMenuButton {
+    	font-size: 1vw;
+	}
+	.exitOptions {
+    	left: 28vw;
+	}
+	
+	.resetGameButton {
+    	margin-top: 2vw;
+    	margin-left: 3vw;
+    	font-size: 1vw;
+	}
+	
+	.stopPausesButton {
+    margin-left: 2vw;
+    font-size: 1vw;
+	}
+	
 }
 
 

@@ -38,14 +38,19 @@
 
 				</div>
 			</div>
+			
+			<!-- div that displays resume button on play together mode-->
+			<div id="resumeButtonDiv"></div>
 
+			<!-- div that hold the text for solo mode question-->
 			<div class = "textSupportDiv" id="textSupportDiv">
 				<p class="textSupportText" id="textSupportText">
 					Pick...
 				</p>
 			</div>
-	
-
+			
+			<!-- button that will replay the audio question in solo mode-->
+			<button id="replayAudioCue" class="replayButton" onclick="playActionAudio()">Replay Question</button>
 			
 				
 		<!-- ______________________ -->
@@ -61,10 +66,6 @@
 			
 			<p id="text_on_together_pause"></p>
 			
-			
-			<div id="song_pause_picture_box">
-				<img id="song_pause_picture_id" src="" />
-			</div>
 			
 		<!-- ______________________ -->
 		<!--  End of elements     -->
@@ -95,21 +96,14 @@
 	<!-- 	division.           -->
 	<!-- ______________________ -->
 	<div class="optionsMenu" id="optionsBox">
-		<button class="exitOptions" onclick="closeOptionsMenu();" style="margin-top:5px;">X</button>
+		<button class="exitOptions" onclick="closeOptionsMenu();">X</button>
 		<p class="optionsTitle">Options</p>
-		<div id="pauseSliderWrapper">
+		<div id="pauseSliderWrapper" style="font-size: 3vw;">
 			<p>Number of Pauses: 
 			<output for="pSlider" id="numOfPauses_outputID"></output></p>
 			<input type="range" class="pausesSlider" id="pSlider" min="0" max="5" step="1" oninput="choosePause(value)"></input>
 		</div>
-		
-		<!-- ------------------------ -->
-		<!-- Buttons for Options Menu -->
-		<!-- ------------------------ -->
-		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
-		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
-		
-		<!-- A textbox for the user to choose the text to show
+				<!-- A textbox for the user to choose the text to show
 		    on the pauses on Solo Play. -->
 		<!-- The form for the textbox is in a <div> that acts
 		     as a container for it so it can be moved in
@@ -135,12 +129,6 @@
 					<option value="black">Black</option>
 				</select>
 				<br>
-				<br>
-				Show image on pauses
-				<input type="checkbox" id="images_on_pauses_checkbox" checked>
-				
-				<br>
-				<br>
 				Background image
 				<select id="background_option">
 					<option value="url(cs4500Media/backgrounds/pink_butterfly.jpg)">Pink Leaf</option>
@@ -153,7 +141,11 @@
 		</div>
 		
 		
-		
+		<!-- ------------------------ -->
+		<!-- Buttons for Options Menu -->
+		<!-- ------------------------ -->
+		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
+		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
 		<button class="resetGameButton" id="omb4" onclick="resetGame()">Reset Game</button>
 		<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
 	</div>
