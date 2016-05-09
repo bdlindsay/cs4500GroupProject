@@ -19,7 +19,7 @@ var counter = 0; //setting the counter as global for this iteration for simplici
 var pausePlacement = 0;
 var pausePlacementCounter = 0;
 var numPauses = 0;
-var maxPauses = 3; // hard coded for now. adjust with user options later
+var maxPauses = document.getElementById("pSlider").value; // pulled from slider value in options
 var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
