@@ -150,7 +150,7 @@ function displayImages(){
 			counter = 0;
 			pausePlacementCounter++;
 		}
-		else if(/*pausePlacementCounter >= pausePlacement*/ counter == 2 && shouldPause){//Manually setting time of interupt for now
+		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
 			clearInterval(interval);
 			numPauses++; // we paused
 			updatePauses();
