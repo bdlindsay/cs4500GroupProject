@@ -478,6 +478,7 @@ var questionInterrupt = function(){
 			var goodJobAudio = new Audio(congratsArray[Math.floor(Math.random()*(congratsArray.length))]);
 			//var goodJobAudio = new Audio(congratsArray[u]);
 			goodJobAudio.play();
+			document.getElementById("image").src = "cs4500Media/encouragement/goodjob.png";
 			window.setTimeout(function() {
 				displayImages();
 				audio.play();
