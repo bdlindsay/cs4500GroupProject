@@ -1,0 +1,164 @@
+<!-- Project: UMSL CS4500 2016 Group Project
+     Team: 10 x 10
+     Members: Benjamin Leach
+     	      Brett Lindsay
+     	      Chad Nelson
+     	      Jason Pham
+     	      Ryan Admire
+     	      
+     Description: This is the HTML for the project. It describes what will apprear on the webpage; but uses the files Slideshow.js and
+                  colorscheme.css to dictate how the objects get displayed and what they do. -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="colorscheme.css">
+		<title>Alaina's Love Story</title>
+        	<meta charset="UTF-8"/>
+	
+	</head>
+	
+	
+	
+	<body class = "main" onload="hideOptionsMenu();">
+	<div class="everythingClass" id="everythingID">
+		
+			<!-- <div style="text-align: left; position: absolute; top: 3%; left: 3%;" id="optionsSymDiv">
+					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
+			</div> -->
+		
+			
+			<!--div for displaying images while song is playing-->
+			<div id="imageBox" class="imageDisplayArea">
+				<img id="image" class="imageDisplay" src="cs4500Media/images/musicalToy-USE.JPG" />
+
+				<!-- div for display popups when music stops-->
+				<div id="popupBox" class="popupBox">
+
+				</div>
+			</div>
+			
+			<!-- div that displays resume button on play together mode-->
+			<div id="resumeButtonDiv"></div>
+
+			<!-- div that hold the text for solo mode question-->
+			<div class = "textSupportDiv" id="textSupportDiv">
+				<p class="textSupportText" id="textSupportText">
+					Pick...
+				</p>
+			</div>
+			
+			<!-- button that will replay the audio question in solo mode-->
+			<button id="replayAudioCue" class="replayButton" onclick="playActionAudio()">Replay Question</button>
+			
+				
+		<!-- ______________________ -->
+		<!--  Start of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
+			
+			<!-- The following <p> should display the words "I love you"
+			 when a Solo Play pause occurs. This is done in 
+			 the Javascript function interruptSong() in 
+			 SlideShow.js -->
+			
+			<p id="text_on_together_pause"></p>
+			
+			
+		<!-- ______________________ -->
+		<!--  End of elements     -->
+		<!--  that appear on song   -->
+		<!--  pause.                -->
+		<!-- ______________________ -->
+			
+			<!-- div for displaying the number of pauses -->
+			<div class="pausesDiv">
+				<p class="pausesText" id="pausesText">
+					
+				</p>
+			</div>
+
+			<div style="text-align: center;">
+				<p class="activebuttonarea">
+					<!-- <button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Together</button> -->
+					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Alaina Play</button>
+					<!-- <button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button> -->
+				</p>
+			</div>
+		
+	
+	</div> <!-- End everything <div> -->
+	
+	<!-- ______________________ -->
+	<!-- Start of options menu  -->
+	<!-- 	division.           -->
+	<!-- ______________________ -->
+	<div class="optionsMenu" id="optionsBox">
+		<button class="exitOptions" onclick="closeOptionsMenu();">X</button>
+		<p class="optionsTitle">Options</p>
+		<div id="pauseSliderWrapper" style="font-size: 3vw;">
+			<p>Number of Pauses: 
+			<output for="pSlider" id="numOfPauses_outputID"></output></p>
+			<input type="range" class="pausesSlider" id="pSlider" min="0" max="5" step="1" oninput="choosePause(value)"></input>
+		</div>
+				<!-- A textbox for the user to choose the text to show
+		    on the pauses on Solo Play. -->
+		<!-- The form for the textbox is in a <div> that acts
+		     as a container for it so it can be moved in
+			 the CSS file. -->
+		<div id="optionsMenuTextbox">
+			<form>
+				Show text on pauses
+				<input type="checkbox" id="text_on_pauses_checkbox" onchange="textboxAvailability();" checked>
+				<br>
+				&nbsp; Text to display on pauses:
+				<input type="text" id="text_on_pauses_id" maxlength="15" size="5" value="I love you"> 
+				<br>
+				&nbsp; Color of text on pauses:
+				<select id="text_on_pauses_color">
+					<option value="blue">Blue</option>
+					<option value="pink">Pink</option>
+					<option value="lightpink">Light Pink</option>
+					<option value="peachpuff">Peach</option>
+					<option value="purple">Purple</option>
+					<option value="blueviolet">Blue Violet</option>
+					<option value="red">Red</option>
+					<option value="green">Green</option>
+					<option value="black">Black</option>
+				</select>
+				<br>
+				Background image
+				<select id="background_option">
+					<option value="url(cs4500Media/backgrounds/pink_butterfly.jpg)">Pink Leaf</option>
+					<option value="url(cs4500Media/backgrounds/purplewhitecircles.jpg)">Purple and White Circles</option>
+					<option value="url(cs4500Media/backgrounds/bluepinklights.jpg">Blue Pink Lights</option>
+					<option value="url(cs4500Media/backgrounds/pinkheartleaves.jpg">Pink Swishes</option>
+					<option value="url(cs4500Media/backgrounds/emptyimage.png)">None</option>
+				</select>
+			</form>
+		</div>
+		
+		
+		<!-- ------------------------ -->
+		<!-- Buttons for Options Menu -->
+		<!-- ------------------------ -->
+		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
+		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
+		<button class="resetGameButton" id="omb4" onclick="resetGame()">Reset Game</button>
+		<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
+	</div>
+	<!-- ______________________ -->
+	<!-- End of options menu    -->
+	<!-- 	division.           -->
+	<!-- ______________________ -->
+		
+		<!--div that gets displayed over the whole screen when the screen size is too small-->
+		<div class="device_not_supported"><p>DEVICE NOT SUPPORTED</p></div>
+		
+		<!-- Script files are placed at the bottom of HTML for performance increase-->
+		<script src="SlideShow.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</body>
+</html>
