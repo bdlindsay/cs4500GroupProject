@@ -566,7 +566,7 @@ function hideOptionsMenu()
 		$(".optionsMenu").hide();
 		$("#optionsSymDiv").hide();
 		document.querySelector('#numOfPauses_outputID').value = document.getElementById("pSlider").value;
-		updateOptions(); // when the user closes the options menu, update a file
+		updateOptions(); // when the user closes the options menu, update the options file
 	});
 }
 
