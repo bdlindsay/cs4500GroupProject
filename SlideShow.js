@@ -544,7 +544,17 @@ var questionInterrupt = function(){
 /*   when the user clicks the        */
 /*   "OPTIONS" button.               */
 /**************************************/
+function loadOptions() // called on page load
+{
+	// load options from a text file
 
+}
+
+function updateOptions() // called on options page close
+{
+	// on options close update the options file to the current options
+	
+}
 
 /* hideOptionsMenu() hides the <div>
    for the options menu as soon as 
@@ -556,6 +566,7 @@ function hideOptionsMenu()
 		$(".optionsMenu").hide();
 		$("#optionsSymDiv").hide();
 		document.querySelector('#numOfPauses_outputID').value = document.getElementById("pSlider").value;
+		updateOptions(); // when the user closes the options menu, update a file
 	});
 }
 
