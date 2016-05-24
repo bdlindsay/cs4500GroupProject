@@ -86,21 +86,21 @@ var family = [
  		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/grandma/whoisgrandma.mp3"},
  	{ name:"Mom",
- 		self:"cs4500Media/images/mom/Alaina's Family-USE copy.JPG",
+ 		self:"cs4500Media/images/mom/MomAndAlaina.JPG",
  		angry:"cs4500Media/images/mom/emotions/angry.jpg",
  		happy:"cs4500Media/images/mom/emotions/happy.jpg",
  		sad:"cs4500Media/images/mom/emotions/sad.jpg",
  		surprised:"cs4500Media/images/mom/emotions/surprised.jpg",
  		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
- 		self:"cs4500Media/images/dad/Alaina's Family-USE copy.JPG",
+ 		self:"cs4500Media/images/dad/AlainaFamilyC.JPG",
  		angry:"cs4500Media/images/dad/emotions/angry2.jpg",
  		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
  		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
  		surprised:"cs4500Media/images/dad/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/dad/whoisdad.mp3"},
  	{ name:"Colin",
- 		self:"cs4500Media/images/brother/BrotherCullen-USE copy.JPG",
+ 		self:"cs4500Media/images/brother/BrotherCullen.JPG",
  		angry:"cs4500Media/images/brother/emotions/angry2.jpg",
  		happy:"cs4500Media/images/brother/emotions/happy2.jpg",
  		sad:"cs4500Media/images/brother/emotions/sad2.jpg",
@@ -124,7 +124,7 @@ function displayImages(){
 	var croppedDuration = SONG_DURATION - 60;
 	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
 	
-	numOfImages = 6;
+	numOfImages = 7;
 	
 	if(isNaN(counter)){
 		console.log("counter is not a number");
@@ -137,10 +137,11 @@ function displayImages(){
 	}
 	imageArray[0].src = 'cs4500Media/images/Alaina1-USE.JPG';
 	imageArray[1].src = 'cs4500Media/images/AlainaGrandad1-USE.JPG';
-	imageArray[2].src = 'cs4500Media/images/BrotherCullen-USE.JPG';
-	imageArray[3].src = 'cs4500Media/images/Alaina\'s Family-USE.JPG';
+	imageArray[2].src = 'cs4500Media/images/BrotherCullen.JPG';
+	imageArray[3].src = 'cs4500Media/images/AlainaGrandad2.JPG';
 	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
-	imageArray[5].src = 'cs4500Media/images/AlainaGrandad2.JPG';
+	imageArray[5].src = 'cs4500Media/images/AlainaFamilyC.JPG';
+	imageArray[6].src = 'cs4500Media/alainaImages/Alaina Laughing.JPG';
 	
 	var imgArea = document.getElementById("imageBox");
 	var img = document.getElementById("image");
@@ -298,6 +299,7 @@ function interruptSong(){
 	
 	//Game 2 is selected, use question format
 	if(gameMode[2] == true){
+		$(".imageDisplay").css("visibility", "hidden");
 		questionInterrupt();
 	}
 
@@ -489,7 +491,10 @@ var questionInterrupt = function(){
 			var goodJobAudio = new Audio(congratsArray[Math.floor(Math.random()*(congratsArray.length))]);
 			//var goodJobAudio = new Audio(congratsArray[u]);
 			goodJobAudio.play();
-			document.getElementById("image").src = "cs4500Media/encouragement/goodjob.png";
+			document.getElementById("image").src = "cs4500Media/alainaImages/Work 055.JPG";
+			window.setTimeout(function() {
+				$(".imageDisplay").css("visibility", "visible");
+			}, 100);	
 			window.setTimeout(function() {
 				displayImages();
 				audio.play();
