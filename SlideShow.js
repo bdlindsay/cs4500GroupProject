@@ -145,7 +145,10 @@ function displayImages(){
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
-
+		
+		/* test code - used for workaround to no PHP for now*/
+		loadOptions();
+		
 		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 			counter = 0;
 			pausePlacementCounter++;
@@ -547,13 +550,26 @@ var questionInterrupt = function(){
 function loadOptions() // called on page load
 {
 	// load options from a text file
+	$.get('options.txt', function (data) {
+    	console.log(data.toString());
+	    // shouldReadFile, maxPauses, shouldStopPauses, shouldResetGame
+    	var options = data.split(" ");
 
+	    if (options[0] == 1) {
+    		choosePause(options[1]);
+       		if (options[2] == 1) {
+         		stopPauses();
+       		}
+       		if (options[3] == 1) {
+       			resetGame();
+       		}  
+    	}
+  	}, 'text');
 }
 
 function updateOptions() // called on options page close
 {
 	// on options close update the options file to the current options
-	
 }
 
 /* hideOptionsMenu() hides the <div>
@@ -566,7 +582,6 @@ function hideOptionsMenu()
 		$(".optionsMenu").hide();
 		$("#optionsSymDiv").hide();
 		document.querySelector('#numOfPauses_outputID').value = document.getElementById("pSlider").value;
-		updateOptions(); // when the user closes the options menu, update the options file
 	});
 }
 
@@ -652,6 +667,7 @@ function openOptionsMenu()
 	getPauseTextColor();
 	 
 	$(".optionsMenu").hide(1000);
+	updateOptions(); // when the user closes the options menu, update the options file
 	optionsMenuOn = false;
 }
 
