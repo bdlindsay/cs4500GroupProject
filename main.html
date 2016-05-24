@@ -96,7 +96,7 @@
 	<!-- 	division.           -->
 	<!-- ______________________ -->
 	<div class="optionsMenu" id="optionsBox">
-		<button class="exitOptions" onclick="closeOptionsMenu();">X</button>
+		<button class="exitOptions" name="exitB" id="exitB" onclick="closeOptionsMenu();">X</button>
 		<p class="optionsTitle">Options</p>
 		<div id="pauseSliderWrapper" style="font-size: 3vw;">
 			<p>Number of Pauses: 
@@ -146,8 +146,8 @@
 		<!-- ------------------------ -->
 		<button class="optionsMenuButton" id="omb1" onclick="openDocumentation();">How to Use this Website</button>
 		<button class="optionsMenuButton" id="omb2" onclick="openAboutUs();">About Us</button>
-		<button class="resetGameButton" id="omb4" onclick="resetGame()">Reset Game</button>
-		<button class="stopPausesButton" id="omb5" onclick="stopPauses()">Stop Pauses</button>
+		<button class="resetGameButton" id="omb4" name="omb4" onclick="resetGame()">Reset Game</button>
+		<button class="stopPausesButton" id="omb5" name="omb5" onclick="stopPauses()">Stop Pauses</button>
 	</div>
 	<!-- ______________________ -->
 	<!-- End of options menu    -->
@@ -158,7 +158,9 @@
 		<div class="device_not_supported"><p>DEVICE NOT SUPPORTED</p></div>
 		
 		<!-- Script files are placed at the bottom of HTML for performance increase-->
-		<script src="SlideShow.js"></script>
+		<!--<script type='text/javascript' src="SlideShow.js"></script>-->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type='text/javascript' srcs='//code.jquery.com/jquery-1.10.1.js'></script>
+		<script type='text/javascript' src="SlideShow.js"></script>
 	</body>
 </html>

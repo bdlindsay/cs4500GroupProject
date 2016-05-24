@@ -24,6 +24,14 @@ var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
 
+////////////////////////////////////////////////////////////////////////////
+////////////// boolean var for use of reset game and stop pauses ///////////
+////////////////////////////////////////////////////////////////////////////
+var resetFlag = "N";
+var stopFlag = "N";
+
+
+
 /* variable to randomize between correct emotion or correct person
 if question_type is 1 then elaina chooses a person
 if question_type is 2 then elaina chooses an emotion
@@ -547,6 +555,36 @@ var questionInterrupt = function(){
 /*   when the user clicks the        */
 /*   "OPTIONS" button.               */
 /**************************************/
+
+/* 
+	This function will be used to write the number of pauses and also the flags for
+	stop pauses and reset buttons.  I have put two globals stopFlag and resetFlag
+	in line 30 and line 31 that can be used to passed into this function and written
+	into our configuration file config.txt.  We will need to update these flags
+	accordigly.
+
+	The function will execute whenever the exit button in the menu (x) is pressed
+
+	configuration file is a text file that contain 3 things as of right now
+	~1: a value of the #of pauses first
+	~2: a Flag (Y/N) for stop pauses second
+	~3: a Flag (Y/N) for reset game third
+
+	will implement more as we go but I think these are the important ones for now
+*/
+	$('#exitB').click(function(){
+		$.ajax({
+			type: "POST",
+			url: "filewrite.php",
+			data: {'pause': maxPauses, 'StopFlag': stopFlag, 'ResetFlag': resetFlag},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("An error has occured");
+			}
+		});
+	});
+
+
+
 function loadOptions() // called on page load
 {
 	// load options from a text file
