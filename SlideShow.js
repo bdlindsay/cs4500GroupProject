@@ -577,7 +577,6 @@ var questionInterrupt = function(){
 
 	will implement more as we go but I think these are the important ones for now
 */
-$(document).ready(function(){
 	$('#exitB').click(function(){
 		$.ajax({
 			type: "POST",
@@ -588,7 +587,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-});
+
 
 
 function loadOptions() // called on page load
