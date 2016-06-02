@@ -11,6 +11,7 @@
 /********************************************************/    
 	/* Description: This file will control the look and feel of the entire project. It dictates everything from the size of the pictures
 	 to the color of the buttons. */
+	/* TODO disable zoom function on website */
 
 	/*_________________*/
 	/*                 */
@@ -254,7 +255,7 @@
 		transition-duration: .4s;
 		position: absolute;
 		border: 5px solid #9999ff; /*light purple*/
-		visibility:hidden;
+		display: none;
 	}
 	
 	/* This style rule will determine what happens
@@ -708,6 +709,7 @@
 		padding: 2vw;
 		margin-left: 72vw;
 		margin-top: 9vw;
+		display: none;
 	}
 
 }
@@ -788,6 +790,7 @@
 		padding: 2vw;
 		margin-left: 2vw;
 		margin-top: -28vw;
+		display: none;
 	}
 
 }
@@ -862,6 +865,7 @@
 		padding: 2vw;
 		margin-left: 6vw;
 		margin-top: -22vw;
+		display: none;
 	}
 	
 	.optionsMenu{

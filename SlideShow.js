@@ -10,7 +10,7 @@
 	        and audio control. A brief description of the components and game modes can be found in the README.*/
 //Globals
 //////////////////////////////////////////////////////////////////////////////////////////////////
-var audio = new Audio('Love Story-Taylor Swift.mp3');//Global for ease of coding for now
+var audio = new Audio('cs4500Media/Songs/Love Story-Taylor Swift.mp3');//Global for ease of coding for now
 var imageArray = new Array();
 var DURATION_PER_IMAGE = 2019;
 var interval;
@@ -23,6 +23,8 @@ var maxPauses = document.getElementById("pSlider").value; // pulled from slider 
 var shouldPause = true;
 var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
+var songArray = new Array(); // array of different audios
+var songChoice = 0; // current song choice for audio (maybe doesn't need to be global)
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////// boolean var for use of reset game and stop pauses ///////////
@@ -120,7 +122,9 @@ var congratsArray = ["cs4500Media/encouragement/tada.mp3","cs4500Media/encourage
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
-	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up.
+	// TODO Probably need to refactor this into two functions one for each mode type
+	var oneMinCounter = 0; // increment to 30 for ~1 min - solo play
+	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up. - play together 
 	var croppedDuration = SONG_DURATION - 60;
 	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
 	
@@ -131,7 +135,7 @@ function displayImages(){
 		counter = 0;
 	}
 	
-	//setting up Image Array, can use this to auto load images down the road
+	//setting up Image Array, can use this to auto load images
 	for(var i = 0;i < numOfImages;i++){
 		imageArray[i] = new Image();
 	}
@@ -142,6 +146,11 @@ function displayImages(){
 	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
 	imageArray[5].src = 'cs4500Media/images/AlainaFamilyC.JPG';
 	imageArray[6].src = 'cs4500Media/alainaImages/Alaina Laughing.JPG';
+	
+	//setting up Song Array, can use this to assign audio
+	songArray = ["cs4500Media/Songs/letItGo.mp3", "cs4500Media/Songs/forTheFirstTime.mp3", 
+		"cs4500Media/Songs/loveStoryDefTay.mp3", "cs4500Media/Songs/photographDefTay.mp3",
+		"cs4500Media/Songs/snowman.mp3", "cs4500Media/Songs/Love Story-Taylor Swift.mp3"];
 	
 	var imgArea = document.getElementById("imageBox");
 	var img = document.getElementById("image");
@@ -154,8 +163,29 @@ function displayImages(){
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
+		if (gameMode[2] == true) { // solo play code (still need image code from showImage and displayImages) (turned off pauses earlier for this mode)
+			// count to 30 and fade out song
+			oneMinCounter++;
+			if (oneMinCounter >= 30) { // image every ~2 sec so 30 is 1 minute, lower for testing
+				while (audio.volume > .000001) { // fade out 
+					audio.volume -= .000001; 
+				}
+				pauseAudio(); // pause audio after fading out
+				audio.volume = 1; // reset volume for next song
+				clearInterval(interval);
+				oneMinCounter = 0;
+				// TODO Have a different DURATION_PER_IMAGE for each song?
+				// TODO normalize volumes somehow?
+				audio = new Audio(songArray[songChoice]);
+				songChoice++;
+				if (songChoice > 5) { // game will keep repeating until page refresh or options change
+					songChoice = 0;
+				}
+				questionInterrupt();
+			} 
+		} // end solo play code
 		
-		/* test code - used for workaround to no PHP for now*/
+		/* TODO test code - used for workaround to no PHP for now*/
 		loadOptions();
 		
 		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
@@ -210,7 +240,8 @@ function resetGame() {
 	$("#optionsButton").css("display", "initial");
 	$("#optionsSymDiv").hide();
 	document.getElementById("imageBox").style.visibility = "visible";
-	document.getElementById("replayAudioCue").style.visibility = "hidden";
+	//document.getElementById("replayAudioCue").style.visibility = "hidden";
+	$("#replayAudioCue").hide();
 	shouldPause = true;
 	numPauses = 0;
 	updatePauses();
@@ -315,16 +346,21 @@ function beginPlaying(gameModeChoice){
 	isGameRunning = true;
 	//audio.canPlayType()//checks if the browser can play the audio file
 	
-	//check and set which gmae mode was sleceted
+	//check and set which game mode was selected
 	if(gameModeChoice =="game1"){
 		gameMode[1] = true;
 		gameMode[2] = false;
-	}
-	else if(gameModeChoice =="game2"){
+		displayImages();
+		audio.play();
+		document.getElementById("pausesText").style.visibility = "visible"; //shows the pause counter text
+		updatePauses();
+	} else if(gameModeChoice =="game2"){
 		gameMode[1] = false;
 		gameMode[2] = true;
+		// changes to solo play implementation
+		shouldPause = false; // No pauses on game mode 2 
+		questionInterrupt(); // Ask a question then reward with song
 	}
-	displayImages();
 
 	//code to stop displaying the initial buttons
 	//is repeated for all 3 initial buttons - changed to jQuery
@@ -332,9 +368,6 @@ function beginPlaying(gameModeChoice){
 	$("#mode2Button").hide(DURATION_PER_IMAGE);
 	$("#optionsButton").hide(DURATION_PER_IMAGE);
 	$("#optionsSymDiv").show(DURATION_PER_IMAGE);
-	audio.play();
-	document.getElementById("pausesText").style.visibility = "visible"; //shows the pause counter text
-	updatePauses();
 }
 
 /*This function will play the action audio to tell endUser what to do
@@ -363,6 +396,8 @@ var questionInterrupt = function(){
 	//---------------------------------------------------//
 	//Choose right answer and worng answers for question-//
 	//---------------------------------------------------//
+		// TODO change all angry -> mad, remove surprised as an emotion choice
+		// TODO change all grandma -> Cece
 		var question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
 		var familyMemberChosen = Math.floor(Math.random()*(family.length-1)); //pick random family member for correct answer
 		var emotionOptions = ["Angry","Surprised","Happy","Sad"]; //possible emotions,these must be in family objects
@@ -465,13 +500,15 @@ var questionInterrupt = function(){
 	//// Audio Support Play Action ////
 	///////////////////////////////////
 	playActionAudio();//play the action audio to prompt the question
-	document.getElementById("replayAudioCue").style.visibility = "visible"; //show replay question button
-							 
+	//document.getElementById("replayAudioCue").style.visibility = "visible"; //show replay question button
+	// TODO changed to animation, but clunky looking
+	$("#replayAudioCue").show(DURATION_PER_IMAGE);
 	//creating click event for the correct choice chosen img ID						
 	$( "#correctChoice" ).click(function() {
 			$( "#correctChoice" ).remove();
 			document.getElementById("textSupportDiv").style.visibility = "hidden";
-			document.getElementById("replayAudioCue").style.visibility = "hidden";
+			//document.getElementById("replayAudioCue").style.visibility = "hidden";
+			$("#replayAudioCue").hide();
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
@@ -576,17 +613,17 @@ var questionInterrupt = function(){
 	~3: a Flag (Y/N) for reset game third
 
 	will implement more as we go but I think these are the important ones for now
-*/
-	$('#exitB').click(function(){
-		$.ajax({
-			type: "POST",
-			url: "filewrite.php",
-			data: {'pause': maxPauses, 'StopFlag': stopFlag, 'ResetFlag': resetFlag},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				alert("An error has occured");
-			}
-		});
-	});
+*/  // ajax/php stuff commented out for now to avoid the alert being thrown
+	// $('#exitB').click(function(){
+		// $.ajax({
+			// type: "POST",
+			// url: "filewrite.php",
+			// data: {'pause': maxPauses, 'StopFlag': stopFlag, 'ResetFlag': resetFlag},
+			// error: function(XMLHttpRequest, textStatus, errorThrown) {
+				// alert("An error has occured");
+			// }
+		// });
+	// });
 
 
 
