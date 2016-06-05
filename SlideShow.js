@@ -10,7 +10,14 @@
 	        and audio control. A brief description of the components and game modes can be found in the README.*/
 //Globals
 //////////////////////////////////////////////////////////////////////////////////////////////////
-var audio = new Audio('cs4500Media/Songs/Love Story-Taylor Swift.mp3');//Global for ease of coding for now
+//var audio = new Audio('cs4500Media/Songs/Love Story-Taylor Swift.mp3');//Global for ease of coding for now
+var audio = document.createElement('audio');	//create audio element in html
+audio.setAttribute('id','playing');
+audio.src = 'cs4500Media/Songs/Love Story-Taylor Swift.mp3'; //can change the src later
+$("body").append(audio);						//append the audio element to the body
+$("#playing")[0].volume = 1;					//full volume
+
+
 var imageArray = new Array();
 var DURATION_PER_IMAGE = 2019;
 var interval;
@@ -160,10 +167,16 @@ function displayImages(){
 	
 	//Funciton that display the image
 	///////////////////////////////////////////////////////////////////
+
+	/* weirdly placed function.  Thoughts? */
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
 		if (gameMode[2] == true) { // solo play code (still need image code from showImage and displayImages) (turned off pauses earlier for this mode)
+			
+			//$("playing").animate({volume: 0}, 30); //code to fade out, doesn't work here
+
+			/*
 			// count to 30 and fade out song
 			oneMinCounter++;
 			if (oneMinCounter >= 30) { // image every ~2 sec so 30 is 1 minute, lower for testing
@@ -182,7 +195,7 @@ function displayImages(){
 					songChoice = 0;
 				}
 				questionInterrupt();
-			} 
+			} */
 		} // end solo play code
 		
 		/* TODO test code - used for workaround to no PHP for now*/
@@ -354,7 +367,8 @@ function beginPlaying(gameModeChoice){
 		audio.play();
 		document.getElementById("pausesText").style.visibility = "visible"; //shows the pause counter text
 		updatePauses();
-	} else if(gameModeChoice =="game2"){
+	} 
+	else if(gameModeChoice =="game2"){
 		gameMode[1] = false;
 		gameMode[2] = true;
 		// changes to solo play implementation
@@ -534,6 +548,9 @@ var questionInterrupt = function(){
 			window.setTimeout(function() {
 				displayImages();
 				audio.play();
+				$("#playing").animate({volume: 0}, 10000);  //fade jquery works here
+				/* maybe we should call audio.play function in the showImage function, 
+				set a condition for game 2 to do audio.play? */
 			}, 1500);
 			
 		});
