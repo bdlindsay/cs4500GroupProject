@@ -95,14 +95,14 @@ var family = [
  		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
  		whoAudio:"cs4500Media/images/grandma/whoiscece.mp3"},
  	{ name:"Mom",
- 		self:"cs4500Media/images/mom/MomAndAlaina.JPG",
+ 		self:"cs4500Media/images/mom/MomAndAlaina.jpg",
  		mad:"cs4500Media/images/mom/emotions/angry.jpg",
  		happy:"cs4500Media/images/mom/emotions/happy.jpg",
  		sad:"cs4500Media/images/mom/emotions/sad.jpg",
  		surprised:"cs4500Media/images/mom/emotions/surprised.jpg",
  		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
- 		self:"cs4500Media/images/dad/AlainaFamilyC.JPG",
+ 		self:"cs4500Media/images/dad/AlainaFamilyC.jpg",
  		mad:"cs4500Media/images/dad/emotions/angry2.jpg",
  		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
  		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
@@ -148,10 +148,10 @@ function displayImages(){
 	}
 	imageArray[0].src = 'cs4500Media/images/Alaina1-USE.JPG';
 	imageArray[1].src = 'cs4500Media/images/AlainaGrandad1-USE.JPG';
-	imageArray[2].src = 'cs4500Media/images/BrotherCullen.JPG';
+	imageArray[2].src = 'cs4500Media/images/BrotherCullen.jpg';
 	imageArray[3].src = 'cs4500Media/images/AlainaGrandad2.JPG';
 	imageArray[4].src = 'cs4500Media/images/Grandparents-Alaina-USE.JPG';
-	imageArray[5].src = 'cs4500Media/images/AlainaFamilyC.JPG';
+	imageArray[5].src = 'cs4500Media/images/AlainaFamilyC.jpg';
 	imageArray[6].src = 'cs4500Media/alainaImages/Alaina Laughing.JPG';
 	
 	//setting up Song Array, can use this to assign audio
