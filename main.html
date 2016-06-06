@@ -29,6 +29,9 @@
 					<img class="optionsSym" src="cs4500Media/images/optionsSymbol.png" onclick="openOptionsMenu();" >
 			</div>
 		
+			<!--div to display song options-->
+			<div id="songOptionsBox" class="songOptionsDisplayArea"></div>
+		
 			
 			<!--div for displaying images while song is playing-->
 			<div id="imageBox" class="imageDisplayArea">
@@ -85,8 +88,16 @@
 				<p class="activebuttonarea">
 					<button id ="activebutton" class="activebutton" onclick="beginPlaying('game1')">Play Together</button>
 					<button id ="mode2Button" onclick="beginPlaying('game2')" class="activebutton">Play Solo</button>
-					<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu();">Options</button>
+					<button id ="mode3Button" class="activebutton" onclick="beginPlaying('game3')">Pick A Song</button>
+					<button id ="optionsButton" class="activebutton" onclick="openOptionsMenu()">Options</button>
+					
 				</p>
+			</div>
+			
+			<!--Buttons for while pick a song game mode is on-->
+			<div class="mode3ButtonArea">
+				<button id ="mainMenuButton" class="activebutton" onclick="resetGame()">Main Menu</button>
+				<button id ="newSongButton" class="activebutton" onclick="beginPlaying('game3')">New Song</button>
 			</div>
 		
 	

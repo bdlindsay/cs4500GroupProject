@@ -308,6 +308,32 @@
 		color: black;
 	}
 
+	/*___________________________*/
+	/*                          */
+	/*     Pick a song CSS      */
+	/*__________________________*/
+	
+	.songChoice{
+		border: 5px solid #9999ff;
+		float:left;
+	}
+	
+	.mode3ButtonArea{
+		position: absolute;
+		display: none;
+		text-align:center;
+	}
+	.songOptionsDisplayArea{
+		display:none;
+		height: 45vw;
+		width: 80vw;
+		margin:auto;
+		padding:3vw;
+		overflow: scroll;
+	}
+
+
+
 	/*________________*/
 	/*                */
 	/*  Options Menu  */
@@ -711,6 +737,28 @@
 		margin-top: 9vw;
 		display: none;
 	}
+	
+	/*___________________________*/
+	/*                          */
+	/*     Pick a song CSS      */
+	/*__________________________*/
+	
+	.songChoice{
+		height: 30vw;
+		width: 30vw;
+		margin: 5px;
+	}
+	
+	.mode3ButtonArea{
+		top: 68%;
+		width: 100%;
+	}
+	
+	/*.songOptionsDisplayArea{
+		height: 60vw;
+		width: 60vw;
+		margin: 5px;
+	}*/
 
 }
 
@@ -792,7 +840,28 @@
 		margin-top: -28vw;
 		display: none;
 	}
-
+	
+	/*___________________________*/
+	/*                          */
+	/*     Pick a song CSS      */
+	/*__________________________*/
+	
+	.songChoice{
+		height: 16vw;
+		width: 16vw;
+		margin:5px;
+	}
+	
+	.mode3ButtonArea{
+		top: 68%;
+		width: 100%;
+	}
+	
+	/*.songOptionsDisplayArea{
+		height: 60vw;
+		width: 60vw;
+		margin: 5px;
+	}*/
 }
 
 /*for larger computer screens NEEDS ADJUST*/
@@ -904,6 +973,28 @@
     margin-left: 2vw;
     font-size: 1vw;
 	}
+	
+	/*___________________________*/
+	/*                          */
+	/*     Pick a song CSS      */
+	/*__________________________*/
+	
+	.songChoice{
+		height: 17vw;
+		width: 17vw;
+		margin:5px;
+	}
+	
+	.mode3ButtonArea{
+		top: 68%;
+		width: 100%;
+	}
+	
+	/*.songOptionsDisplayArea{
+		height: 80vw;
+		width: 80vw;
+		margin: 5px;
+	}*/
 	
 }
 

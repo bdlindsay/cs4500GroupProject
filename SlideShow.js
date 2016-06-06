@@ -28,9 +28,8 @@ var pausePlacementCounter = 0;
 var numPauses = 0;
 var maxPauses = document.getElementById("pSlider").value; // pulled from slider value in options
 var shouldPause = true;
-var gameMode = { 1:false,2:false}; //This is used to set which game mode has been selected
+var gameMode = { 1:false,2:false,3:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
-var songArray = new Array(); // array of different audios
 var songChoice = 0; // current song choice for audio (maybe doesn't need to be global)
 
 ////////////////////////////////////////////////////////////////////////////
@@ -126,6 +125,18 @@ var congratsArray = ["cs4500Media/encouragement/tada.mp3","cs4500Media/encourage
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////
+//// This array holds all the song choices used in the game   /////
+///////////////////////////////////////////////////////////////////
+var	songArray = ["cs4500Media/Songs/letItGo.mp3", 
+				"cs4500Media/Songs/forTheFirstTime.mp3", 
+				"cs4500Media/Songs/loveStoryDefTay.mp3", 
+				"cs4500Media/Songs/photographDefTay.mp3",
+				"cs4500Media/Songs/snowman.mp3", 
+				"cs4500Media/Songs/Love Story-Taylor Swift.mp3"];
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
 //Functions to manipulate Image Area
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displayImages(){
@@ -154,10 +165,7 @@ function displayImages(){
 	imageArray[5].src = 'cs4500Media/images/AlainaFamilyC.jpg';
 	imageArray[6].src = 'cs4500Media/alainaImages/Alaina Laughing.JPG';
 	
-	//setting up Song Array, can use this to assign audio
-	songArray = ["cs4500Media/Songs/letItGo.mp3", "cs4500Media/Songs/forTheFirstTime.mp3", 
-		"cs4500Media/Songs/loveStoryDefTay.mp3", "cs4500Media/Songs/photographDefTay.mp3",
-		"cs4500Media/Songs/snowman.mp3", "cs4500Media/Songs/Love Story-Taylor Swift.mp3"];
+
 	
 	var imgArea = document.getElementById("imageBox");
 	var img = document.getElementById("image");
@@ -168,7 +176,9 @@ function displayImages(){
 	//Funciton that display the image
 	///////////////////////////////////////////////////////////////////
 
-	/* weirdly placed function.  Thoughts? */
+	/* weirdly placed function.  Thoughts? 
+	* This function wsa originally here to work with the interval before it was global,it could probabaly be changed -Chad 
+	*/
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
@@ -197,6 +207,10 @@ function displayImages(){
 				questionInterrupt();
 			} */
 		} // end solo play code
+		
+		else if(gameMode[3] == true){//Begin game mode 3 code
+			
+		}//End of code if mode 3 is selected
 		
 		/* TODO test code - used for workaround to no PHP for now*/
 		loadOptions();
@@ -250,7 +264,12 @@ function resetGame() {
 	// reset everything for a new start of program
 	$("#activebutton").css("display", "initial");
 	$("#mode2Button").css("display", "initial");
+	$("#mode3Button").css("display", "initial");
 	$("#optionsButton").css("display", "initial");
+	$("#pausesText").show();
+	$( "#songOptionsBox" ).css("display","none");
+	$( ".mode3ButtonArea").css("display", "none");
+	$( "#imageBox").show();
 	$("#optionsSymDiv").hide();
 	document.getElementById("imageBox").style.visibility = "visible";
 	//document.getElementById("replayAudioCue").style.visibility = "hidden";
@@ -341,12 +360,20 @@ function interruptSong(){
 		
 	}
 	
+	/* i dont think this code is needed anymore -Chad
+	
+	
 	//Game 2 is selected, use question format
-	if(gameMode[2] == true){
+	else if(gameMode[2] == true){
 		$(".imageDisplay").css("visibility", "hidden");
 		questionInterrupt();
 	}
 
+	//Game 3 is selected, display options of songs to pick
+	else if(gameMode[3] == true){
+		
+	}
+	*******************************************************/
 }
 
 function pauseAudio(){
@@ -363,6 +390,7 @@ function beginPlaying(gameModeChoice){
 	if(gameModeChoice =="game1"){
 		gameMode[1] = true;
 		gameMode[2] = false;
+		gameMode[3] = false;
 		displayImages();
 		audio.play();
 		document.getElementById("pausesText").style.visibility = "visible"; //shows the pause counter text
@@ -371,17 +399,31 @@ function beginPlaying(gameModeChoice){
 	else if(gameModeChoice =="game2"){
 		gameMode[1] = false;
 		gameMode[2] = true;
+		gameMode[3] = false;
 		// changes to solo play implementation
 		shouldPause = false; // No pauses on game mode 2 
 		questionInterrupt(); // Ask a question then reward with song
+	}
+	else if(gameModeChoice =="game3"){
+		gameMode[1] = false;
+		gameMode[2] = false;
+		gameMode[3] = true;
+		// changes to pick a song implementation
+		shouldPause = false; // No pauses on game mode 3 
+		displaySongChoices();//function to display song options
+		
 	}
 
 	//code to stop displaying the initial buttons
 	//is repeated for all 3 initial buttons - changed to jQuery
 	$("#activebutton").hide(DURATION_PER_IMAGE);
 	$("#mode2Button").hide(DURATION_PER_IMAGE);
+	$("#mode3Button").hide(DURATION_PER_IMAGE);
 	$("#optionsButton").hide(DURATION_PER_IMAGE);
-	$("#optionsSymDiv").show(DURATION_PER_IMAGE);
+	if(gameMode[3] == false ){//do not show if game mode 3 is selected
+		$("#optionsSymDiv").show(DURATION_PER_IMAGE);
+	}
+	
 }
 
 /*This function will play the action audio to tell endUser what to do
@@ -400,6 +442,20 @@ function playActionAudio() {
 /////////////// Function to use in Game Mode 2 /////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var questionInterrupt = function(){
+	
+	//Set appearence of items for pick a song mode
+	if(gameMode[3] == true){
+		$( "#imageBox").show();
+		$( ".mode3ButtonArea").css("display", "none");	
+		$( "#songOptionsBox").css("display", "none");
+		for(var i = 0;i < songArray.length;i++){
+				$( "#songChoice"+i ).remove();
+			}
+		
+	}
+	
+	
+	
 	var correctChoice = new Image();
 	var madeWrongChoice;
 	//var wrongChoice = new Array();//array for wrong choice images
@@ -522,6 +578,14 @@ var questionInterrupt = function(){
 			document.getElementById("textSupportDiv").style.visibility = "hidden";
 			//document.getElementById("replayAudioCue").style.visibility = "hidden";
 			$("#replayAudioCue").hide();
+			
+
+			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
+				$(".mode3ButtonArea").css("display", "block");
+			}
+
+			
+			
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
 			}
@@ -546,11 +610,18 @@ var questionInterrupt = function(){
 				$(".imageDisplay").css("visibility", "visible");
 			}, 100);	
 			window.setTimeout(function() {
-				displayImages();
-				audio.play();
-				$("#playing").animate({volume: 0}, 10000);  //fade jquery works here
-				/* maybe we should call audio.play function in the showImage function, 
-				set a condition for game 2 to do audio.play? */
+				
+				if (gameMode[3] == true){//if pick a song is the game mode, play the video
+					//play video here, might not need the line below after youtube implementation
+					audio.play();
+				}
+				else{//If the other modes are selected continue the slide show and song
+					displayImages();
+					audio.play();
+					$("#playing").animate({volume: 0}, 10000);  //fade jquery works here
+					/* maybe we should call audio.play function in the showImage function, 
+					set a condition for game 2 to do audio.play? */
+				}
 			}, 1500);
 			
 		});
@@ -598,10 +669,43 @@ var questionInterrupt = function(){
 };
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
+///////End of questionInterrupt()/////////////////////////////////////////////////////////////
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//Start of function for Pick A Song Mode                       ///////////////////////////////
+//This function will primarily display the song choices        ///////////////////////////////
+//then call quesitonInterrupt() everytime a song choice is made///////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+function displaySongChoices(){
+	
+	//Need to stop current audio here just in case it is playing, this
+	//would be possible if new song button was clicked in the middle of the song
+	
+	for(var i = 0;i < songArray.length;i++){//remove existing song choices if they exist
+		$( "#songChoice"+i ).remove();
+	}
+
+	var songSource;
+	$( "#imageBox").hide(); //Make original slide show disappear
+	$( ".mode3ButtonArea").css("display", "block"); //display buttons for this gameMode
+	$( "#songOptionsBox" ).css("display","block");
+	$("#pausesText").hide();//hide because this is not needed
+	
+	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
+	for(let i = 0; i < songArray.length;i++){ 
+		$( "#songOptionsBox").append("<div id=\"songChoice"+i+"\"class=\"songChoice\">"+songArray[i]+"</div>");
+		
+		songSource = songArray[i];//For s
+		$( "#songChoice"+i).click(function() {
+				alert(songArray[i]+" picked");//set the correct audio here
+				questionInterrupt();
+			});
+	}
+	
+}
+////////////End of displaySongChoices///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 /*_____________________________*/
 /*                             */
 /* START OF OPTIONS MENU CODE  */
