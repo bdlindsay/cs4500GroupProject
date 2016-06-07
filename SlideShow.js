@@ -693,7 +693,7 @@ function displaySongChoices(){
 	$("#pausesText").hide();//hide because this is not needed
 	
 	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
-	for(let i = 0; i < songArray.length;i++){ 
+	for(var i = 0; i < songArray.length; i++){ 
 		$( "#songOptionsBox").append("<div id=\"songChoice"+i+"\"class=\"songChoice\">"+songArray[i]+"</div>");
 		
 		songSource = songArray[i];//For s
