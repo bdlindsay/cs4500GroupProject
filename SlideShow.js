@@ -200,9 +200,8 @@ function displayImages(){
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
-		if (gameMode[2] == true) { // solo play code (still need image code from showImage and displayImages) (turned off pauses earlier for this mode)
-			
-			$("#playing").animate({volume: 0}, 10000); //code to fade out, doesn't work here
+			if (gameMode[2] == true) {
+
 
 			/*
 			// count to 30 and fade out song
@@ -262,6 +261,28 @@ function displayImages(){
 	////end of show image///////////////////////////////////////////////////////////////
 }
 /////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////
+// Function to fade the song ////////
+/////////////////////////////////////
+function fadeSong() {
+	if (gameMode[2] == true) {
+		$("#playing").animate({volume: 0}, 10000); 
+
+			window.setTimeout(function() {
+				audio.pause();
+				clearInterval(interval);
+				// can add a new audio.src for a new song here
+				$("#playing")[0].volume = 1;
+				questionInterrupt();
+			}, 10100);
+	}
+
+}
+
+
+
 
 // Functions for options menu
 function resetGame() {
@@ -472,8 +493,7 @@ var questionInterrupt = function(){
 		
 	}
 	
-	
-	
+
 	var correctChoice = new Image();
 	var madeWrongChoice;
 	//var wrongChoice = new Array();//array for wrong choice images
@@ -642,12 +662,14 @@ var questionInterrupt = function(){
 					//play video here, might not need the line below after youtube implementation
 					audio.play();
 				}
+				if (gameMode[2] == true) {
+					displayImages();
+					audio.play();
+					fadeSong(); // new method called here
+				}
 				else{//If the other modes are selected continue the slide show and song
 					displayImages();
 					audio.play();
-					//$("#playing").animate({volume: 0}, 10000);  //fade jquery works here
-					/* maybe we should call audio.play function in the showImage function, 
-					set a condition for game 2 to do audio.play? */
 				}
 			}, 1500);
 			
