@@ -81,38 +81,56 @@ var text_on_pause = "I love you";
 var family = [
  	{ name:"Grandpa",
  		self:"cs4500Media/images/grandpa/AlainaGrandad1-USE copy.JPG",
- 		mad:"cs4500Media/images/grandpa/emotions/angry2.jpg",
- 		happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
- 		sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
- 		surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg",
+ 		Mad:"cs4500Media/images/grandpa/emotions/angry2.jpg",
+ 		Happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
+ 		Sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
+		
+		
+		
  		whoAudio:"cs4500Media/images/grandpa/whoisgrandpa.mp3"},
  	{ name:"Cece",
  		self:"cs4500Media/images/grandma/Grandparents-Alaina-USE copy.JPG",
- 		mad:"cs4500Media/images/grandma/emotions/angry2.jpg",
- 		happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
- 		sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
- 		surprised:"cs4500Media/images/grandma/emotions/surprised2.jpg",
+ 		Mad:"cs4500Media/images/grandma/emotions/angry2.jpg",
+ 		Happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
+ 		Sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
+		
+ 		/* The emotion "Surprised" is removed right now at
+		   the request of the family. */
+ 		/* Surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg", */
+		
  		whoAudio:"cs4500Media/images/grandma/whoiscece.mp3"},
  	{ name:"Mom",
  		self:"cs4500Media/images/mom/MomAndAlaina.jpg",
- 		mad:"cs4500Media/images/mom/emotions/angry.jpg",
- 		happy:"cs4500Media/images/mom/emotions/happy.jpg",
- 		sad:"cs4500Media/images/mom/emotions/sad.jpg",
- 		surprised:"cs4500Media/images/mom/emotions/surprised.jpg",
+ 		Mad:"cs4500Media/images/mom/emotions/angry.jpg",
+ 		Happy:"cs4500Media/images/mom/emotions/happy.jpg",
+ 		Sad:"cs4500Media/images/mom/emotions/sad.jpg",
+		
+ 		/* The emotion "Surprised" is removed right now at
+		   the request of the family. */
+ 		/* Surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg", */
+		
  		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
  		self:"cs4500Media/images/dad/AlainaFamilyC.jpg",
- 		mad:"cs4500Media/images/dad/emotions/angry2.jpg",
- 		happy:"cs4500Media/images/dad/emotions/happy2.jpg",
- 		sad:"cs4500Media/images/dad/emotions/sad2.jpg",
- 		surprised:"cs4500Media/images/dad/emotions/surprised2.jpg",
+ 		Mad:"cs4500Media/images/dad/emotions/angry2.jpg",
+ 		Happy:"cs4500Media/images/dad/emotions/happy2.jpg",
+ 		Sad:"cs4500Media/images/dad/emotions/sad2.jpg",
+		
+ 		/* The emotion "Surprised" is removed right now at
+		   the request of the family. */
+ 		/* Surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg", */
+		
  		whoAudio:"cs4500Media/images/dad/whoisdad.mp3"},
  	{ name:"Colin",
  		self:"cs4500Media/images/brother/BrotherCullen.JPG",
- 		mad:"cs4500Media/images/brother/emotions/angry2.jpg",
- 		happy:"cs4500Media/images/brother/emotions/happy2.jpg",
- 		sad:"cs4500Media/images/brother/emotions/sad2.jpg",
- 		surprised:"cs4500Media/images/brother/emotions/surprised2.jpg",
+ 		Mad:"cs4500Media/images/brother/emotions/angry2.jpg",
+ 		Happy:"cs4500Media/images/brother/emotions/happy2.jpg",
+ 		Sad:"cs4500Media/images/brother/emotions/sad2.jpg",
+		
+ 		/* The emotion "Surprised" is removed right now at
+		   the request of the family. */
+ 		/* Surprised:"cs4500Media/images/grandpa/emotions/surprised2.jpg", */
+		
  		whoAudio:"cs4500Media/images/brother/whoisbro.mp3"}
  ];
 
@@ -469,13 +487,22 @@ var questionInterrupt = function(){
 		// TODO Remove surprised as an emotion choice.
 		var question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
 		var familyMemberChosen = Math.floor(Math.random()*(family.length-1)); //pick random family member for correct answer
-		var emotionOptions = ["Mad","Surprised","Happy","Sad"]; //possible emotions,these must be in family objects
+		
+		/* The emotion "Surprised" is being removed for now
+				   at the request of the family. */
+		/* var emotionsOptions = ["Mad", "Surprised", "Happy", "Sad"]; */
+		
+		var emotionOptions = ["Mad","Happy","Sad"]; //possible emotions,these must be in family objects
 		var emotionChosen = emotionOptions[Math.floor(Math.random()*(emotionOptions.length-1))];//randomly choose correct emotion
 		var emotionAudio = {//this object holds the source files for the emtions audio questions
 				Mad:"cs4500Media/whoismad.mp3",
 				Sad:"cs4500Media/whoissad.mp3",
-				Happy:"cs4500Media/whoishappy.mp3",
-				Surprised:"cs4500Media/whoissurprised.mp3"
+				Happy:"cs4500Media/whoishappy.mp3"
+				
+				/* The emotion "Surprised" is being removed for now
+				   at the request of the family. */
+				   
+				/* Surprised:"cs4500Media/whoissurprised.mp3" */
 			};
 		
 		
@@ -506,7 +533,7 @@ var questionInterrupt = function(){
 			$(".textSupportText").html("Pick <br>" + emotionChosen); // set to ask the chosen emotion
 			document.getElementById("textSupportDiv").style.visibility = "visible";
 		
-			correctChoice.src = family[familyMemberChosen][emotionChosen.toLowerCase()];//set correct answer
+			correctChoice.src = family[familyMemberChosen][emotionChosen];//set correct answer
 			
 			cueAudio = emotionAudio[emotionChosen];//set cue audio
 		
@@ -518,7 +545,7 @@ var questionInterrupt = function(){
 				if(emotionOptions[i] == emotionChosen){
 					j++;
 				}
-				wrongAnswerArray[i].src = family[familyMemberChosen][emotionOptions[j].toLowerCase()];
+				wrongAnswerArray[i].src = family[familyMemberChosen][emotionOptions[j]];
 				j++;
 			}
 		}
