@@ -415,7 +415,7 @@ function interruptSong(){
 	*******************************************************/
 }
 
-function pauseAudio(){
+function pauseAudio(){  //maybe not needed??
 	audio.pause();	
 }
 
@@ -656,6 +656,17 @@ var questionInterrupt = function(){
 			window.setTimeout(function() {
 				$(".imageDisplay").css("visibility", "visible");
 			}, 100);	
+
+
+			// solomode will work with these call outside of the window.setTimeout below
+			audio.play();
+			displayImages();
+			fadeSong();
+			
+
+
+
+			/*
 			window.setTimeout(function() {
 				
 				if (gameMode[3] == true){//if pick a song is the game mode, play the video
@@ -663,16 +674,16 @@ var questionInterrupt = function(){
 					audio.play();
 				}
 				if (gameMode[2] == true) {
-					displayImages();
 					audio.play();
-					fadeSong(); // new method called here
+					displayImages();
+					//fadeSong(); // new method called here
 				}
 				else{//If the other modes are selected continue the slide show and song
 					displayImages();
 					audio.play();
 				}
 			}, 1500);
-			
+			*/
 		});
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
