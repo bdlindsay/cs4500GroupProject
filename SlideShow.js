@@ -489,8 +489,7 @@ var questionInterrupt = function(){
 		$( "#songOptionsBox").css("display", "none");
 		for(var i = 0;i < songArray.length;i++){
 				$( "#songChoice"+i ).remove();
-			}
-		
+			}	
 	}
 	
 
@@ -658,10 +657,52 @@ var questionInterrupt = function(){
 			}, 100);	
 
 
-			// solomode will work with these call outside of the window.setTimeout below
-			audio.play();
-			displayImages();
-			fadeSong();
+			//THIS LOGIC IS TEMP and needs to be improved
+			if(gameMode[3] == false){
+				// solomode will work with these call outside of the window.setTimeout below
+				audio.play();
+				displayImages();
+				fadeSong();
+			}else{
+			$( "#imageBox").hide();
+			
+			var tag = document.createElement('script');
+     		tag.src = "https://www.youtube.com/iframe_api";
+      		var firstScriptTag = document.getElementsByTagName('script')[0];
+      		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			
+			var player;
+			function onYouTubeIframeAPIReady() {
+				player = new YT.Player('videoPlayer', {
+					height : '390',
+					width : '640',
+					videoId : 'M7lc1UVf-VE',
+					events : {
+						'onReady' : onPlayerReady,
+						'onStateChange' : onPlayerStateChange
+					}
+				});
+			}
+			// 4. The API will call this function when the video player is ready.
+			function onPlayerReady(event) {
+        		event.target.playVideo();
+     		 }
+     		 // 5. The API calls this function when the player's state changes.
+     		 //    The function indicates that when playing a video (state=1),
+      		 //    the player should play for 60 seconds and then stop.
+     		 var done = false;
+     		 function onPlayerStateChange(event) {
+       		 if (event.data == YT.PlayerState.PLAYING && !done) {
+          		setTimeout(stopVideo, 60000);
+          		done = true;
+        		}
+     	 	}
+     	 	
+      		function stopVideo() {
+        	player.stopVideo();
+      		}
+		}
+
 			
 
 
@@ -739,6 +780,14 @@ var questionInterrupt = function(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displaySongChoices(){
 	
+	var videoSrcArray = ["https://youtu.be/8xg3vE8Ie_E",  //Taylor Swift-Love Story
+						"https://youtu.be/WmKpINPZ4D8", //Def Leppard & Talyor Swift-Love Story
+						"https://youtu.be/B-9V4mfWAWk?list=PL7MRq00E-e4hr1hWX-mMWt648hGcdVzrD",//Def Leppard & Taylor Swift - Photograph 
+						"https://youtu.be/YECmDiBhADk?t=12s", //For The First Time In Forever - FROZEN 
+						"https://youtu.be/L0MK7qz13bU?t=17s", //Let It Go Sing - FROZEN
+						"https://youtu.be/V-zXT5bIBM0?t=2s" //Do You Want to Build a Snowman - FROZEN
+						];
+	
 	//Need to stop current audio here just in case it is playing, this
 	//would be possible if new song button was clicked in the middle of the song
 	
@@ -746,19 +795,19 @@ function displaySongChoices(){
 		$( "#songChoice"+i ).remove();
 	}
 
-	var songSource;
 	$( "#imageBox").hide(); //Make original slide show disappear
+	$("#pausesText").hide();//hide because this is not needed
 	$( ".mode3ButtonArea").css("display", "block"); //display buttons for this gameMode
 	$( "#songOptionsBox" ).css("display","block");
-	$("#pausesText").hide();//hide because this is not needed
+	
 	
 	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
 	for(var i = 0; i < songArray.length; i++)(function(i){ 
-		$( "#songOptionsBox").append("<div id=\"songChoice"+i+"\"class=\"songChoice\">"+songArray[i]+"</div>");
 		
-		songSource = songArray[i];//For s
+		$( "#songOptionsBox").append("<div id=\"songChoice"+i+"\"class=\"songChoice\">"+videoSrcArray[i]+"</div>");
+		
 		$( "#songChoice"+i).click(function() {
-				alert(songArray[i]+" picked");//set the correct audio here
+				alert(videoSrcArray[i]+" picked");//set the correct audio here
 				questionInterrupt();
 			});
 	})(i);
