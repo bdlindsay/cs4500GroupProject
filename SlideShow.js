@@ -621,40 +621,9 @@ var questionInterrupt = function(){
 
 			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
 				$(".mode3ButtonArea").css("display", "block");
-							var tag = document.createElement('script');
-    			tag.src = "https://www.youtube.com/iframe_api";
-    			var firstScriptTag = document.getElementsByTagName('script')[0];
-    			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-				window.onYouTubePlayerAPIReady = function() {
-					console.log("YouTube Ready");
-					player = new YT.Player('videoPlayer', {
-						height : '490',
-						width : '880',
-						videoId : videoChosen,
-						playerVars : {
-							controls : 1,
-							showinfo : 0,
-							rel : 0,
-							showsearch : 0,
-							iv_load_policy : 3
-						},
-						events : {
-							'onStateChange' : onPlayerStateChange
-						}
-					});
-				}; 
-
-				function onPlayerStateChange(event) {
-					if (event.data == YT.PlayerState.PLAYING && !done) {
-						// setTimeout(stopVideo, 6000);
-						done = true;
-					} else if (event.data == YT.PlayerState.ENDED) {
-						location.reload();
-					}
-				}
-
+				$( "#imageBox").hide();
+				$("#videoPlayer").show();
+				loadYouTubePlayer();
 			}
 
 			
@@ -782,6 +751,7 @@ function displaySongChoices(){
 	$("#pausesText").hide();//hide because this is not needed
 	$( ".mode3ButtonArea").css("display", "block"); //display buttons for this gameMode
 	$( "#songOptionsBox" ).css("display","block");
+	$("#videoPlayer").hide();
 	
 	
 	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
@@ -798,6 +768,58 @@ function displaySongChoices(){
 	
 }
 ////////////End of displaySongChoices///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+//functions for using YouTube Player/////////////////////////////////////////////////////////////
+function loadYouTubePlayer(){
+
+	//Dynamically add script for Youtube API
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	window.onYouTubePlayerAPIReady = function() {
+		console.log("YouTube Ready");
+		player = new YT.Player('videoPlayer', {
+			height : '490',
+			width : '880',
+			videoId : videoChosen,
+			playerVars : {
+				controls : 1,
+				showinfo : 0,
+				rel : 0,
+				showsearch : 0,
+				iv_load_policy : 3
+			},
+			events : {
+				'onReady' : onPlayerReady,
+				'onStateChange' : onPlayerStateChange
+				//'onError': catchError //If we want to cath the error this is where we would do it.
+			}
+		});
+	};
+
+	function onPlayerReady(event) {
+		//event.target.playVideo();
+		player.playVideo();
+	}
+
+	function onPlayerStateChange(event) {
+		if (event.data == YT.PlayerState.PLAYING) {
+			setTimeout(stopVideo, 6000);
+		} else if (event.data == YT.PlayerState.ENDED) {
+			location.reload();
+		}
+	}
+
+	function stopVideo() {
+		player.stopVideo();
+		displaySongChoices();
+	}
+
+}
+////////////End of displaySongChoices///////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 /*_____________________________*/
 /*                             */
