@@ -30,8 +30,7 @@ var maxPauses = document.getElementById("pSlider").value; // pulled from slider 
 var shouldPause = true;
 var gameMode = { 1:false,2:false,3:false}; //This is used to set which game mode has been selected
 var wrongChoicesForGame2; //this is the number of wrong choices that will display on game 2
-var songChoice = 0; // current song choice for audio (maybe doesn't need to be global)
-
+var songChoice = 0; // determines starting song for solo play (gameMode[2]) - TODO could change with options menu
 ////////////////////////////////////////////////////////////////////////////
 ////////////// boolean var for use of reset game and stop pauses ///////////
 ////////////////////////////////////////////////////////////////////////////
@@ -146,12 +145,12 @@ var congratsArray = ["cs4500Media/encouragement/tada.mp3","cs4500Media/encourage
 ///////////////////////////////////////////////////////////////////
 //// This array holds all the song choices used in the game   /////
 ///////////////////////////////////////////////////////////////////
-var	songArray = ["cs4500Media/Songs/letItGo.mp3", 
-				"cs4500Media/Songs/forTheFirstTime.mp3", 
-				"cs4500Media/Songs/loveStoryDefTay.mp3", 
-				"cs4500Media/Songs/photographDefTay.mp3",
-				"cs4500Media/Songs/snowman.mp3", 
-				"cs4500Media/Songs/Love Story-Taylor Swift.mp3"];
+var	songArray = ["cs4500Media/Songs/1MFadeLetItGoMP3.mp3", 
+				"cs4500Media/Songs/1MFadeFirstTimeInForeverMP3.mp3", 
+				"cs4500Media/Songs/1MFadeDefTaylorLoveStoryMP3.mp3", 
+				"cs4500Media/Songs/1MFadePhotographMP3.mp3",
+				"cs4500Media/Songs/1MFadeSnowmanMP3.mp3", 
+				"cs4500Media/Songs/1MFadeLoveStoryMP3.mp3"];
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -200,62 +199,56 @@ function displayImages(){
 	function showImage(){
 		//console.log(counter);		
 		img.src = imageArray[counter].src;
-			if (gameMode[2] == true) {
-
-
-			/*
-			// count to 30 and fade out song
-			oneMinCounter++;
-			if (oneMinCounter >= 30) { // image every ~2 sec so 30 is 1 minute, lower for testing
-				while (audio.volume > .000001) { // fade out 
-					audio.volume -= .000001; 
-				}
-				pauseAudio(); // pause audio after fading out
-				audio.volume = 1; // reset volume for next song
-				clearInterval(interval);
-				oneMinCounter = 0;
-				// TODO Have a different DURATION_PER_IMAGE for each song?
-				// TODO normalize volumes somehow?
-				audio = new Audio(songArray[songChoice]);
-				songChoice++;
-				if (songChoice > 5) { // game will keep repeating until page refresh or options change
-					songChoice = 0;
-				}
-				questionInterrupt();
-			} */
-		} // end solo play code
-		
-		else if(gameMode[3] == true){//Begin game mode 3 code
-			
-		}//End of code if mode 3 is selected
 		
 		/* TODO test code - used for workaround to no PHP for now*/
 		loadOptions();
 		
-		if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
-			counter = 0;
-			pausePlacementCounter++;
-		}
-		else if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
-			clearInterval(interval);
-			numPauses++; // we paused
-			updatePauses();
-			interruptSong();
-			// only pause maxPauses times
-			if (numPauses >= maxPauses) {
-				shouldPause = false;
+		if(gameMode[3] == true){//Begin game mode 3 code
+		
+		//End of mode 3 logic	
+		} else if (gameMode[2] == true) {
+			if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
+				counter = 0;
+				pausePlacementCounter++;
+			} else {
+				counter++;
 			}
-			counter++;
-			pausePlacementCounter = 0;
-		}
-		else{
-			counter++;
-			pausePlacementCounter++;
+		// End of mode 2 logic
+		} else if (gameMode[1] == true) {
+			if(pausePlacementCounter >= pausePlacement && shouldPause){//Manually setting time of interupt for now
+				clearInterval(interval);
+				numPauses++; // we paused
+				updatePauses();
+				interruptSong();
+				// only pause maxPauses times
+				if (numPauses >= maxPauses) {
+					shouldPause = false;
+				}
+				counter++;
+				pausePlacementCounter = 0;
+			} else{
+				counter++;
+				pausePlacementCounter++;
+			}
+		// End of mode1 logic
 		}
 		// if song has ended, reset the app
 		if(audio.ended) {
-			// reset everything for a new start of program
-			resetGame();
+			if (gameMode[2] == true) {
+				clearInterval(interval);
+				songChoice++;
+				audio.src = songArray[songChoice];
+				audio.load();
+				console.log(audio.src);
+				if (songChoice <= 5){			
+					questionInterrupt();
+				} else {
+					resetGame();
+				}
+			} else {	
+				// reset everything for a new start of program
+				resetGame();
+			}
 		}
 	}
 	////end of show image///////////////////////////////////////////////////////////////
@@ -263,24 +256,24 @@ function displayImages(){
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-/////////////////////////////////////
-// Function to fade the song ////////
-/////////////////////////////////////
-function fadeSong() {
-	if (gameMode[2] == true) {
-		$("#playing").animate({volume: 0}, 10000); 
-
-			window.setTimeout(function() {
-				audio.pause();
-				clearInterval(interval);
-				// can add a new audio.src for a new song here
-				$("#playing")[0].volume = 1;
-				questionInterrupt();
-			}, 10100);
-	}
-
-}
-
+// /////////////////////////////////////
+// // Function to fade the song //////// have own faded versions of songs now
+// /////////////////////////////////////
+// function fadeSong() {
+	// if (gameMode[2] == true) {
+		// $("#playing").animate({volume: 0}, 10000); 
+// 
+			// window.setTimeout(function() {
+				// audio.pause();
+				// clearInterval(interval);
+				// // can add a new audio.src for a new song here
+				// $("#playing")[0].volume = 1;
+				// questionInterrupt();
+			// }, 10100);
+	// }
+// 
+// }
+// 
 
 
 
@@ -317,7 +310,7 @@ function resetGame() {
 	numPauses = 0;
 	updatePauses();
 	pausePlacementCounter = 0;
-
+	songChoice = 0; // reset song selection for solo play
 	
 	if (gameMode[2] == true) { // removes the choices for gameMode2 on restart
 		$( "#correctChoice" ).remove();
@@ -688,9 +681,16 @@ var questionInterrupt = function(){
 			window.setTimeout(function() {
 				$(".imageDisplay").css("visibility", "visible");
 			}, 100);	
-
-
-				/*
+			// TODO delay to not interfere with previous audio
+			//while (!goodJobAudio.ended) {}; // busy wait for good job audio to finish
+			if (gameMode[2] == true) {
+				if (songChoice == 0) {
+					audio = new Audio("cs4500Media/Songs/1MFadeLoveStoryMP3.mp3"); // change to 1 min fade audio
+				}
+				audio.play();
+				displayImages();
+			}	
+			/*
 			window.setTimeout(function() {
 				
 				if (gameMode[3] == true){//if pick a song is the game mode, play the video
