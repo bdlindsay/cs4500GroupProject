@@ -762,6 +762,9 @@ function displaySongChoices(){
 		$( "#songChoice"+i).click(function() {
 				alert(videoSrcArray[i]+" picked");//set the correct audio here
 				videoChosen = videoSrcArray[i];
+				if(player != null){
+					player.cueVideoById(videoChosen);
+				}
 				questionInterrupt();
 			});
 	})(i);
@@ -770,8 +773,8 @@ function displaySongChoices(){
 ////////////End of displaySongChoices///////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //functions for using YouTube Player/////////////////////////////////////////////////////////////
+var player;
 function loadYouTubePlayer(){
-
 	//Dynamically add script for Youtube API
 	var tag = document.createElement('script');
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -781,15 +784,20 @@ function loadYouTubePlayer(){
 	window.onYouTubePlayerAPIReady = function() {
 		console.log("YouTube Ready");
 		player = new YT.Player('videoPlayer', {
-			height : '490',
+			height : '490',  //min dimensions is 200x200
 			width : '880',
 			videoId : videoChosen,
-			playerVars : {
-				controls : 1,
-				showinfo : 0,
-				rel : 0,
-				showsearch : 0,
-				iv_load_policy : 3
+			playerVars : { //look at documentation to see what each do.
+				enablejsapi: 1, //enables the player to be controlled via IFrame or JavaScript Player API calls
+				controls : 0, //do not show controls (play,seek,etc)
+				fs:1,       //allow fullscreen
+				showinfo : 0,  //do not display video info like title
+				rel : 0,   //related videos set to not show
+				//showsearch : 0, //no idea what this is
+				iv_load_policy : 3, //video annotations not shown
+				modestbranding:1 //player does not show a YouTube logo except on pause
+				//start: 1 //specify start time in seconds
+				//autoplay: 1 //this does not work in firefox
 			},
 			events : {
 				'onReady' : onPlayerReady,
@@ -798,26 +806,29 @@ function loadYouTubePlayer(){
 			}
 		});
 	};
-
-	function onPlayerReady(event) {
-		//event.target.playVideo();
-		player.playVideo();
-	}
-
-	function onPlayerStateChange(event) {
-		if (event.data == YT.PlayerState.PLAYING) {
-			setTimeout(stopVideo, 6000);
-		} else if (event.data == YT.PlayerState.ENDED) {
-			location.reload();
-		}
-	}
-
-	function stopVideo() {
-		player.stopVideo();
-		displaySongChoices();
-	}
-
 }
+
+function onPlayerReady(event) {
+	//event.target.playVideo();
+	//player.cueVideoById(videoChosen);
+	player.playVideo();
+    
+}
+
+function onPlayerStateChange(event) {
+	if (event.data == YT.PlayerState.PLAYING) {
+		setTimeout(stopVideo, 6000);
+	} else if (event.data == YT.PlayerState.ENDED) {
+		location.reload();
+	}
+}
+
+function stopVideo() {
+	player.stopVideo();
+	displaySongChoices();
+}
+
+
 ////////////End of displaySongChoices///////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////
