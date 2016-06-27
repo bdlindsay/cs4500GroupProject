@@ -628,9 +628,42 @@ var questionInterrupt = function(){
 
 			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
 				$(".mode3ButtonArea").css("display", "block");
+							var tag = document.createElement('script');
+    			tag.src = "https://www.youtube.com/iframe_api";
+    			var firstScriptTag = document.getElementsByTagName('script')[0];
+    			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+				window.onYouTubePlayerAPIReady = function() {
+					console.log("YouTube Ready");
+					player = new YT.Player('videoPlayer', {
+						height : '490',
+						width : '880',
+						videoId : videoChosen,
+						playerVars : {
+							controls : 1,
+							showinfo : 0,
+							rel : 0,
+							showsearch : 0,
+							iv_load_policy : 3
+						},
+						events : {
+							'onStateChange' : onPlayerStateChange
+						}
+					});
+				}; 
+
+				function onPlayerStateChange(event) {
+					if (event.data == YT.PlayerState.PLAYING && !done) {
+						// setTimeout(stopVideo, 6000);
+						done = true;
+					} else if (event.data == YT.PlayerState.ENDED) {
+						location.reload();
+					}
+				}
+
 			}
 
-			
 			
 			for(var i = 0;i < wrongChoicesForGame2;i++){
 				$( "#wrongChoice"+i ).remove();
@@ -657,57 +690,7 @@ var questionInterrupt = function(){
 			}, 100);	
 
 
-			//THIS LOGIC IS TEMP and needs to be improved
-			if(gameMode[3] == false){
-				// solomode will work with these call outside of the window.setTimeout below
-				audio.play();
-				displayImages();
-				fadeSong();
-			}else{
-			$( "#imageBox").hide();
-			
-			var tag = document.createElement('script');
-     		tag.src = "https://www.youtube.com/iframe_api";
-      		var firstScriptTag = document.getElementsByTagName('script')[0];
-      		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			
-			var player;
-			function onYouTubeIframeAPIReady() {
-				player = new YT.Player('videoPlayer', {
-					height : '390',
-					width : '640',
-					videoId : 'M7lc1UVf-VE',
-					events : {
-						'onReady' : onPlayerReady,
-						'onStateChange' : onPlayerStateChange
-					}
-				});
-			}
-			// 4. The API will call this function when the video player is ready.
-			function onPlayerReady(event) {
-        		event.target.playVideo();
-     		 }
-     		 // 5. The API calls this function when the player's state changes.
-     		 //    The function indicates that when playing a video (state=1),
-      		 //    the player should play for 60 seconds and then stop.
-     		 var done = false;
-     		 function onPlayerStateChange(event) {
-       		 if (event.data == YT.PlayerState.PLAYING && !done) {
-          		setTimeout(stopVideo, 60000);
-          		done = true;
-        		}
-     	 	}
-     	 	
-      		function stopVideo() {
-        	player.stopVideo();
-      		}
-		}
-
-			
-
-
-
-			/*
+				/*
 			window.setTimeout(function() {
 				
 				if (gameMode[3] == true){//if pick a song is the game mode, play the video
@@ -780,12 +763,12 @@ var questionInterrupt = function(){
 //////////////////////////////////////////////////////////////////////////////////////////////
 function displaySongChoices(){
 	
-	var videoSrcArray = ["https://youtu.be/8xg3vE8Ie_E",  //Taylor Swift-Love Story
-						"https://youtu.be/WmKpINPZ4D8", //Def Leppard & Talyor Swift-Love Story
-						"https://youtu.be/B-9V4mfWAWk?list=PL7MRq00E-e4hr1hWX-mMWt648hGcdVzrD",//Def Leppard & Taylor Swift - Photograph 
-						"https://youtu.be/YECmDiBhADk?t=12s", //For The First Time In Forever - FROZEN 
-						"https://youtu.be/L0MK7qz13bU?t=17s", //Let It Go Sing - FROZEN
-						"https://youtu.be/V-zXT5bIBM0?t=2s" //Do You Want to Build a Snowman - FROZEN
+	var videoSrcArray = ["8xg3vE8Ie_E",  //Taylor Swift-Love Story
+						"WmKpINPZ4D8", //Def Leppard & Talyor Swift-Love Story
+						"B-9V4mfWAWk",//Def Leppard & Taylor Swift - Photograph 
+						"YECmDiBhADk", //For The First Time In Forever - FROZEN 
+						"L0MK7qz13bU", //Let It Go Sing - FROZEN
+						"V-zXT5bIBM0" //Do You Want to Build a Snowman - FROZEN
 						];
 	
 	//Need to stop current audio here just in case it is playing, this
@@ -808,6 +791,7 @@ function displaySongChoices(){
 		
 		$( "#songChoice"+i).click(function() {
 				alert(videoSrcArray[i]+" picked");//set the correct audio here
+				videoChosen = videoSrcArray[i];
 				questionInterrupt();
 			});
 	})(i);
