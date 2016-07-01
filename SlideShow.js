@@ -496,8 +496,30 @@ var questionInterrupt = function(){
 	//---------------------------------------------------//
 	//Choose right answer and worng answers for question-//
 	//---------------------------------------------------//
-		// TODO Remove surprised as an emotion choice.
-		var question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+		
+		/* The next variable "choose_play_solo_questions" gets its value
+		   for a dropbox element in "main.html". If the value is "1" it means
+		   only ask family questions, "2" means only ask emotion questions. 
+		   "3" means ask both. */
+		var choose_play_solo_questions = document.getElementById("choose_play_solo_questions").value;
+		
+		var question_type;
+		
+		if (choose_play_solo_questions == "family")
+		{
+			question_type = 1;
+		}
+		
+		else if (choose_play_solo_questions == "emotions")
+		{
+			question_type = 2;
+		}
+		
+		else if (choose_play_solo_questions == "family_and_emotions")
+		{
+			question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+		}
+		
 		var familyMemberChosen = Math.floor(Math.random()*(family.length-1)); //pick random family member for correct answer
 		
 		/* The emotion "Surprised" is being removed for now
