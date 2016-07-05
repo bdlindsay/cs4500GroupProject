@@ -464,10 +464,10 @@ function playActionAudio() {
 	
 	var actionAudio = new Audio(cueAudio);
 	actionAudio.play();
-// 
-	// window.setTimeout(function () {
-		// actionAudio.play();
-	// }, 200);
+
+	window.setTimeout(function () {
+		actionAudio.play();
+	}, 400);
 
 }
 
