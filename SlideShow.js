@@ -463,9 +463,11 @@ function beginPlaying(gameModeChoice){
 function playActionAudio() {
 	
 	var actionAudio = new Audio(cueAudio);
-	window.setTimeout(function () {
-		actionAudio.play();
-	}, 200);
+	actionAudio.play();
+// 
+	// window.setTimeout(function () {
+		// actionAudio.play();
+	// }, 200);
 
 }
 
