@@ -322,6 +322,7 @@
 		position: absolute;
 		display: none;
 		text-align:center;
+		height: 10vw;
 	}
 	.songOptionsDisplayArea{
 		display:none;
@@ -330,6 +331,15 @@
 		margin:auto;
 		padding:3vw;
 		overflow: scroll;
+	}
+	
+	.videoPlayer-Container{
+		display:none;
+		margin-top: 4vw;
+		margin-left: auto;
+		margin-right: auto;
+		width:64vw;
+		height:36vw;
 	}
 
 

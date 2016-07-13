@@ -646,7 +646,7 @@ var questionInterrupt = function(){
 			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
 				$(".mode3ButtonArea").css("display", "block");
 				$( "#imageBox").hide();
-				$("#videoPlayer").show();
+				$(".videoPlayer-Container").css("display", "block");
 				loadYouTubePlayer();
 			}
 
@@ -775,7 +775,7 @@ function displaySongChoices(){
 	$("#pausesText").hide();//hide because this is not needed
 	$( ".mode3ButtonArea").css("display", "block"); //display buttons for this gameMode
 	$( "#songOptionsBox" ).css("display","block");
-	$("#videoPlayer").hide();
+	$(".videoPlayer-Container").css("display", "none");
 	
 	
 	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
@@ -808,8 +808,8 @@ function loadYouTubePlayer(){
 	window.onYouTubePlayerAPIReady = function() {
 		console.log("YouTube Ready");
 		player = new YT.Player('videoPlayer', {
-			height : '490',  //min dimensions is 200x200
-			width : '880',
+			height : '100%',  //min dimensions is 200x200
+			width : '100%',
 			videoId : videoChosen,
 			playerVars : { //look at documentation to see what each do.
 				enablejsapi: 1, //enables the player to be controlled via IFrame or JavaScript Player API calls
@@ -841,7 +841,7 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
 	if (event.data == YT.PlayerState.PLAYING) {
-		setTimeout(stopVideo, 6000);
+		setTimeout(stopVideo, 60000);
 	} else if (event.data == YT.PlayerState.ENDED) {
 		location.reload();
 	}
