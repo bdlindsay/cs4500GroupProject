@@ -57,7 +57,7 @@
 	.activebuttonarea {
 		position: absolute;
 	}
-		/* This is the style rule for the all buttons on the webpage. */
+		/* This is the style rule for most of the buttons on the webpage. */
 	.activebutton {
 		/*________________*/
 		/*                */
@@ -319,17 +319,38 @@
 	}
 	
 	.mode3ButtonArea{
-		position: absolute;
 		display: none;
 		text-align:center;
-		height: 10vw;
+		padding-top: 3vw;
+	}
+
+	.activebutton3 {
+		background-color: #b300b3; /* medium-purple */
+		border: none;
+		color: white;
+		border: 2px solid #f7f7f7; /* off white */
+		font-size: 25px;
+		border-radius: 20px;
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
+		box-shadow: 0 9px #999;
+		transition-duration: .4s;
+	}
+
+	.activebutton3:hover {
+		background-color: #ff1aff; /* light purple */
+		color: black;
+	}
+
+	.activebutton3:active {
+		box-shadow: 0 5px #666;
+		transform: translateY(4px);
 	}
 	.songOptionsDisplayArea{
 		display:none;
-		height: 45vw;
+		height: 40vw;
 		width: 80vw;
 		margin:auto;
-		padding:3vw;
+		padding-top:3vw;
 		overflow: scroll;
 	}
 	
@@ -340,6 +361,7 @@
 		margin-right: auto;
 		width:64vw;
 		height:36vw;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
 
@@ -680,7 +702,7 @@
 		width: 100%;
 	}
 
-	/* This is the style rule for the all buttons on the webpage. */
+	/* This is the style rule for most of the buttons on the webpage. */
 	.activebutton {
 		padding: 2%;
 		width: 51vw;
@@ -754,21 +776,25 @@
 	/*__________________________*/
 	
 	.songChoice{
-		height: 30vw;
-		width: 30vw;
-		margin: 5px;
+		height: 25vw;
+		width: 25vw;
+		margin: 8px;
+		margin-left:65px;
 	}
 	
-	.mode3ButtonArea{
-		top: 68%;
-		width: 100%;
+	.activebutton3 {
+		padding: 2%;
+		width: 51vw;
+		margin: 1%;
 	}
 	
-	/*.songOptionsDisplayArea{
-		height: 60vw;
-		width: 60vw;
-		margin: 5px;
-	}*/
+	.songOptionsDisplayArea{
+		height: 86vw;
+	}
+	
+	.videoPlayer-Container {
+    	margin-top: 30vw;
+	}	
 
 }
 
@@ -785,7 +811,7 @@
 	}
 
 
-	/* This is the style rule for the all buttons on the webpage. */
+	/* This is the style rule for most of the buttons on the webpage. */
 	.activebutton {
 		margin-top: 15%;
 		padding: 4%;
@@ -862,9 +888,10 @@
 		margin:5px;
 	}
 	
-	.mode3ButtonArea{
-		top: 68%;
-		width: 100%;
+	.activebutton3 {
+		margin-top: 3%;
+		padding: 15px 15px;
+		width: 22vw;
 	}
 	
 	/*.songOptionsDisplayArea{
@@ -884,7 +911,7 @@
 		width: 100%;
 	}
 
-	/* This is the style rule for the all buttons on the webpage. */
+	/* This is the style rule for most of the buttons on the webpage. */
 	.activebutton {
 		padding: 15px 15px;
 		width: 250px;
@@ -995,9 +1022,9 @@
 		margin:5px;
 	}
 	
-	.mode3ButtonArea{
-		top: 68%;
-		width: 100%;
+	.activebutton3 {
+		padding: 15px 15px;
+		width: 250px;
 	}
 	
 	/*.songOptionsDisplayArea{

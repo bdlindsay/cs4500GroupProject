@@ -301,6 +301,8 @@ function resetGame() {
 	$("#pausesText").show();
 	$( "#songOptionsBox" ).css("display","none");
 	$( ".mode3ButtonArea").css("display", "none");
+	$(".videoPlayer-Container").css("display", "none");
+	player.stopVideo();
 	$( "#imageBox").show();
 	$("#optionsSymDiv").hide();
 	document.getElementById("imageBox").style.visibility = "visible";
@@ -417,7 +419,9 @@ function pauseAudio(){  //maybe not needed??
 function beginPlaying(gameModeChoice){
 	isGameRunning = true;
 	//audio.canPlayType()//checks if the browser can play the audio file
-	
+	if (player != undefined){
+		player.stopVideo();//if youtube video is playing stop it
+	}
 	//check and set which game mode was selected
 	if(gameModeChoice =="game1"){
 		gameMode[1] = true;
