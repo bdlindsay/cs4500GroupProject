@@ -302,7 +302,11 @@ function resetGame() {
 	$( "#songOptionsBox" ).css("display","none");
 	$( ".mode3ButtonArea").css("display", "none");
 	$(".videoPlayer-Container").css("display", "none");
-	player.stopVideo();
+	if (player != undefined){
+		player.destroy();//if youtube video is playing stop it and destroy iframe
+		player = undefined; //this is required for proper cleanup
+		clearTimeout(videoTimeout);
+	}
 	$( "#imageBox").show();
 	$("#optionsSymDiv").hide();
 	document.getElementById("imageBox").style.visibility = "visible";
@@ -420,7 +424,9 @@ function beginPlaying(gameModeChoice){
 	isGameRunning = true;
 	//audio.canPlayType()//checks if the browser can play the audio file
 	if (player != undefined){
-		player.stopVideo();//if youtube video is playing stop it
+		player.destroy();//if youtube video is playing stop it and destroy iframe
+		player = undefined; //this is required for proper cleanup
+		clearTimeout(videoTimeout);
 	}
 	//check and set which game mode was selected
 	if(gameModeChoice =="game1"){
@@ -645,14 +651,6 @@ var questionInterrupt = function(){
 			document.getElementById("textSupportDiv").style.visibility = "hidden";
 			//document.getElementById("replayAudioCue").style.visibility = "hidden";
 			$("#replayAudioCue").hide();
-			
-
-			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
-				$(".mode3ButtonArea").css("display", "block");
-				$( "#imageBox").hide();
-				$(".videoPlayer-Container").css("display", "block");
-				loadYouTubePlayer();
-			}
 
 			
 			for(var i = 0;i < wrongChoicesForGame2;i++){
@@ -687,24 +685,13 @@ var questionInterrupt = function(){
 				audio.play();
 				displayImages();
 			}	
-			/*
-			window.setTimeout(function() {
-				
-				if (gameMode[3] == true){//if pick a song is the game mode, play the video
-					//play video here, might not need the line below after youtube implementation
-					audio.play();
-				}
-				if (gameMode[2] == true) {
-					audio.play();
-					displayImages();
-					//fadeSong(); // new method called here
-				}
-				else{//If the other modes are selected continue the slide show and song
-					displayImages();
-					audio.play();
-				}
-			}, 1500);
-			*/
+			
+			if (gameMode[3] == true) {//if we are on mode 3 display main menu and new song
+				$(".mode3ButtonArea").css("display", "block");
+				$( "#imageBox").hide();
+				$(".videoPlayer-Container").css("display", "block");
+				loadYouTubePlayer();
+			}
 		});
 	
 	//Manually assigning click events to wrong answers for now, until better solution is found.
@@ -791,7 +778,9 @@ function displaySongChoices(){
 				//alert(videoSrcArray[i]+" picked");//set the correct audio here
 				videoChosen = videoSrcArray[i];
 				if(player != null){
-					player.cueVideoById(videoChosen);//que up video selected
+					//This does not work because it breaks the autoplay for the next song
+					//player.cueVideoById(videoChosen);//que up video selected
+					//player.loadVideoById(videoChosen);
 				}
 				questionInterrupt();
 			});
@@ -809,7 +798,7 @@ function loadYouTubePlayer(){
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-	window.onYouTubePlayerAPIReady = function() {
+	onYouTubePlayerAPIReady = function() {
 		console.log("YouTube Ready");
 		player = new YT.Player('videoPlayer', {
 			height : '100%',  //min dimensions is 200x200
@@ -834,6 +823,7 @@ function loadYouTubePlayer(){
 			}
 		});
 	};
+	onYouTubePlayerAPIReady();
 }
 
 function onPlayerReady(event) {
@@ -842,17 +832,19 @@ function onPlayerReady(event) {
 	player.playVideo();
     
 }
-
+var videoTimeout;
 function onPlayerStateChange(event) {
 	if (event.data == YT.PlayerState.PLAYING) {
-		setTimeout(stopVideo, 60000);
-	} else if (event.data == YT.PlayerState.ENDED) {
-		location.reload();
+		videoTimeout = setTimeout(stopVideo, 60000);
 	}
 }
 
 function stopVideo() {
-	player.stopVideo();
+	if (player != undefined){
+		player.destroy();//if youtube video is playing stop it and destroy iframe
+		player = undefined; //this is required for proper cleanup
+	}
+	clearTimeout(videoTimeout);
 	displaySongChoices();
 }
 
