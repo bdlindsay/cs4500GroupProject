@@ -785,13 +785,13 @@ function displaySongChoices(){
 	//Create a div for every song, currently just text is displayed but eventually the thumbnail for the song will be
 	for(var i = 0; i < songArray.length; i++)(function(i){ 
 		
-		$( "#songOptionsBox").append("<div id=\"songChoice"+i+"\"class=\"songChoice\">"+videoSrcArray[i]+"</div>");
+		$( "#songOptionsBox").append("<div style=\"background-image: url(http://img.youtube.com/vi/"+videoSrcArray[i]+"/mqdefault.jpg);\" id=\"songChoice"+i+"\"class=\"songChoice\"></div>");
 		
 		$( "#songChoice"+i).click(function() {
-				alert(videoSrcArray[i]+" picked");//set the correct audio here
+				//alert(videoSrcArray[i]+" picked");//set the correct audio here
 				videoChosen = videoSrcArray[i];
 				if(player != null){
-					player.cueVideoById(videoChosen);
+					player.cueVideoById(videoChosen);//que up video selected
 				}
 				questionInterrupt();
 			});

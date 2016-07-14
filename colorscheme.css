@@ -316,6 +316,9 @@
 	.songChoice{
 		border: 5px solid #9999ff;
 		float:left;
+		background-repeat: no-repeat;
+		background-size:cover;
+		background-position:center center;
 	}
 	
 	.mode3ButtonArea{
