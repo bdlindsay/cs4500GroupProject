@@ -80,18 +80,18 @@ var text_on_pause = "I love you";
 var family = [
  	{ name:"Grandpa",
  		self:"cs4500Media/images/grandpa/AlainaGrandad1-USE copy.JPG",
- 		Mad:"cs4500Media/images/grandpa/emotions/angry2.jpg",
- 		Happy:"cs4500Media/images/grandpa/emotions/happy2.jpg",
- 		Sad:"cs4500Media/images/grandpa/emotions/sad2.jpg",
+ 		Mad:"cs4500Media/images/grandpa/emotions/GrandpaMad.jpg",
+ 		Happy:"cs4500Media/images/grandpa/emotions/GrandpaHappy.jpg",
+ 		Sad:"cs4500Media/images/grandpa/emotions/GrandpaSad.jpg",
 		
 		
 		
  		whoAudio:"cs4500Media/images/grandpa/whoisgrandpa.mp3"},
- 	{ name:"Cece",
+ 	{ name:"CC",
  		self:"cs4500Media/images/grandma/Grandparents-Alaina-USE copy.JPG",
- 		Mad:"cs4500Media/images/grandma/emotions/angry2.jpg",
- 		Happy:"cs4500Media/images/grandma/emotions/happy2.jpg",
- 		Sad:"cs4500Media/images/grandma/emotions/sad2.jpg",
+ 		Mad:"cs4500Media/images/grandma/emotions/CCMad.jpg",
+ 		Happy:"cs4500Media/images/grandma/emotions/CCHappy.jpg",
+ 		Sad:"cs4500Media/images/grandma/emotions/CCSad.jpg",
 		
  		/* The emotion "Surprised" is removed right now at
 		   the request of the family. */
@@ -100,9 +100,9 @@ var family = [
  		whoAudio:"cs4500Media/images/grandma/whoiscece.mp3"},
  	{ name:"Mom",
  		self:"cs4500Media/images/mom/MomAndAlaina.jpg",
- 		Mad:"cs4500Media/images/mom/emotions/angry.jpg",
- 		Happy:"cs4500Media/images/mom/emotions/happy.jpg",
- 		Sad:"cs4500Media/images/mom/emotions/sad.jpg",
+ 		Mad:"cs4500Media/images/mom/emotions/MommyMad.jpg",
+ 		Happy:"cs4500Media/images/mom/emotions/MommyHappy.jpg",
+ 		Sad:"cs4500Media/images/mom/emotions/MommySad.jpg",
 		
  		/* The emotion "Surprised" is removed right now at
 		   the request of the family. */
@@ -111,9 +111,9 @@ var family = [
  		whoAudio:"cs4500Media/images/mom/whoismom.mp3"},
  	{ name:"Dad",
  		self:"cs4500Media/images/dad/AlainaFamilyC.jpg",
- 		Mad:"cs4500Media/images/dad/emotions/angry2.jpg",
- 		Happy:"cs4500Media/images/dad/emotions/happy2.jpg",
- 		Sad:"cs4500Media/images/dad/emotions/sad2.jpg",
+ 		Mad:"cs4500Media/images/dad/emotions/DaddyMad.jpg",
+ 		Happy:"cs4500Media/images/dad/emotions/DaddyHappy.jpg",
+ 		Sad:"cs4500Media/images/dad/emotions/DaddySad.jpg",
 		
  		/* The emotion "Surprised" is removed right now at
 		   the request of the family. */
@@ -122,9 +122,9 @@ var family = [
  		whoAudio:"cs4500Media/images/dad/whoisdad.mp3"},
  	{ name:"Colin",
  		self:"cs4500Media/images/brother/BrotherCullen.JPG",
- 		Mad:"cs4500Media/images/brother/emotions/angry2.jpg",
- 		Happy:"cs4500Media/images/brother/emotions/happy2.jpg",
- 		Sad:"cs4500Media/images/brother/emotions/sad2.jpg",
+ 		Mad:"cs4500Media/images/brother/emotions/CullenMad.jpg",
+ 		Happy:"cs4500Media/images/brother/emotions/CullenJackHappy.jpg",
+ 		Sad:"cs4500Media/images/brother/emotions/CullenSad.jpg",
 		
  		/* The emotion "Surprised" is removed right now at
 		   the request of the family. */
@@ -162,6 +162,7 @@ function displayImages(){
 	var SONG_DURATION = audio.duration; //return the duration of the song in seconds,rounded up. - play together 
 	var croppedDuration = SONG_DURATION - 60;
 	pausePlacement = Math.floor((croppedDuration/(DURATION_PER_IMAGE/1000))/maxPauses);
+	var timeoutCounter = 0;
 	
 	numOfImages = 7;
 	
@@ -201,7 +202,7 @@ function displayImages(){
 		img.src = imageArray[counter].src;
 		
 		/* TODO test code - used for workaround to no PHP for now*/
-		loadOptions();
+		//loadOptions();
 		
 		if(gameMode[3] == true){//Begin game mode 3 code
 		
@@ -210,8 +211,10 @@ function displayImages(){
 			if(counter == (numOfImages-1)){ //reset counter to 0 if we are at max image array
 				counter = 0;
 				pausePlacementCounter++;
+				timeoutCounter++;
 			} else {
 				counter++;
+				timeoutCounter++;
 			}
 		// End of mode 2 logic
 		} else if (gameMode[1] == true) {
@@ -231,6 +234,19 @@ function displayImages(){
 				pausePlacementCounter++;
 			}
 		// End of mode1 logic
+		}
+		//precaution to make sure game resets for next song
+		if (timeoutCounter >= 45){
+			clearInterval(interval);
+			songChoice++;
+			audio.src = songArray[songChoice];
+			audio.load();
+			console.log(audio.src);
+			if (songChoice <= 5){			
+				questionInterrupt();
+			} else {
+				resetGame();
+			}
 		}
 		// if song has ended, reset the app
 		if(audio.ended) {
@@ -444,6 +460,7 @@ function beginPlaying(gameModeChoice){
 		gameMode[3] = false;
 		// changes to solo play implementation
 		shouldPause = false; // No pauses on game mode 2 
+		document.getElementById("pausesText").style.visibility = "hidden";
 		questionInterrupt(); // Ask a question then reward with song
 	}
 	else if(gameModeChoice =="game3"){
@@ -525,11 +542,21 @@ var questionInterrupt = function(){
 		else if (choose_play_solo_questions == "emotions")
 		{
 			question_type = 2;
+			maxWrongChoicesForGame2 = 2;
+			if (wrongChoicesForGame2 == 3 && maxWrongChoicesForGame2 == 2) {
+				wrongChoicesForGame2 = 2;
+			}
 		}
 		
 		else if (choose_play_solo_questions == "family_and_emotions")
 		{
 			question_type = Math.floor((Math.random()*2)+1); //randomizes 2 choices 1 or 2
+			if (question_type == 2) {
+				maxWrongChoicesForGame2 = 2;
+				if (wrongChoicesForGame2 == 3 && maxWrongChoicesForGame2 == 2) {
+					wrongChoicesForGame2 = 2;
+				}
+			}
 		}
 		
 		var familyMemberChosen = Math.floor(Math.random()*(family.length-1)); //pick random family member for correct answer
@@ -834,8 +861,11 @@ function onPlayerReady(event) {
 }
 var videoTimeout;
 function onPlayerStateChange(event) {
-	if (event.data == YT.PlayerState.PLAYING) {
-		videoTimeout = setTimeout(stopVideo, 60000);
+	// if (event.data == YT.PlayerState.PLAYING) {
+		// videoTimeout = setTimeout(stopVideo, 60000);
+	// }
+	if (event.data === 0) {
+		stopVideo();
 	}
 }
 
